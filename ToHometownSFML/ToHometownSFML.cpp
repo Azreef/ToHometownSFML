@@ -4,11 +4,11 @@ int main()
 {
     GameManager game;
 
-    game.openWindow();
-    
     while (game.running())
     {
-
+        game.update();
+        
+        game.render();
     }
 
     return 0;
