@@ -1,0 +1,153 @@
+#include "Game.h";
+
+/*
+class EnemyTruck
+{
+public:
+
+    sf::Vector2f truckPos;
+    sf::RectangleShape truck;
+    sf::Vector2f truckSize = { 300,100 };
+        
+
+    void EnemyTruckCons()
+    {
+        truck.setPosition(truckPos);
+        truck.setSize(truckSize);
+    }
+
+    void setTruckPos( sf::Vector2f pos )
+    {
+        truckPos = pos;
+    }
+
+};
+*/
+
+int main()
+{
+    //sf::RenderWindow window(sf::VideoMode(1280, 1080), "To Hometown");
+   //Create Game Manager
+    Game game;
+
+    //window.setFramerateLimit(60);
+
+    /*
+    sf::Time gameTime = sf::seconds(0.0f);
+    sf::Clock clock;
+
+    sf::Vector2f charPos(300, 600);
+    float charSpeed = 10;
+
+    EnemyTruck enemyTruck[10];
+
+    for (int i = 0; i<10; i++)
+    {
+        enemyTruck[i].setTruckPos(sf::Vector2f(720, 600));
+        enemyTruck[i].EnemyTruckCons();
+    }
+
+   
+    //sf::Vector2f enemyTruckPos(720, 600);
+
+    //sf::RectangleShape enemyTruck[10];
+
+    
+    //enemyTruck[0].setPosition(enemyTruckPos);
+    //enemyTruck[0].setSize(sf::Vector2f(300, 100));
+    
+
+    sf::Texture playerTexture;
+    sf::Texture roadTexture;
+
+
+    if (!playerTexture.loadFromFile("Asset/Player2.png"))
+    {
+        std::cout << "ERROR TEXTURE";
+    }
+    if (!roadTexture.loadFromFile("Asset/road3.png"))
+    {
+        std::cout << "ERROR TEXTURE";
+    }
+
+    sf::Sprite playerSprite(playerTexture);
+    sf::Sprite roadSprite(roadTexture);
+
+    playerSprite.setPosition(charPos);
+    playerSprite.setScale(sf::Vector2f(0.2, 0.2));
+
+    roadSprite.setScale(0.6, 0.6);
+    roadSprite.setPosition(sf::Vector2f(0, 350));
+
+    int currentTruck = 0;
+    */
+
+    while (game.running())
+    {
+        
+        //UPDATE
+        game.update();
+        //RENDER
+        game.render();
+        
+        
+        /*
+
+        //CONTROL
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            charPos.y--;
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            charPos.y++;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            charPos.x--;
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            charPos.x++;
+        }
+
+        playerSprite.setPosition(charPos);
+        roadSprite.move(sf::Vector2f(-charSpeed, 0));
+        //enemyTruck[0].move(sf::Vector2f(-charSpeed / 2, 0));
+        
+        //std::cout << roadSprite.getPosition().x;
+
+        if (roadSprite.getPosition().x <= -1550)
+        {
+            roadSprite.setPosition(sf::Vector2f(0, 350));
+        }
+        
+        gameTime = clock.getElapsedTime();
+
+       // std::cout << gameTime.asSeconds() << std::endl;
+        //DRAW
+        window.clear();
+
+
+        if (currentTruck < 10)
+        {
+            if (gameTime.asSeconds() >= 5)
+            {
+                window.draw(enemyTruck[currentTruck].truck);
+                std::cout << "drawn" << std::endl;
+                currentTruck++;
+                clock.restart();
+            }
+        }
+        
+      
+        //window.draw(enemyTruck[0]);
+        window.draw(playerSprite);
+        
+        window.display(); 
+        */
+    }
+
+    return 0;
+}
