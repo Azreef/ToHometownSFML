@@ -30,6 +30,7 @@ void GameManager::render()
 void GameManager::update()
 {
     this->pollEvent();
+    this->player.update();
 }
 
 void GameManager::pollEvent()
@@ -57,7 +58,6 @@ GameManager::GameManager()
     this->initVariable();
     this->openWindow();
 }
-
 
 GameManager::~GameManager()
 {

@@ -1,17 +1,19 @@
 #include "Player.h"
 
+//Constructor
 Player::Player()
 {
 	this->setSprite();
+    this->initVariable();
 }
 
-//Constructor
-Player::Player(sf::Vector2f position)
+Player::Player(float posX, float posY)
 {
-	this->position = position;
+
 }
 
 //Function
+
 void Player::setSprite()
 {
 	{
@@ -22,6 +24,7 @@ void Player::setSprite()
 
 		this->playerSprite.setTexture(this->texture);
 		this->playerSprite.setPosition(this->position);
+        this->playerSprite.setScale(sf::Vector2f(0.2, 0.2));
 	}
 }
 
@@ -33,7 +36,34 @@ void Player::render(sf::RenderTarget* target)
 
 void Player::update()
 {
+    this->moveUpdate();
+}
 
+void Player::moveUpdate()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        this->playerSprite.move(0, -this->movementSpeed);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        this->playerSprite.move(0, this->movementSpeed);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        this->playerSprite.move(-this->movementSpeed, 0);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        this->playerSprite.move(this->movementSpeed, 0);
+    }
+
+}
+
+void Player::initVariable()
+{
+    this->movementSpeed = 10;
 }
 
 
