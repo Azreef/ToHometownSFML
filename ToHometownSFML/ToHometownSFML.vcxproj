@@ -130,7 +130,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ToHometownSFML.cpp" />
   </ItemGroup>
@@ -138,7 +141,10 @@
     <Text Include="oldCode.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

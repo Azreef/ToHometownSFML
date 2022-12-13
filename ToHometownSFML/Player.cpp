@@ -16,16 +16,16 @@ Player::Player(float posX, float posY)
 
 void Player::setSprite()
 {
+	
+	if (!this->texture.loadFromFile("Asset/Player2.png"))
 	{
-		if (!this->texture.loadFromFile("Asset/Player2.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		this->playerSprite.setTexture(this->texture);
-		this->playerSprite.setPosition(this->position);
-        this->playerSprite.setScale(sf::Vector2f(0.2, 0.2));
+		std::cout << "ERROR TEXTURE";
 	}
+
+	this->playerSprite.setTexture(this->texture);
+	this->playerSprite.setPosition(this->position);
+    this->playerSprite.setScale(sf::Vector2f(0.2, 0.2));
+	
 }
 
 void Player::render(sf::RenderTarget* target)

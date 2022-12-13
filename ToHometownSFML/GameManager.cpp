@@ -23,14 +23,23 @@ void GameManager::initVariable()
 void GameManager::render()
 {
     this->window->clear();
+    this->level.render(this->window);
+    enemyManager.render(this->window);
     this->player.render(this->window);
+   
+   
     this->window->display();
+    
 }
 
 void GameManager::update()
 {
     this->pollEvent();
     this->player.update();
+    this->level.update();
+
+    enemyManager.update();
+   
 }
 
 void GameManager::pollEvent()
@@ -49,6 +58,11 @@ void GameManager::pollEvent()
                 
         }
     }
+}
+
+void GameManager::setData()
+{
+    enemyManager.setEnemiesData();
 }
 
 
