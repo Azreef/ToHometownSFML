@@ -5,7 +5,6 @@
 class Level
 {
 private:
-	float roadSpeed;
 	sf::Texture texture;
 	sf::Sprite roadSprite;
 	sf::Vector2f position;
