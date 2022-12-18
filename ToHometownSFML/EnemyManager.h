@@ -8,7 +8,7 @@
 #include "Level.h";
 #include "Player.h";
 
-#define TOTAL_ENEMY 15
+#define TOTAL_ENEMY 150
 
 class EnemyManager
 {

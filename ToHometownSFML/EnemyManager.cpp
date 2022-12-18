@@ -79,17 +79,34 @@ void EnemyManager::render(sf::RenderTarget* target)
 
 void EnemyManager::setEnemiesData()
 {
-
 	std::cout << "Loading Enemies" << std::endl;
+
 	std::uniform_int_distribution<int> dist(650, 850);
 	std::mt19937 randomNum;
+	int randomPos[TOTAL_ENEMY];
+	int randomType[TOTAL_ENEMY];
 
+
+	//Randomnize Position
+	for (int i = 0; i < TOTAL_ENEMY; i++)
+	{
+		randomPos[i] = dist(randomNum);
+	}
+
+	//Randomnize Type
+	std::uniform_int_distribution<int> dist2(0, 1);
+	for (int i = 0; i < TOTAL_ENEMY; i++)
+	{
+		randomType[i] = dist2(randomNum);
+	}
+
+	//Set Enemy Data
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
 		std::cout << i << std::endl;
-		enemy[i] = Enemy(1300, dist(randomNum), 0);
-
+		enemy[i] = Enemy(1300, randomPos[i], randomType[i]);
 	}
+
 	std::cout << "Done Loading" << std::endl;
 }
 

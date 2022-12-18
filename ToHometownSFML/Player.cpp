@@ -3,8 +3,8 @@
 //CONSTRUCTOR
 Player::Player()
 {
-	this->setSprite();
     this->initVariable();
+    this->setSprite();
 }
 
 Player::Player(float posX, float posY)
@@ -42,6 +42,32 @@ void Player::moveUpdate()
     {
         this->playerSprite.move(this->movementSpeed, 0);
     }
+
+    //Border Collision
+
+    //Left
+    if (this->playerSprite.getPosition().x < 0)
+    {
+        this->playerSprite.setPosition(0, this->playerSprite.getPosition().y);
+    }
+
+    //Top
+    if (this->playerSprite.getPosition().y < 600)
+    {
+        this->playerSprite.setPosition(this->playerSprite.getPosition().x, 600);
+    }
+
+    //Right
+    if (this->playerSprite.getPosition().x + this->playerSprite.getGlobalBounds().width > 1280)
+    {
+        this->playerSprite.setPosition(1280 - this->playerSprite.getGlobalBounds().width, this->playerSprite.getPosition().y);
+    }
+
+    //Bottom
+    if (this->playerSprite.getPosition().y + this->playerSprite.getGlobalBounds().height > 980)
+    {
+        this->playerSprite.setPosition(this->playerSprite.getPosition().x, 980 - this->playerSprite.getGlobalBounds().height);
+    }
 }
 
 
@@ -70,6 +96,7 @@ void Player::setSprite()
 void Player::initVariable()
 {
     this->movementSpeed = 10;
+    this->position = { 0,700 };
 }
 
 void Player::setPlayerSprite(sf::Sprite playerData)
