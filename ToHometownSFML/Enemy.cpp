@@ -1,8 +1,8 @@
 #include "Enemy.h"
 #include <iostream>
 
-//Constructor
-Enemy::Enemy(float x, float y,int enemyType)
+//CONSTRUCTOR
+Enemy::Enemy(float x, float y, int enemyType)
 {
 	//Enemy Type Car
 	if (enemyType == 0)
@@ -10,15 +10,15 @@ Enemy::Enemy(float x, float y,int enemyType)
 		this->initVariable(x, y);
 		this->setTempCar();
 	}
-	
-	
+
+
 	//Enemy Type Bus
 	if (enemyType == 1)
 	{
 		this->initVariable(x, y);
 		this->setTempBus();
 	}
-	
+
 }
 
 Enemy::Enemy()
@@ -27,10 +27,35 @@ Enemy::Enemy()
 	this->setTempBus();
 }
 
-//FunctionW
+//FUNCTION 
+
+//Update ==============================================================================
+
+void Enemy::update()
+{
+	this->enemyScroll();
+}
+
+void Enemy::enemyScroll()
+{
+	this->tempEnemy.move(-this->enemySpeed + 3, 0);
+
+}
+
+
+//Draw   ==============================================================================
+
+void Enemy::render(sf::RenderTarget* target)
+{
+	target->draw(this->tempEnemy);
+}
+
+
+//Setter ==============================================================================
+
 void Enemy::setSprite()
 {
-	
+
 }
 
 void Enemy::setTempBus()
@@ -52,26 +77,27 @@ void Enemy::initVariable(float x, float y)
 
 }
 
-void Enemy::render(sf::RenderTarget* target)
+void Enemy::setIsDestroyed(bool isDestoyed)
 {
-	target->draw(this->tempEnemy);
+	this->isDestroyed = isDestoyed;
 }
 
-void Enemy::update()
+void Enemy::setEnemySpeed(int enemySpeed)
 {
-	this->enemyScroll();
+	this->enemySpeed = enemySpeed;
+
 }
 
-void Enemy::enemyScroll()
-{
-	this->tempEnemy.move(-this->level.getRoadSpeed() + 3, 0);
-	
-}
+//Getter ==============================================================================
 
 sf::RectangleShape Enemy::getTempEnemy()
 {
-	//this->update();
 	return tempEnemy;
 }
 
+bool Enemy::getIsDestroyed()
+{
 
+	return this->isDestroyed;
+
+}

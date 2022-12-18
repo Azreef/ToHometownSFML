@@ -6,24 +6,19 @@
 class Player
 {
 private:
-	
+	//Variable
 	sf::Texture texture;
-	
 	sf::Vector2f position;
-	
-	
+	sf::Sprite playerSprite;
 
 
 	float posX;
 	float posY;
-
 	float movementSpeed;
 
 
 public:
 	
-	sf::Sprite playerSprite;
-
 	//Constructor
 	Player();
 	Player(float posX, float pos);
@@ -35,7 +30,7 @@ public:
 	void moveUpdate();
 	void initVariable();
 	sf::Sprite getPlayerData();
+	void setPlayerSprite(sf::Sprite playerData);
 
-	//void setPosition();
 };
 

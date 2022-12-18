@@ -1,37 +1,22 @@
 #include "GameManager.h"
 #include <iostream>
 
+//CONSTRUCTOR
 
-//Function
-void GameManager::openWindow()
+GameManager::GameManager()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown");
-    this->window->setFramerateLimit(60);
+    this->initVariable();
+    this->openWindow();
 }
 
-bool GameManager::running()
+GameManager::~GameManager()
 {
-    return this->window->isOpen();
+    delete this->window;
 }
 
+//FUNCTION 
 
-void GameManager::initVariable()
-{
-    this->window = nullptr;
-}
-
-//Render
-void GameManager::render()
-{
-    this->window->clear();
-    this->level.render(this->window);
-    this->enemyManager.render(this->window);
-    this->player.render(this->window);
-   
-   
-    this->window->display();
-    
-}
+//Update ==============================================================================
 
 void GameManager::update()
 {
@@ -40,8 +25,7 @@ void GameManager::update()
     this->player.update();
     this->level.update();
     this->enemyManager.update();
-    
-   
+
 }
 
 void GameManager::pollEvent()
@@ -57,9 +41,40 @@ void GameManager::pollEvent()
             if (this->event.key.code == sf::Keyboard::Escape)
                 this->window->close();
             break;
-                
+
         }
     }
+}
+
+bool GameManager::running()
+{
+    return this->window->isOpen();
+}
+
+//Draw   ==============================================================================
+
+void GameManager::render()
+{
+    this->window->clear();
+    this->level.render(this->window);
+    this->enemyManager.render(this->window);
+    this->player.render(this->window);
+
+
+    this->window->display();
+
+}
+
+//Setter ==============================================================================
+void GameManager::openWindow()
+{
+    this->window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown");
+    this->window->setFramerateLimit(60);
+}
+
+void GameManager::initVariable()
+{
+    this->window = nullptr;
 }
 
 void GameManager::setData()
@@ -71,17 +86,3 @@ void GameManager::updateData()
 {
     enemyManager.setPlayerData(player.getPlayerData());
 }
-
-
-//Constructor
-GameManager::GameManager()
-{
-    this->initVariable();
-    this->openWindow();
-}
-
-GameManager::~GameManager()
-{
-    delete this->window;
-}
-

@@ -8,17 +8,14 @@ class Enemy
 {
 private:
 	//Variable
-
-	
-	
-	int enemySpeed;
-	
-public:
-	Level level;
 	sf::Vector2f position;
 	sf::RectangleShape tempEnemy;
 	bool isDestroyed;
-
+	int enemySpeed;
+	
+	
+public:
+	
 	//Constructor
 	Enemy(float x, float y,int type);
 	Enemy();
@@ -32,7 +29,9 @@ public:
 	void update();
 	void enemyScroll();
 	sf::RectangleShape getTempEnemy();
-	
+	bool getIsDestroyed();
+	void setIsDestroyed(bool isDestoyed);
+	void setEnemySpeed(int enemySpeed);
 	
 };
 

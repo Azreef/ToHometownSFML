@@ -1,6 +1,6 @@
 #include "Player.h"
 
-//Constructor
+//CONSTRUCTOR
 Player::Player()
 {
 	this->setSprite();
@@ -12,44 +12,15 @@ Player::Player(float posX, float posY)
 
 }
 
-//Function
 
-//void Player::setSprite()
-//{
-//    this->playerSprite.setSize(sf::Vector2f(300, 100));
-//    this->playerSprite.setPosition(sf::Vector2f(100, 700));
-//
-//   
-//
-//}
+//FUNCTION 
 
-void Player::setSprite()
-{
-	
-	if (!this->texture.loadFromFile("Asset/Player2.png"))
-	{
-		std::cout << "ERROR TEXTURE";
-	}
-
-	this->playerSprite.setTexture(this->texture);
-	this->playerSprite.setPosition(this->position);
-    this->playerSprite.setScale(sf::Vector2f(0.2, 0.2));
-	
-}
-
-void Player::render(sf::RenderTarget* target)
-{
-	target->draw(this->playerSprite);
-}
-
+//Update ==============================================================================
 
 void Player::update()
 {
     this->moveUpdate();
-    //std::cout << playerSprite.getGlobalBounds().top << std::endl;;
 }
-
-
 
 void Player::moveUpdate()
 {
@@ -60,7 +31,7 @@ void Player::moveUpdate()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         this->playerSprite.move(0, this->movementSpeed);
-        
+
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -73,13 +44,43 @@ void Player::moveUpdate()
     }
 }
 
+
+//Draw ==============================================================================
+
+void Player::render(sf::RenderTarget* target)
+{
+    target->draw(this->playerSprite);
+}
+
+
+//Setter ==============================================================================
+
+void Player::setSprite()
+{
+    if (!this->texture.loadFromFile("Asset/Player2.png"))
+    {
+        std::cout << "ERROR TEXTURE";
+    }
+
+    this->playerSprite.setTexture(this->texture);
+    this->playerSprite.setPosition(this->position);
+    this->playerSprite.setScale(sf::Vector2f(0.2, 0.2));
+}
+
 void Player::initVariable()
 {
     this->movementSpeed = 10;
 }
 
+void Player::setPlayerSprite(sf::Sprite playerData)
+{
+    this->playerSprite = playerData;
+}
+
+
+//Getter ==============================================================================
+
 sf::Sprite Player::getPlayerData()
 {
     return this->playerSprite;
 }
-

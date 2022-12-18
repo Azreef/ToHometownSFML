@@ -27,7 +27,8 @@ private:
 public:
 	//Constructor
 	EnemyManager();
-	void spawnEnemies();
+
+	//Function
 	void render(sf::RenderTarget* target);
 	void update();
 	void setEnemiesData();

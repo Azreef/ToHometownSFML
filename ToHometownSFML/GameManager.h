@@ -12,6 +12,7 @@
 class GameManager
 {
 private:
+	//Variable
 	sf::RenderWindow* window;
 	sf::Event event;
 	Player player;
@@ -19,10 +20,12 @@ private:
 	Enemy enemy;
 	EnemyManager enemyManager;
 	
-	
 
 public:
-	int currentDistance;
+	// Constructor
+	GameManager();
+	~GameManager();
+
 
 	//Function
 	void openWindow();
@@ -33,12 +36,6 @@ public:
 	void pollEvent();
 	void setData();
 	void updateData();
-
-
-	// Constructor
-	GameManager();
-	~GameManager();
-
 
 };
 
