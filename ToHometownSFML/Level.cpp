@@ -1,11 +1,12 @@
 #include "Level.h"
+#include <iostream>
 
 
 //Constructor
 Level::Level()
 {
 	this->setPosition();
-	this->setSpeed();
+	this->initVariable();
 	this->setSprite();
 }
 
@@ -20,6 +21,7 @@ void Level::update()
 {
 	this->scrollRoad();
 	this->roadSpeedControl();
+	this->setCurrentDistance();
 }
 
 void Level::setSprite()
@@ -29,7 +31,6 @@ void Level::setSprite()
 	{
 		std::cout << "ERROR TEXTURE";
 	}
-
 	this->roadSprite.setTexture(this->texture);
 	this->roadSprite.setScale(sf::Vector2f(0.6, 0.6));
 	this->roadSprite.setPosition(this->position);
@@ -50,22 +51,31 @@ void Level::setPosition()
 	position = {0,350};
 }
 
-void Level::setSpeed()
+void Level::initVariable()
 {
 	this->roadSpeed = 10;
 	this->maxSpeed = 30;
 	this->minSpeed = 5;
+	this->currentDistance = 0;
+}
+
+void Level::initVariable(int speed)
+{
+	this->roadSpeed = speed;
+	this->maxSpeed = 30;
+	this->minSpeed = 5;
+	this->currentDistance = 0;
 }
 
 void Level::roadSpeedControl()
 {
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
 		if (this->roadSpeed < this->maxSpeed)
 		{
 			this->roadSpeed = this->roadSpeed + 1;
 		}
-		
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{
@@ -80,4 +90,15 @@ float Level::getRoadSpeed()
 {
 	this->roadSpeedControl();
 	return this->roadSpeed;
+}
+
+void Level::setCurrentDistance()
+{
+	this->currentDistance = this->currentDistance + this->roadSpeed;
+}
+
+int Level::getCurrentDistance()
+{
+	this->setCurrentDistance();
+	return this->currentDistance;
 }

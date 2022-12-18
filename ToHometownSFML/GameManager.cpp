@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include <iostream>
 
 
 //Function
@@ -24,7 +25,7 @@ void GameManager::render()
 {
     this->window->clear();
     this->level.render(this->window);
-    enemyManager.render(this->window);
+    this->enemyManager.render(this->window);
     this->player.render(this->window);
    
    
@@ -35,10 +36,11 @@ void GameManager::render()
 void GameManager::update()
 {
     this->pollEvent();
+    this->updateData();
     this->player.update();
     this->level.update();
-
-    enemyManager.update();
+    this->enemyManager.update();
+    
    
 }
 
@@ -63,6 +65,11 @@ void GameManager::pollEvent()
 void GameManager::setData()
 {
     enemyManager.setEnemiesData();
+}
+
+void GameManager::updateData()
+{
+    enemyManager.setPlayerData(player.getPlayerData());
 }
 
 

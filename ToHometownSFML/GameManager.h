@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Main.hpp>
+
 #include "Player.h"
 #include "Level.h"
 #include "Enemy.h"
@@ -16,9 +19,11 @@ private:
 	Enemy enemy;
 	EnemyManager enemyManager;
 	
+	
 
 public:
-	
+	int currentDistance;
+
 	//Function
 	void openWindow();
 	bool running();
@@ -27,6 +32,7 @@ public:
 	void update();
 	void pollEvent();
 	void setData();
+	void updateData();
 
 
 	// Constructor

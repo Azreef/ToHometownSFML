@@ -2,35 +2,54 @@
 #include <iostream>
 
 //Constructor
-Enemy::Enemy(float x, float y)
+Enemy::Enemy(float x, float y,int enemyType)
 {
-	this->initVariable(x,y);
-	this->setTemp();
+	//Enemy Type Car
+	if (enemyType == 0)
+	{
+		this->initVariable(x, y);
+		this->setTempCar();
+	}
+	
+	
+	//Enemy Type Bus
+	if (enemyType == 1)
+	{
+		this->initVariable(x, y);
+		this->setTempBus();
+	}
+	
 }
 
 Enemy::Enemy()
 {
-	this->initVariable(-4000, -4000);
-	this->setTemp();
+	this->position = { 0,0 };
+	this->setTempBus();
 }
 
-
-
-//Function
+//FunctionW
 void Enemy::setSprite()
 {
 	
 }
 
-void Enemy::setTemp()
+void Enemy::setTempBus()
 {
 	this->tempEnemy.setSize(sf::Vector2f(300, 100));
+	this->tempEnemy.setPosition(this->position);
+}
+
+void Enemy::setTempCar()
+{
+	this->tempEnemy.setSize(sf::Vector2f(100, 100));
 	this->tempEnemy.setPosition(this->position);
 }
 
 void Enemy::initVariable(float x, float y)
 {
 	this->position = { x,y };
+	this->isDestroyed = false;
+
 }
 
 void Enemy::render(sf::RenderTarget* target)
@@ -45,13 +64,14 @@ void Enemy::update()
 
 void Enemy::enemyScroll()
 {
-	this->tempEnemy.move(-level.getRoadSpeed() + 8,0);
+	this->tempEnemy.move(-this->level.getRoadSpeed() + 3, 0);
 	
-	if (this->tempEnemy.getPosition().x < -300)
-	{
-		this->tempEnemy.setPosition(this->position);
-	}
 }
 
+sf::RectangleShape Enemy::getTempEnemy()
+{
+	//this->update();
+	return tempEnemy;
+}
 
 

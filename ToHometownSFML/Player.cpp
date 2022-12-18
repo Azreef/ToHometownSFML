@@ -14,6 +14,15 @@ Player::Player(float posX, float posY)
 
 //Function
 
+//void Player::setSprite()
+//{
+//    this->playerSprite.setSize(sf::Vector2f(300, 100));
+//    this->playerSprite.setPosition(sf::Vector2f(100, 700));
+//
+//   
+//
+//}
+
 void Player::setSprite()
 {
 	
@@ -37,7 +46,10 @@ void Player::render(sf::RenderTarget* target)
 void Player::update()
 {
     this->moveUpdate();
+    //std::cout << playerSprite.getGlobalBounds().top << std::endl;;
 }
+
+
 
 void Player::moveUpdate()
 {
@@ -48,6 +60,7 @@ void Player::moveUpdate()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         this->playerSprite.move(0, this->movementSpeed);
+        
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -58,7 +71,6 @@ void Player::moveUpdate()
     {
         this->playerSprite.move(this->movementSpeed, 0);
     }
-
 }
 
 void Player::initVariable()
@@ -66,4 +78,8 @@ void Player::initVariable()
     this->movementSpeed = 10;
 }
 
+sf::Sprite Player::getPlayerData()
+{
+    return this->playerSprite;
+}
 

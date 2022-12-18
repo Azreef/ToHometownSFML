@@ -8,8 +8,11 @@ class Player
 private:
 	
 	sf::Texture texture;
-	sf::Sprite playerSprite;
+	
 	sf::Vector2f position;
+	
+	
+
 
 	float posX;
 	float posY;
@@ -18,6 +21,9 @@ private:
 
 
 public:
+	
+	sf::Sprite playerSprite;
+
 	//Constructor
 	Player();
 	Player(float posX, float pos);
@@ -28,8 +34,8 @@ public:
 	void update();
 	void moveUpdate();
 	void initVariable();
+	sf::Sprite getPlayerData();
+
 	//void setPosition();
-
-
 };
 
