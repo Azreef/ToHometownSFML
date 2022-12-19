@@ -86,16 +86,23 @@ void Level::setCurrentDistance()
 	this->currentDistance = this->currentDistance + this->roadSpeed;
 }
 
+void Level::setCurrentDistance(int distance)
+{
+	this->currentDistance = distance;
+}
+
 //Getter ==============================================================================
 
 float Level::getRoadSpeed()
 {
-	this->roadSpeedControl();
+	//this->roadSpeedControl();
 	return this->roadSpeed;
 }
 
 int Level::getCurrentDistance()
 {
-	this->setCurrentDistance();
+	//this->setCurrentDistance();
 	return this->currentDistance;
 }
+
+

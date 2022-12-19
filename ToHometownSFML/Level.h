@@ -8,30 +8,28 @@ private:
 	sf::Texture texture;
 	sf::Sprite roadSprite;
 	sf::Vector2f position;
+	int currentDistance;
+	int roadSpeed;
 	int maxSpeed;
 	int minSpeed;
 	
-	
 
 public:
-	int currentDistance;
-	int roadSpeed;
-
+	
 	//Constructor
 	Level();
 	
-
-
 	void render(sf::RenderTarget* target);
 	void update();
 	void setSprite();
 	void scrollRoad();
 	void setPosition();
 	void initVariable();
-	void initVariable(int speed);
 	void roadSpeedControl();
 	float getRoadSpeed();
 	void setCurrentDistance();
+	void setCurrentDistance(int distance);
+
 	int getCurrentDistance();
 
 

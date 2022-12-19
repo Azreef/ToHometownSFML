@@ -8,7 +8,7 @@
 #include "Level.h"
 #include "Enemy.h"
 #include "EnemyManager.h"
-
+#include "MechanicManager.h"
 class GameManager
 {
 private:
@@ -19,6 +19,7 @@ private:
 	Level level;
 	Enemy enemy;
 	EnemyManager enemyManager;
+	MechanicManager mechanicManager;
 	
 
 public:

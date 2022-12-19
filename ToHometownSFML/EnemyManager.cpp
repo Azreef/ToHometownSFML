@@ -13,13 +13,7 @@ EnemyManager::EnemyManager()
 
 void EnemyManager::update()
 {
-	//Set all enemies speed to be the same
-	this->enemySpeed = level.getRoadSpeed();
-
-
-	//Set current distance
-	currentDistance = level.getCurrentDistance();
-
+	std::cout << "E: " <<currentDistance << std::endl;
 
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
@@ -60,16 +54,13 @@ void EnemyManager::detectCollision()
 
 void EnemyManager::render(sf::RenderTarget* target)
 {
-
 	for (int i = 0; i < this->currentEnemy; i++)
 	{
 		if (!enemy[i].getIsDestroyed())
 		{
 			this->enemy[i].render(target);
 		}
-
 	}
-
 }
 
 //Setter ==============================================================================
@@ -109,7 +100,17 @@ void EnemyManager::setEnemiesData()
 
 void EnemyManager::setPlayerData(sf::Sprite playerData)
 {
-	this->player.setPlayerSprite(playerData);;
+	this->player.setPlayerSprite(playerData);
+}
+
+void EnemyManager::setCurrentDistance(int distance)
+{
+	this->currentDistance = distance;
+}
+
+void EnemyManager::setCurrentSpeed(int speed)
+{
+	this->enemySpeed = speed;
 }
 
 

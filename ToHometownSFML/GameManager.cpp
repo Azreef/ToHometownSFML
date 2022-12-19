@@ -25,6 +25,7 @@ void GameManager::update()
     this->player.update();
     this->level.update();
     this->enemyManager.update();
+    this->mechanicManager.update();
 
 }
 
@@ -85,4 +86,8 @@ void GameManager::setData()
 void GameManager::updateData()
 {
     enemyManager.setPlayerData(player.getPlayerData());
+    enemyManager.setCurrentDistance(level.getCurrentDistance());
+    enemyManager.setCurrentSpeed(level.getRoadSpeed());
+    mechanicManager.setCurrentDistance(level.getCurrentDistance());
+
 }

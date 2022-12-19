@@ -11,6 +11,11 @@ MechanicManager::MechanicManager()
 //FUNCTION 
 
 //Update ==============================================================================
+void MechanicManager::update()
+{
+}
+
+
 
 //Draw   ==============================================================================
 
@@ -25,7 +30,14 @@ void MechanicManager::initVariable()
 void MechanicManager::removeLive()
 {
 	this->lives= this->lives - 1;
-	std::cout << lives << std::endl;
+	//std::cout << lives << std::endl;
 }
+void MechanicManager::setCurrentDistance(int distance)
+{
+	this->currentDistance = distance;
+	std::cout << currentDistance << std::endl;
+}
+
+
 //Getter ==============================================================================
 

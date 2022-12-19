@@ -35,6 +35,8 @@ public:
 	void update();
 	void setEnemiesData();
 	void setPlayerData(sf::Sprite);
+	void setCurrentDistance(int distance);
+	void setCurrentSpeed(int speed);
 	void detectCollision();
 
 };
