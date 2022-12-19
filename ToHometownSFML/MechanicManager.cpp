@@ -21,7 +21,7 @@ void MechanicManager::update()
 void MechanicManager::updateText()
 {
 	this->livesText.setString("Lives: " + std::to_string(lives));
-	
+	this->distanceText.setString("Distance: " + std::to_string(currentDistance/100));
 }
 
 
@@ -29,6 +29,7 @@ void MechanicManager::updateText()
 void MechanicManager::render(sf::RenderTarget* target)
 {
 	target->draw(this->livesText);
+	target->draw(this->distanceText);
 }
 
 
@@ -56,6 +57,13 @@ void MechanicManager::setFont()
 	this->livesText.setFillColor(sf::Color::White);
 	this->livesText.setString("Lives: ");
 	this->livesText.setPosition(sf::Vector2f(20, -80));
+
+
+	this->distanceText.setFont(font);
+	this->distanceText.setCharacterSize(150);
+	this->distanceText.setFillColor(sf::Color::White);
+	this->distanceText.setString("Distance: ");
+	this->distanceText.setPosition(sf::Vector2f(400, -80));
 
 }
 

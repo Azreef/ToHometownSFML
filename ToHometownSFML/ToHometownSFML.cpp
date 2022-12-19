@@ -3,8 +3,7 @@
 int main()
 {
     GameManager game;
-    game.setData();
-
+  
     while (game.running())
     {
         game.update();

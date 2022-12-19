@@ -5,20 +5,20 @@
 #include <iostream>
 #include <random>
 #include "Enemy.h"
-#include "Level.h"
+
 #include "Player.h"
-#include "MechanicManager.h"
+
 
 #define TOTAL_ENEMY 150
 
-class EnemyManager
+class GamePlayManager
 {
 private:
 	//Variable
 	Enemy enemy[TOTAL_ENEMY];
 	Level level;
 	Player player;
-	MechanicManager mechanicManager;
+	
 	
 	sf::Time gameTime = sf::seconds(0);
 	sf::Clock gameClock;
@@ -28,7 +28,7 @@ private:
 
 public:
 	//Constructor
-	EnemyManager();
+	GamePlayManager();
 
 	//Function
 	void render(sf::RenderTarget* target);

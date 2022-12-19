@@ -4,11 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Main.hpp>
 
-#include "Player.h"
-#include "Level.h"
-#include "Enemy.h"
-#include "EnemyManager.h"
-#include "MechanicManager.h"
+#include "SystemManager.h"
 
 class GameManager
 {
@@ -16,12 +12,7 @@ private:
 	//Variable
 	sf::RenderWindow* window;
 	sf::Event event;
-	Player player;
-	Level level;
-	Enemy enemy;
-	EnemyManager enemyManager;
-	MechanicManager mechanicManager;
-	
+	SystemManager system;
 
 public:
 	// Constructor
@@ -36,8 +27,6 @@ public:
 	void render();
 	void update();
 	void pollEvent();
-	void setData();
-	void updateData();
 
 };
 

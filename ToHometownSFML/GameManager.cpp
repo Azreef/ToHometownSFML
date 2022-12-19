@@ -20,13 +20,9 @@ GameManager::~GameManager()
 
 void GameManager::update()
 {
+    system.update();
     this->pollEvent();
-    this->updateData();
-    this->player.update();
-    this->level.update();
-    this->enemyManager.update();
-    //this->mechanicManager.update();
-
+    
 }
 
 void GameManager::pollEvent()
@@ -57,11 +53,8 @@ bool GameManager::running()
 void GameManager::render()
 {
     this->window->clear();
-  
-    this->level.render(this->window);
-    this->enemyManager.render(this->window);
-    this->player.render(this->window);
-   // this->mechanicManager.render(this->window);
+
+    system.render(this->window);
 
     this->window->display();
 
@@ -79,16 +72,4 @@ void GameManager::initVariable()
     this->window = nullptr;
 }
 
-void GameManager::setData()
-{
-    enemyManager.setEnemiesData();
-}
 
-void GameManager::updateData()
-{
-    enemyManager.setPlayerData(player.getPlayerData());
-    enemyManager.setCurrentDistance(level.getCurrentDistance());
-    enemyManager.setCurrentSpeed(level.getRoadSpeed());
-    mechanicManager.setCurrentDistance(level.getCurrentDistance());
-
-}

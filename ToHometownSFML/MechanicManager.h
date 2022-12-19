@@ -15,6 +15,7 @@ private:
 	Level level;
 	sf::Font font;
 	sf::Text livesText;
+	sf::Text distanceText;
 
 public:
 	

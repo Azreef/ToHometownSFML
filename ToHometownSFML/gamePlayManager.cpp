@@ -1,8 +1,8 @@
-#include "EnemyManager.h"
+#include "GamePlayManager.h"
 #include <iostream>
 
 //CONSTRUCTOR
-EnemyManager::EnemyManager()
+GamePlayManager::GamePlayManager()
 {
 }
 
@@ -11,16 +11,14 @@ EnemyManager::EnemyManager()
 
 //Update ==============================================================================
 
-void EnemyManager::update()
+void GamePlayManager::update()
 {
-	mechanicManager.update();
 	this->spawnEnemies();
 	this->detectCollision();
 }
 
-void EnemyManager::detectCollision()
+void GamePlayManager::detectCollision()
 {
-
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
 		if (player.getPlayerData().getGlobalBounds().intersects(enemy[i].getTempEnemy().getGlobalBounds()))
@@ -28,13 +26,12 @@ void EnemyManager::detectCollision()
 			if (!enemy[i].getIsDestroyed())
 			{
 				enemy[i].setIsDestroyed(true);
-				mechanicManager.removeLive();
 			}
 		}
 	}
 }
 
-void EnemyManager::spawnEnemies()
+void GamePlayManager::spawnEnemies()
 {
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
@@ -55,7 +52,7 @@ void EnemyManager::spawnEnemies()
 
 //Draw   ==============================================================================
 
-void EnemyManager::render(sf::RenderTarget* target)
+void GamePlayManager::render(sf::RenderTarget* target)
 {
 	for (int i = 0; i < this->currentEnemy; i++)
 	{
@@ -64,13 +61,11 @@ void EnemyManager::render(sf::RenderTarget* target)
 			this->enemy[i].render(target);
 		}
 	}
-
-	mechanicManager.render(target);
 }
 
 //Setter ==============================================================================
 
-void EnemyManager::setEnemiesData()
+void GamePlayManager::setEnemiesData()
 {
 	std::cout << "Loading Enemies" << std::endl;
 
@@ -103,17 +98,17 @@ void EnemyManager::setEnemiesData()
 	std::cout << "Done Loading" << std::endl;
 }
 
-void EnemyManager::setPlayerData(sf::Sprite playerData)
+void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {
 	this->player.setPlayerSprite(playerData);
 }
 
-void EnemyManager::setCurrentDistance(int distance)
+void GamePlayManager::setCurrentDistance(int distance)
 {
 	this->currentDistance = distance;
 }
 
-void EnemyManager::setCurrentSpeed(int speed)
+void GamePlayManager::setCurrentSpeed(int speed)
 {
 	this->enemySpeed = speed;
 }
