@@ -47,16 +47,13 @@ void EnemyManager::detectCollision()
 	{
 		if (player.getPlayerData().getGlobalBounds().intersects(enemy[i].getTempEnemy().getGlobalBounds()))
 		{
-
 			if (!enemy[i].getIsDestroyed())
 			{
 				enemy[i].setIsDestroyed(true);
-				std::cout << "HIT" << std::endl;
+				mechanicManager.removeLive();
 			}
-
 		}
 	}
-
 }
 
 //Draw   ==============================================================================
