@@ -25,7 +25,7 @@ void GameManager::update()
     this->player.update();
     this->level.update();
     this->enemyManager.update();
-    this->mechanicManager.update();
+    //this->mechanicManager.update();
 
 }
 
@@ -57,10 +57,11 @@ bool GameManager::running()
 void GameManager::render()
 {
     this->window->clear();
+  
     this->level.render(this->window);
     this->enemyManager.render(this->window);
     this->player.render(this->window);
-
+   // this->mechanicManager.render(this->window);
 
     this->window->display();
 

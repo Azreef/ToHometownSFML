@@ -77,7 +77,7 @@ void Level::initVariable()
 {
 	this->roadSpeed = 10;
 	this->maxSpeed = 30;
-	this->minSpeed = 5;
+	this->minSpeed = 10;
 	this->currentDistance = 0;
 }
 

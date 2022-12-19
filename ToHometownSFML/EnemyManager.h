@@ -38,6 +38,7 @@ public:
 	void setCurrentDistance(int distance);
 	void setCurrentSpeed(int speed);
 	void detectCollision();
+	void spawnEnemies();
 
 };
 

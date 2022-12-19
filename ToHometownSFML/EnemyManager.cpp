@@ -13,24 +13,8 @@ EnemyManager::EnemyManager()
 
 void EnemyManager::update()
 {
-	std::cout << "E: " <<currentDistance << std::endl;
-
-	for (int i = 0; i < TOTAL_ENEMY; i++)
-	{
-		enemy[i].setEnemySpeed(enemySpeed);
-	}
-
-	//Find current number of enemy spawn
-	if (this->currentDistance / this->currentEnemy > 1000 && this->currentEnemy < TOTAL_ENEMY)
-	{
-		this->currentEnemy++;
-	}
-	
-	for (int i = 0; i < this->currentEnemy; i++)
-	{
-		this->enemy[i].update();
-	}
-
+	mechanicManager.update();
+	this->spawnEnemies();
 	this->detectCollision();
 }
 
@@ -50,6 +34,25 @@ void EnemyManager::detectCollision()
 	}
 }
 
+void EnemyManager::spawnEnemies()
+{
+	for (int i = 0; i < TOTAL_ENEMY; i++)
+	{
+		enemy[i].setEnemySpeed(enemySpeed);
+	}
+
+	//Find current number of enemy spawn
+	if (this->currentDistance / this->currentEnemy > 1000 && this->currentEnemy < TOTAL_ENEMY)
+	{
+		this->currentEnemy++;
+	}
+
+	for (int i = 0; i < this->currentEnemy; i++)
+	{
+		this->enemy[i].update();
+	}
+}
+
 //Draw   ==============================================================================
 
 void EnemyManager::render(sf::RenderTarget* target)
@@ -61,6 +64,8 @@ void EnemyManager::render(sf::RenderTarget* target)
 			this->enemy[i].render(target);
 		}
 	}
+
+	mechanicManager.render(target);
 }
 
 //Setter ==============================================================================
