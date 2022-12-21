@@ -11,10 +11,10 @@ private:
 	sf::Vector2f position;
 	sf::Sprite playerSprite;
 
-
 	float posX;
 	float posY;
 	float movementSpeed;
+
 
 
 public:

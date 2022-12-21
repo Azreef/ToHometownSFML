@@ -14,10 +14,10 @@ GamePlayManager::GamePlayManager()
 void GamePlayManager::update()
 {
 	this->spawnEnemies();
-	this->detectCollision();
+	//this->detectCollision();
 }
 
-void GamePlayManager::detectCollision()
+bool GamePlayManager::detectCollision()
 {
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
@@ -26,6 +26,7 @@ void GamePlayManager::detectCollision()
 			if (!enemy[i].getIsDestroyed())
 			{
 				enemy[i].setIsDestroyed(true);
+				return true;
 			}
 		}
 	}

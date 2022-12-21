@@ -37,7 +37,7 @@ public:
 	void setPlayerData(sf::Sprite);
 	void setCurrentDistance(int distance);
 	void setCurrentSpeed(int speed);
-	void detectCollision();
+	bool detectCollision();
 	void spawnEnemies();
 
 };

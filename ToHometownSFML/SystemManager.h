@@ -12,7 +12,7 @@
 class SystemManager
 {
 private:
-	GamePlayManager GamePlayManager;
+	GamePlayManager gamePlayManager;
 	MechanicManager mechanicManager;
 	Player player;
 	Level level;

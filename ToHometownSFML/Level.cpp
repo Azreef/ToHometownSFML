@@ -31,20 +31,53 @@ void Level::scrollRoad()
 
 void Level::roadSpeedControl()
 {
-
+	//Set Gear
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
-		if (this->roadSpeed < this->maxSpeed)
+		if (this->currentGear < this->maxGear && !keyIsPressed)
 		{
-			this->roadSpeed = this->roadSpeed + 1;
+			this->currentGear++;
+			this->keyIsPressed = true;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{
-		if (this->roadSpeed > this->minSpeed)
+		if (this->currentGear > this->minGear && !keyIsPressed)
 		{
-			this->roadSpeed = this->roadSpeed - 1;
+			this->currentGear--;
+			this->keyIsPressed = true;
 		}
+	}
+
+	if (!((sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) || (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))))
+	{
+		this->keyIsPressed = false;
+	}
+
+	std::cout << currentGear << std:: endl;
+
+
+
+	//Set Speed
+	if (this->currentGear == 1)
+	{
+		roadSpeed = 10;
+	}
+	else if (this->currentGear == 2)
+	{
+		roadSpeed = 15;
+	}
+	else if (this->currentGear == 3)
+	{
+		roadSpeed = 20;
+	}
+	else if (this->currentGear == 4)
+	{
+		roadSpeed = 25;
+	}
+	else if (this->currentGear == 5)
+	{
+		roadSpeed = 30;
 	}
 }
 //Draw   ==============================================================================
@@ -76,9 +109,10 @@ void Level::setPosition()
 void Level::initVariable()
 {
 	this->roadSpeed = 10;
-	this->maxSpeed = 30;
-	this->minSpeed = 10;
+	this->maxGear = 5;
+	this->minGear = 1;
 	this->currentDistance = 0;
+	this->currentGear = 1;
 }
 
 void Level::setCurrentDistance()
@@ -95,14 +129,17 @@ void Level::setCurrentDistance(int distance)
 
 float Level::getRoadSpeed()
 {
-	//this->roadSpeedControl();
 	return this->roadSpeed;
 }
 
 int Level::getCurrentDistance()
 {
-	//this->setCurrentDistance();
 	return this->currentDistance;
+}
+
+int Level::getCurrentGear()
+{
+	return this->currentGear;
 }
 
 

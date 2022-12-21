@@ -10,8 +10,11 @@ private:
 	sf::Vector2f position;
 	int currentDistance;
 	int roadSpeed;
-	int maxSpeed;
-	int minSpeed;
+	int maxGear;
+	int minGear;
+
+	int currentGear;
+	bool keyIsPressed;
 	
 
 public:
@@ -31,6 +34,7 @@ public:
 	void setCurrentDistance(int distance);
 
 	int getCurrentDistance();
+	int getCurrentGear();
 
 
 };

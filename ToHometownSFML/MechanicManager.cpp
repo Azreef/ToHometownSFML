@@ -22,6 +22,7 @@ void MechanicManager::updateText()
 {
 	this->livesText.setString("Lives: " + std::to_string(lives));
 	this->distanceText.setString("Distance: " + std::to_string(currentDistance/100));
+	this->gearText.setString("Gear: " + std::to_string(currentGear));
 }
 
 
@@ -30,6 +31,7 @@ void MechanicManager::render(sf::RenderTarget* target)
 {
 	target->draw(this->livesText);
 	target->draw(this->distanceText);
+	target->draw(this->gearText);
 }
 
 
@@ -65,11 +67,22 @@ void MechanicManager::setFont()
 	this->distanceText.setString("Distance: ");
 	this->distanceText.setPosition(sf::Vector2f(400, -80));
 
+	this->gearText.setFont(font);
+	this->gearText.setCharacterSize(150);
+	this->gearText.setFillColor(sf::Color::White);
+	this->gearText.setString("Distance: ");
+	this->gearText.setPosition(sf::Vector2f(20, 50));
+
 }
 
 void MechanicManager::setCurrentDistance(int distance)
 {
 	this->currentDistance = distance;
+}
+
+void MechanicManager::setCurrentGear(int gear)
+{
+	this->currentGear = gear;
 }
 
 
