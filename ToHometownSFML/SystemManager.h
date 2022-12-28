@@ -16,6 +16,7 @@ private:
 	MechanicManager mechanicManager;
 	Player player;
 	Level level;
+	bool isInvi;
 
 public:
 	SystemManager();

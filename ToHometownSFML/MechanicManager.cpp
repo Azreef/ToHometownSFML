@@ -15,6 +15,7 @@ MechanicManager::MechanicManager()
 void MechanicManager::update()
 {
 	this->updateText();
+	inviTimerUpdate();
 	
 }
 
@@ -23,6 +24,24 @@ void MechanicManager::updateText()
 	this->livesText.setString("Lives: " + std::to_string(lives));
 	this->distanceText.setString("Distance: " + std::to_string(currentDistance/100));
 	this->gearText.setString("Gear: " + std::to_string(currentGear));
+	if (isInvi)
+	{
+		this->inviTimerText.setString("Invincibility: " + std::to_string(abs(inviTimer.asSeconds() - 5)));
+	}
+	else if (!isInvi)
+	{
+		this->inviTimerText.setString("");
+	}
+		
+}
+
+void MechanicManager::inviTimerUpdate()
+{
+	inviTimer = clock.getElapsedTime();
+	if (inviTimer.asSeconds() >= 5)
+	{
+		isInvi = false;
+	}
 }
 
 
@@ -32,6 +51,7 @@ void MechanicManager::render(sf::RenderTarget* target)
 	target->draw(this->livesText);
 	target->draw(this->distanceText);
 	target->draw(this->gearText);
+	target->draw(this->inviTimerText);
 }
 
 
@@ -40,11 +60,21 @@ void MechanicManager::initVariable()
 {
 	this->score = 0;
 	this->lives = 5;
+	this->isInvi = false;
 }
 void MechanicManager::removeLive()
 {
 	this->lives--;
 	
+}
+void MechanicManager::addLive()
+{
+	this->lives++;
+}
+void MechanicManager::setInvi()
+{
+	isInvi = true;
+	clock.restart();
 }
 
 void MechanicManager::setFont()
@@ -73,6 +103,13 @@ void MechanicManager::setFont()
 	this->gearText.setString("Distance: ");
 	this->gearText.setPosition(sf::Vector2f(20, 50));
 
+	this->inviTimerText.setFont(font);
+	this->inviTimerText.setCharacterSize(150);
+	this->inviTimerText.setFillColor(sf::Color::White);
+	this->inviTimerText.setString("Invincible: ");
+	this->inviTimerText.setPosition(sf::Vector2f(20, 200));
+
+
 }
 
 void MechanicManager::setCurrentDistance(int distance)
@@ -87,4 +124,10 @@ void MechanicManager::setCurrentGear(int gear)
 
 
 //Getter ==============================================================================
+
+bool MechanicManager::getIsInvi()
+{
+	return isInvi;
+}
+
 

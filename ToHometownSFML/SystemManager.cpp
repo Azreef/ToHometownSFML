@@ -37,11 +37,28 @@ void SystemManager::updateData()
     gamePlayManager.setCurrentSpeed(level.getRoadSpeed());
     mechanicManager.setCurrentDistance(level.getCurrentDistance());
     mechanicManager.setCurrentGear(level.getCurrentGear());
+    
+    int detectType = gamePlayManager.detectCollision();
+    isInvi = mechanicManager.getIsInvi();
 
-    if (gamePlayManager.detectCollision() == true)
+    if (!isInvi)
     {
-        mechanicManager.removeLive();
+        if (detectType == 1)
+        {
+            mechanicManager.removeLive();
+        }
     }
+   
+    if (detectType == 2)
+    {
+        mechanicManager.addLive();
+    }
+
+    if (detectType == 3)
+    {
+        mechanicManager.setInvi();
+    }
+
 
 }
 

@@ -8,8 +8,8 @@ private:
 	sf::Texture texture;
 	sf::Sprite roadSprite;
 	sf::Vector2f position;
-	int currentDistance;
-	int roadSpeed;
+	float currentDistance;
+	float roadSpeed;
 	int maxGear;
 	int minGear;
 
@@ -31,9 +31,9 @@ public:
 	void roadSpeedControl();
 	float getRoadSpeed();
 	void setCurrentDistance();
-	void setCurrentDistance(int distance);
+	void setCurrentDistance(float distance);
 
-	int getCurrentDistance();
+	float getCurrentDistance();
 	int getCurrentGear();
 
 

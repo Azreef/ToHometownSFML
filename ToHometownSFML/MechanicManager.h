@@ -13,11 +13,17 @@ private:
 	int lives;
 	int currentDistance;
 	int currentGear;
+	bool isInvi;
+	
 	Level level;
 	sf::Font font;
 	sf::Text livesText;
 	sf::Text distanceText;
 	sf::Text gearText;
+	sf::Text inviTimerText;
+
+	sf::Clock clock;
+	sf::Time inviTimer;
 
 public:
 	
@@ -26,11 +32,15 @@ public:
 	void setFont();
 	void initVariable();
 	void removeLive();
+	void addLive();
 	void setCurrentDistance(int dis);
 	void setCurrentGear(int gear);
 	void update();
 	void updateText();
 	void render(sf::RenderTarget* target);
+	void setInvi();
+	void inviTimerUpdate();
+	bool getIsInvi();
 
 };
 

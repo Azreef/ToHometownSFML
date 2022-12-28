@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <random>
-#include "Enemy.h"
+#include "Entity.h"
 
 #include "Player.h"
 
@@ -15,7 +15,9 @@ class GamePlayManager
 {
 private:
 	//Variable
-	Enemy enemy[TOTAL_ENEMY];
+	Entity enemy[TOTAL_ENEMY];
+	Entity repairPickup;
+	Entity fuelPickup;
 	Level level;
 	Player player;
 	
@@ -23,8 +25,12 @@ private:
 	sf::Time gameTime = sf::seconds(0);
 	sf::Clock gameClock;
 	int currentEnemy = 1;
-	int enemySpeed;
-	int currentDistance;
+	float enemySpeed;
+	float currentDistance;
+	int enemyInterval;
+	bool powerUpSpawned = false;
+	int spawnPickupRate;
+
 
 public:
 	//Constructor
@@ -34,11 +40,13 @@ public:
 	void render(sf::RenderTarget* target);
 	void update();
 	void setEnemiesData();
+	void spawnPickup();
 	void setPlayerData(sf::Sprite);
 	void setCurrentDistance(int distance);
 	void setCurrentSpeed(int speed);
-	bool detectCollision();
-	void spawnEnemies();
+	int detectCollision();
+	void spawnEntity();
+	void initVariable();
 
 };
 

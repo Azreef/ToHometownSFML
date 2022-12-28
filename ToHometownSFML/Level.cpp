@@ -54,8 +54,6 @@ void Level::roadSpeedControl()
 		this->keyIsPressed = false;
 	}
 
-	std::cout << currentGear << std:: endl;
-
 
 
 	//Set Speed
@@ -120,7 +118,7 @@ void Level::setCurrentDistance()
 	this->currentDistance = this->currentDistance + this->roadSpeed;
 }
 
-void Level::setCurrentDistance(int distance)
+void Level::setCurrentDistance(float distance)
 {
 	this->currentDistance = distance;
 }
@@ -132,7 +130,7 @@ float Level::getRoadSpeed()
 	return this->roadSpeed;
 }
 
-int Level::getCurrentDistance()
+float Level::getCurrentDistance()
 {
 	return this->currentDistance;
 }
