@@ -4,8 +4,8 @@
 //CONSTRUCTOR
 MechanicManager::MechanicManager()
 {
-	this->initVariable();
-	this->setFont();
+	initVariable();
+	setFont(); 
 }
 
 
@@ -14,23 +14,23 @@ MechanicManager::MechanicManager()
 //Update ==============================================================================
 void MechanicManager::update()
 {
-	this->updateText();
+	updateText();
 	inviTimerUpdate();
 	
 }
 
 void MechanicManager::updateText()
 {
-	this->livesText.setString("Lives: " + std::to_string(lives));
-	this->distanceText.setString("Distance: " + std::to_string(currentDistance/100));
-	this->gearText.setString("Gear: " + std::to_string(currentGear));
+	livesText.setString("Lives: " + std::to_string(lives));
+	distanceText.setString("Distance: " + std::to_string(currentDistance/100));
+	gearText.setString("Gear: " + std::to_string(currentGear));
 	if (isInvi)
 	{
-		this->inviTimerText.setString("Invincibility: " + std::to_string(abs(inviTimer.asSeconds() - 5)));
+		inviTimerText.setString("Invincibility: " + std::to_string(abs(inviTimer.asSeconds() - 5)));
 	}
 	else if (!isInvi)
 	{
-		this->inviTimerText.setString("");
+		inviTimerText.setString("");
 	}
 		
 }
@@ -48,28 +48,28 @@ void MechanicManager::inviTimerUpdate()
 //Draw   ==============================================================================
 void MechanicManager::render(sf::RenderTarget* target)
 {
-	target->draw(this->livesText);
-	target->draw(this->distanceText);
-	target->draw(this->gearText);
-	target->draw(this->inviTimerText);
+	target->draw(livesText);
+	target->draw(distanceText);
+	target->draw(gearText);
+	target->draw(inviTimerText);
 }
 
 
 //Setter ==============================================================================
 void MechanicManager::initVariable()
 {
-	this->score = 0;
-	this->lives = 5;
-	this->isInvi = false;
+	score = 0;
+	lives = 5;
+	isInvi = false;
 }
 void MechanicManager::removeLive()
 {
-	this->lives--;
+	lives--;
 	
 }
 void MechanicManager::addLive()
 {
-	this->lives++;
+	lives++;
 }
 void MechanicManager::setInvi()
 {
@@ -79,47 +79,47 @@ void MechanicManager::setInvi()
 
 void MechanicManager::setFont()
 {
-	if (!this->font.loadFromFile("Asset/game_over.ttf"))
+	if (!font.loadFromFile("Asset/game_over.ttf"))
 	{
 		std::cout << "CANT LOAD FONT";
 	}
 
-	this->livesText.setFont(font);
-	this->livesText.setCharacterSize(150);
-	this->livesText.setFillColor(sf::Color::White);
-	this->livesText.setString("Lives: ");
-	this->livesText.setPosition(sf::Vector2f(20, -80));
+	livesText.setFont(font);
+	livesText.setCharacterSize(150);
+	livesText.setFillColor(sf::Color::White);
+	livesText.setString("Lives: ");
+	livesText.setPosition(sf::Vector2f(20, -80));
 
 
-	this->distanceText.setFont(font);
-	this->distanceText.setCharacterSize(150);
-	this->distanceText.setFillColor(sf::Color::White);
-	this->distanceText.setString("Distance: ");
-	this->distanceText.setPosition(sf::Vector2f(400, -80));
+	distanceText.setFont(font);
+	distanceText.setCharacterSize(150);
+	distanceText.setFillColor(sf::Color::White);
+	distanceText.setString("Distance: ");
+	distanceText.setPosition(sf::Vector2f(400, -80));
 
-	this->gearText.setFont(font);
-	this->gearText.setCharacterSize(150);
-	this->gearText.setFillColor(sf::Color::White);
-	this->gearText.setString("Distance: ");
-	this->gearText.setPosition(sf::Vector2f(20, 50));
+	gearText.setFont(font);
+	gearText.setCharacterSize(150);
+	gearText.setFillColor(sf::Color::White);
+	gearText.setString("Distance: ");
+	gearText.setPosition(sf::Vector2f(20, 50));
 
-	this->inviTimerText.setFont(font);
-	this->inviTimerText.setCharacterSize(150);
-	this->inviTimerText.setFillColor(sf::Color::White);
-	this->inviTimerText.setString("Invincible: ");
-	this->inviTimerText.setPosition(sf::Vector2f(20, 200));
+	inviTimerText.setFont(font);
+	inviTimerText.setCharacterSize(150);
+	inviTimerText.setFillColor(sf::Color::White);
+	inviTimerText.setString("Invincible: ");
+	inviTimerText.setPosition(sf::Vector2f(20, 200));
 
 
 }
 
 void MechanicManager::setCurrentDistance(int distance)
 {
-	this->currentDistance = distance;
+	currentDistance = distance;
 }
 
 void MechanicManager::setCurrentGear(int gear)
 {
-	this->currentGear = gear;
+	currentGear = gear;
 }
 
 

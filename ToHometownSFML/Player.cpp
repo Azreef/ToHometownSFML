@@ -3,8 +3,8 @@
 //CONSTRUCTOR
 Player::Player()
 {
-    this->initVariable();
-    this->setSprite();
+    initVariable();
+    setSprite();
 }
 
 Player::Player(float posX, float posY)
@@ -19,54 +19,54 @@ Player::Player(float posX, float posY)
 
 void Player::update()
 {
-    this->moveUpdate();
+    moveUpdate();
 }
 
 void Player::moveUpdate()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        this->playerSprite.move(0, -this->movementSpeed);
+        playerSprite.move(0, -movementSpeed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        this->playerSprite.move(0, this->movementSpeed);
+        playerSprite.move(0, movementSpeed);
 
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        this->playerSprite.move(-this->movementSpeed, 0);
+        playerSprite.move(-movementSpeed, 0);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        this->playerSprite.move(this->movementSpeed, 0);
+        playerSprite.move(movementSpeed, 0);
     }
 
     //Border Collision
 
     //Left
-    if (this->playerSprite.getPosition().x < 0)
+    if (playerSprite.getPosition().x < 0)
     {
-        this->playerSprite.setPosition(0, this->playerSprite.getPosition().y);
+        playerSprite.setPosition(0, playerSprite.getPosition().y);
     }
 
     //Top
-    if (this->playerSprite.getPosition().y < 600)
+    if (playerSprite.getPosition().y < 600)
     {
-        this->playerSprite.setPosition(this->playerSprite.getPosition().x, 600);
+        playerSprite.setPosition(playerSprite.getPosition().x, 600);
     }
 
     //Right
-    if (this->playerSprite.getPosition().x + this->playerSprite.getGlobalBounds().width > 1280)
+    if (playerSprite.getPosition().x + playerSprite.getGlobalBounds().width > 1280)
     {
-        this->playerSprite.setPosition(1280 - this->playerSprite.getGlobalBounds().width, this->playerSprite.getPosition().y);
+        playerSprite.setPosition(1280 - playerSprite.getGlobalBounds().width, playerSprite.getPosition().y);
     }
 
     //Bottom
-    if (this->playerSprite.getPosition().y + this->playerSprite.getGlobalBounds().height > 980)
+    if (playerSprite.getPosition().y + playerSprite.getGlobalBounds().height > 980)
     {
-        this->playerSprite.setPosition(this->playerSprite.getPosition().x, 980 - this->playerSprite.getGlobalBounds().height);
+        playerSprite.setPosition(playerSprite.getPosition().x, 980 - playerSprite.getGlobalBounds().height);
     }
 }
 
@@ -75,7 +75,7 @@ void Player::moveUpdate()
 
 void Player::render(sf::RenderTarget* target)
 {
-    target->draw(this->playerSprite);
+    target->draw(playerSprite);
 }
 
 
@@ -83,25 +83,25 @@ void Player::render(sf::RenderTarget* target)
 
 void Player::setSprite()
 {
-    if (!this->texture.loadFromFile("Asset/Player2.png"))
+    if (!texture.loadFromFile("Asset/Player2.png"))
     {
         std::cout << "ERROR TEXTURE";
     }
 
-    this->playerSprite.setTexture(this->texture);
-    this->playerSprite.setPosition(this->position);
-    this->playerSprite.setScale(sf::Vector2f(0.2, 0.2));
+    playerSprite.setTexture(texture);
+    playerSprite.setPosition(position);
+    playerSprite.setScale(sf::Vector2f(0.2, 0.2));
 }
 
 void Player::initVariable()
 {
-    this->movementSpeed = 10;
-    this->position = { 0,700 };
+    movementSpeed = 10;
+    position = { 0,700 };
 }
 
 void Player::setPlayerSprite(sf::Sprite playerData)
 {
-    this->playerSprite = playerData;
+    playerSprite = playerData;
 }
 
 
@@ -109,5 +109,5 @@ void Player::setPlayerSprite(sf::Sprite playerData)
 
 sf::Sprite Player::getPlayerData()
 {
-    return this->playerSprite;
+    return playerSprite;
 }

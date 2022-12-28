@@ -9,15 +9,15 @@ Entity::Entity(float x, float y, int entityType, int entitySubtype)
 		//Entity Type Car
 		if (entitySubtype == 0)
 		{
-			this->initVariable(x, y);
-			this->setTempCar();
+			initVariable(x, y);
+			setTempCar();
 		}
 
 		//Entity Type Bus
 		else if (entitySubtype == 1)
 		{
-			this->initVariable(x, y);
-			this->setTempBus();
+			initVariable(x, y);
+			setTempBus();
 		}
 	}
 
@@ -26,13 +26,13 @@ Entity::Entity(float x, float y, int entityType, int entitySubtype)
 		//Entity Type Repair Kit
 		if (entitySubtype == 0)
 		{
-			this->initVariable(x, y);
-			this->setTempRepair();
+			initVariable(x, y);
+			setTempRepair();
 		}
 		else if (entitySubtype == 1)
 		{
-			this->initVariable(x, y);
-			this->setTempFuel();
+			initVariable(x, y);
+			setTempFuel();
 		}
 
 	}
@@ -41,8 +41,8 @@ Entity::Entity(float x, float y, int entityType, int entitySubtype)
 
 Entity::Entity()
 {
-	this->position = { 0,0 };
-	this->setTempBus();
+	position = { 0,0 };
+	setTempBus();
 }
 
 //FUNCTION 
@@ -51,12 +51,12 @@ Entity::Entity()
 
 void Entity::update()
 {
-	this->entityScroll();
+	entityScroll();
 }
 
 void Entity::entityScroll()
 {
-	this->tempEntity.move(-this->entitySpeed + 1, 0);
+	tempEntity.move(-entitySpeed + 1, 0);
 
 }
 
@@ -65,7 +65,7 @@ void Entity::entityScroll()
 
 void Entity::render(sf::RenderTarget* target)
 {
-	target->draw(this->tempEntity);
+	target->draw(tempEntity);
 }
 
 
@@ -78,42 +78,42 @@ void Entity::setSprite()
 
 void Entity::setTempBus()
 {
-	this->tempEntity.setSize(sf::Vector2f(300, 100));
-	this->tempEntity.setPosition(this->position);
-	this->entityType = 0;
-	this->entitySubType = 1;
+	tempEntity.setSize(sf::Vector2f(300, 100));
+	tempEntity.setPosition(position);
+	entityType = 0;
+	entitySubType = 1;
 }
 
 void Entity::setTempCar()
 {
-	this->tempEntity.setSize(sf::Vector2f(100, 100));
-	this->tempEntity.setPosition(this->position);
-	this->entityType = 0;
-	this->entitySubType = 0;
+	tempEntity.setSize(sf::Vector2f(100, 100));
+	tempEntity.setPosition(position);
+	entityType = 0;
+	entitySubType = 0;
 }
 
 void Entity::setTempRepair()
 {
-	this->tempEntity.setSize(sf::Vector2f(50, 50));
-	this->tempEntity.setPosition(this->position);
-	this->entityType = 1;
-	this->entitySubType = 0;
-	this->tempEntity.setFillColor(sf::Color::Green);
+	tempEntity.setSize(sf::Vector2f(50, 50));
+	tempEntity.setPosition(position);
+	entityType = 1;
+	entitySubType = 0;
+	tempEntity.setFillColor(sf::Color::Green);
 }
 
 void Entity::setTempFuel()
 {
-	this->tempEntity.setSize(sf::Vector2f(50, 50));
-	this->tempEntity.setPosition(this->position);
-	this->entityType = 1;
-	this->entitySubType =1;
-	this->tempEntity.setFillColor(sf::Color::Yellow);
+	tempEntity.setSize(sf::Vector2f(50, 50));
+	tempEntity.setPosition(position);
+	entityType = 1;
+	entitySubType =1;
+	tempEntity.setFillColor(sf::Color::Yellow);
 }
 
 void Entity::initVariable(float x, float y)
 {
-	this->position = { x,y };
-	this->isDestroyed = false;
+	position = { x,y };
+	isDestroyed = false;
 }
 
 void Entity::setIsDestroyed(bool isDestoyed)
@@ -142,6 +142,6 @@ sf::RectangleShape Entity::getTempEntity()
 bool Entity::getIsDestroyed()
 {
 
-	return this->isDestroyed;
+	return isDestroyed;
 
 }

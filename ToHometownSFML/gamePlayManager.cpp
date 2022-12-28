@@ -4,8 +4,8 @@
 //CONSTRUCTOR
 GamePlayManager::GamePlayManager()
 {
-	repairPickup = Entity(0,0, 1, 0);
-	fuelPickup = Entity(0, 0, 1, 1);
+	repairPickup = Entity(0,-100, 1, 0);
+	fuelPickup = Entity(0, -100, 1, 1);
 	initVariable();
 
 }
@@ -17,10 +17,10 @@ GamePlayManager::GamePlayManager()
 
 void GamePlayManager::update()
 {
-	this->spawnEntity();
-	this->spawnPickup();
-	this->repairPickup.update();
-	this->fuelPickup.update();
+	spawnEntity();
+	spawnPickup();
+	repairPickup.update();
+	fuelPickup.update();
 }
 
 int GamePlayManager::detectCollision()
@@ -71,16 +71,16 @@ void GamePlayManager::spawnEntity()
 	}
 
 	//Find current number of enemy spawn
-	if (this->currentDistance / this->currentEnemy > enemyInterval && this->currentEnemy < TOTAL_ENEMY)
+	if (currentDistance / currentEnemy > enemyInterval && currentEnemy < TOTAL_ENEMY)
 	{
-		this->currentEnemy++;
+		currentEnemy++;
 		spawnPickup();
 	}
 
 
-	for (int i = 0; i < this->currentEnemy; i++)
+	for (int i = 0; i < currentEnemy; i++)
 	{
-		this->enemy[i].update();
+		enemy[i].update();
 	}
 }
 
@@ -127,12 +127,12 @@ void GamePlayManager::spawnPickup()
 	
 	if (repairPickup.getTempEntity().getPosition().x < 0 && fuelPickup.getTempEntity().getPosition().x < 0)
 	{
-		this->powerUpSpawned = false;
+		powerUpSpawned = false;
 		
 	}
 	else
 	{
-		this->powerUpSpawned = true;
+		powerUpSpawned = true;
 	}
 	
 }
@@ -141,16 +141,16 @@ void GamePlayManager::spawnPickup()
 
 void GamePlayManager::render(sf::RenderTarget* target)
 {
-	for (int i = 0; i < this->currentEnemy; i++)
+	for (int i = 0; i < currentEnemy; i++)
 	{
 		if (!enemy[i].getIsDestroyed())
 		{
-			this->enemy[i].render(target);
+			enemy[i].render(target);
 		}
 	}
 
-	this->repairPickup.render(target);
-	this->fuelPickup.render(target);
+	repairPickup.render(target);
+	fuelPickup.render(target);
 }
 
 //Setter ==============================================================================
@@ -198,17 +198,17 @@ void GamePlayManager::initVariable()
 }
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {
-	this->player.setPlayerSprite(playerData);
+	player.setPlayerSprite(playerData);
 }
 
 void GamePlayManager::setCurrentDistance(int distance)
 {
-	this->currentDistance = distance;
+	currentDistance = distance;
 }
 
 void GamePlayManager::setCurrentSpeed(int speed)
 {
-	this->enemySpeed = speed;
+	enemySpeed = speed;
 }
 
 

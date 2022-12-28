@@ -5,13 +5,13 @@
 
 GameManager::GameManager()
 {
-    this->initVariable();
-    this->openWindow();
+    initVariable();
+    openWindow();
 }
 
 GameManager::~GameManager()
 {
-    delete this->window;
+    delete window;
 }
 
 //FUNCTION 
@@ -21,22 +21,22 @@ GameManager::~GameManager()
 void GameManager::update()
 {
     system.update();
-    this->pollEvent();
+    pollEvent();
     
 }
 
 void GameManager::pollEvent()
 {
-    while (this->window->pollEvent(this->event))
+    while (window->pollEvent(event))
     {
-        switch (this->event.type)
+        switch (event.type)
         {
         case sf::Event::Closed:
-            this->window->close();
+            window->close();
             break;
         case sf::Event::KeyPressed:
-            if (this->event.key.code == sf::Keyboard::Escape)
-                this->window->close();
+            if (event.key.code == sf::Keyboard::Escape)
+                window->close();
             break;
 
         }
@@ -45,31 +45,31 @@ void GameManager::pollEvent()
 
 bool GameManager::running()
 {
-    return this->window->isOpen();
+    return window->isOpen();
 }
 
 //Draw   ==============================================================================
 
 void GameManager::render()
 {
-    this->window->clear();
+    window->clear();
 
-    system.render(this->window);
+    system.render(window);
 
-    this->window->display();
+    window->display();
 
 }
 
 //Setter ==============================================================================
 void GameManager::openWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown");
-    this->window->setFramerateLimit(60);
+    window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown");
+    window->setFramerateLimit(60);
 }
 
 void GameManager::initVariable()
 {
-    this->window = nullptr;
+    window = nullptr;
 }
 
 
