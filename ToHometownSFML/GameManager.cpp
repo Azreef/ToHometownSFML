@@ -20,7 +20,7 @@ GameManager::~GameManager()
 
 void GameManager::update()
 {
-    system.update();
+    levelManager.update();
     pollEvent();
     
 }
@@ -54,7 +54,7 @@ void GameManager::render()
 {
     window->clear();
 
-    system.render(window);
+    levelManager.render(window);
 
     window->display();
 

@@ -2,6 +2,20 @@
 
 
 //CONSTRUCTOR
+SystemManager::SystemManager(int currentLevel)
+{
+    if (currentLevel == 1)
+    {
+        gamePlayManager = GamePlayManager(1000, 2);
+        setData();
+    }
+    if (currentLevel == 2)
+    {
+        gamePlayManager = GamePlayManager(1, 2);
+        setData();
+    }
+   
+}
 SystemManager::SystemManager()
 {
     setData();

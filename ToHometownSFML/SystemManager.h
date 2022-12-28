@@ -20,6 +20,7 @@ private:
 
 public:
 	SystemManager();
+	SystemManager(int currentLevel);
 	
 	void update();
 	void render(sf::RenderTarget* target);

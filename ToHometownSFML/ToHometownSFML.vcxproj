@@ -134,6 +134,7 @@
     <ClCompile Include="GamePlayManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MechanicManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SystemManager.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="GamePlayManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MechanicManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />

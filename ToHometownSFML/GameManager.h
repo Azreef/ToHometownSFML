@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Main.hpp>
 
-#include "SystemManager.h"
+#include "LevelManager.h"
 
 class GameManager
 {
@@ -12,7 +12,8 @@ private:
 	//Variable
 	sf::RenderWindow* window;
 	sf::Event event;
-	SystemManager system;
+	LevelManager levelManager;
+	//SystemManager system = SystemManager(2);
 
 public:
 	// Constructor

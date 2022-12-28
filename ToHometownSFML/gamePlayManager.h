@@ -35,6 +35,7 @@ private:
 public:
 	//Constructor
 	GamePlayManager();
+	GamePlayManager(float enemyInterval, int spawnPickupRate);
 
 	//Function
 	void render(sf::RenderTarget* target);

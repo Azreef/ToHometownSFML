@@ -10,6 +10,15 @@ GamePlayManager::GamePlayManager()
 
 }
 
+GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate)
+{
+	repairPickup = Entity(0, -100, 1, 0);
+	fuelPickup = Entity(0, -100, 1, 1);
+
+	this->enemyInterval = enemyInterval;
+	this->spawnPickupRate = spawnPickupRate;
+}
+
 
 //FUNCTION 
 
