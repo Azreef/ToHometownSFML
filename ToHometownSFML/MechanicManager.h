@@ -21,9 +21,13 @@ private:
 	sf::Text distanceText;
 	sf::Text gearText;
 	sf::Text inviTimerText;
+	sf::Text timeLimitText;
 
-	sf::Clock clock;
+	sf::Clock clockInvi;
 	sf::Time inviTimer;
+
+	sf::Time timeLimit;
+	sf::Clock clockTimer;
 
 public:
 	
@@ -41,6 +45,11 @@ public:
 	void setInvi();
 	void inviTimerUpdate();
 	bool getIsInvi();
+	int getLive();
+	
+	int getDistance();
+	void setTimeLimit(sf::Time timeLimit);
+	void timeLimitUpdate();
 
 };
 

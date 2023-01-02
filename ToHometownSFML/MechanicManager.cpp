@@ -16,7 +16,7 @@ void MechanicManager::update()
 {
 	updateText();
 	inviTimerUpdate();
-	
+	timeLimitUpdate();
 }
 
 void MechanicManager::updateText()
@@ -24,6 +24,7 @@ void MechanicManager::updateText()
 	livesText.setString("Lives: " + std::to_string(lives));
 	distanceText.setString("Distance: " + std::to_string(currentDistance/100));
 	gearText.setString("Gear: " + std::to_string(currentGear));
+
 	if (isInvi)
 	{
 		inviTimerText.setString("Invincibility: " + std::to_string(abs(inviTimer.asSeconds() - 5)));
@@ -32,12 +33,13 @@ void MechanicManager::updateText()
 	{
 		inviTimerText.setString("");
 	}
-		
+
+	timeLimitText.setString("Time: " + std::to_string(abs(timeLimit.asSeconds())));
 }
 
 void MechanicManager::inviTimerUpdate()
 {
-	inviTimer = clock.getElapsedTime();
+	inviTimer = clockInvi.getElapsedTime();
 	if (inviTimer.asSeconds() >= 5)
 	{
 		isInvi = false;
@@ -52,6 +54,7 @@ void MechanicManager::render(sf::RenderTarget* target)
 	target->draw(distanceText);
 	target->draw(gearText);
 	target->draw(inviTimerText);
+	target->draw(timeLimitText);
 }
 
 
@@ -74,7 +77,7 @@ void MechanicManager::addLive()
 void MechanicManager::setInvi()
 {
 	isInvi = true;
-	clock.restart();
+	clockInvi.restart();
 }
 
 void MechanicManager::setFont()
@@ -109,6 +112,12 @@ void MechanicManager::setFont()
 	inviTimerText.setString("Invincible: ");
 	inviTimerText.setPosition(sf::Vector2f(20, 200));
 
+	timeLimitText.setFont(font);
+	timeLimitText.setCharacterSize(150);
+	timeLimitText.setFillColor(sf::Color::White);
+	timeLimitText.setString("Time: ");
+	timeLimitText.setPosition(sf::Vector2f(400, 50));
+
 
 }
 
@@ -128,6 +137,28 @@ void MechanicManager::setCurrentGear(int gear)
 bool MechanicManager::getIsInvi()
 {
 	return isInvi;
+}
+
+int MechanicManager::getLive()
+{
+	return lives;
+}
+
+int MechanicManager::getDistance()
+{
+	return currentDistance;
+}
+
+void MechanicManager::timeLimitUpdate()
+{
+	timeLimit = clockTimer.getElapsedTime();
+}
+
+
+void MechanicManager::setTimeLimit(sf::Time timeLimit)
+{
+	this->timeLimit = timeLimit;
+	clockTimer.restart();
 }
 
 

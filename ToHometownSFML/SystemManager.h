@@ -28,6 +28,8 @@ public:
 	void render(sf::RenderTarget* target);
 	void updateData();
 	void setData();
+	void updateLive();
+	int checkIfFinished(); //0-Not Finished | 1-Completed |  2-Out of Lives | 3-Out of time
 
 };
 

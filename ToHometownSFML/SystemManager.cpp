@@ -6,14 +6,22 @@ SystemManager::SystemManager(int currentLevel)
 {
     if (currentLevel == 0)
     {
-        gamePlayManager = new GamePlayManager(1000,1,0);
+        gamePlayManager =  new GamePlayManager(1000,1,0);
         maxDistance = 400;
+
+        sf::Time time = sf::seconds(60);
+        mechanicManager.setTimeLimit(time);
+
         setData();
     }
     if (currentLevel == 1)
     {
         gamePlayManager = new GamePlayManager(1000, 1, 1);
         maxDistance = 600;
+
+        sf::Time time = sf::seconds(60);
+       mechanicManager.setTimeLimit(time);
+
         setData();
     }
    
@@ -32,28 +40,22 @@ void SystemManager::update()
 	gamePlayManager->update();
     level.update();
     mechanicManager.update();
+    updateLive();
     updateData();
 }
 
-//Draw   ==============================================================================
-void SystemManager::render(sf::RenderTarget* target)
-{
-    level.render(target);
-    player.render(target);
-	gamePlayManager->render(target);
-    
-    mechanicManager.render(target);
-}
-
-//Setter ==============================================================================
 void SystemManager::updateData()
 {
     gamePlayManager->setPlayerData(player.getPlayerData());
     gamePlayManager->setCurrentDistance(level.getCurrentDistance());
     gamePlayManager->setCurrentSpeed(level.getRoadSpeed());
+
     mechanicManager.setCurrentDistance(level.getCurrentDistance());
     mechanicManager.setCurrentGear(level.getCurrentGear());
-    
+}
+
+void SystemManager::updateLive()
+{
     int detectType = gamePlayManager->detectCollision();
     isInvi = mechanicManager.getIsInvi();
 
@@ -64,7 +66,7 @@ void SystemManager::updateData()
             mechanicManager.removeLive();
         }
     }
-   
+
     if (detectType == 2)
     {
         mechanicManager.addLive();
@@ -74,13 +76,40 @@ void SystemManager::updateData()
     {
         mechanicManager.setInvi();
     }
-
 }
+
+int SystemManager::checkIfFinished()
+{
+    if (mechanicManager.getDistance() >= maxDistance)
+    {
+        return 1;
+    }
+
+    else if (mechanicManager.getLive() <= 0)
+    {
+        return 2;
+    }
+}
+//Draw   ==============================================================================
+void SystemManager::render(sf::RenderTarget* target)
+{
+    level.render(target);
+    player.render(target);
+	gamePlayManager->render(target);
+    
+    mechanicManager.render(target);
+}
+
+
+//Setter ==============================================================================
+
 
 void SystemManager::setData()
 {
     gamePlayManager->setEnemiesData();
 }
+
+
 
 //Getter ==============================================================================
 

@@ -32,6 +32,9 @@ void GamePlayManager::update()
 	spawnPickup();
 	repairPickup.update();
 	fuelPickup.update();
+
+	std::cout << powerUpSpawned << std::endl;
+	//std::cout << fuelPickup.getTempEntity().getPosition().x << std::endl;
 }
 
 int GamePlayManager::detectCollision()
@@ -101,6 +104,7 @@ void GamePlayManager::spawnPickup()
 
 	fuelPickup.setEntitySpeed(enemySpeed);
 	//std::cout << powerUpSpawned  << " | " << repairPickup.getTempEntity().getPosition().x << std::endl;
+	//std::cout << spawnPickupRate << std::endl;
 	if (!powerUpSpawned)
 	{
 		int randomChanceSpawn;
@@ -178,8 +182,6 @@ void GamePlayManager::setEnemiesData()
 
 	//Randomnize Position
 	 
-	
-
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
 		randomPos[i] = dist(randomNum);
