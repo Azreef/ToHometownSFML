@@ -18,11 +18,17 @@ private:
 	bool levelIsSet;
 
 
+	//Menu variable
 	int currentLevel;
 	int currentMenu;
 	bool isInmenu;
 
 	SystemManager* systemManager;
+
+	//gameplay Variable
+	int remainingLive;
+	sf::Time remainingTime;
+	int gameState;
 
 public:
 	// Constructor

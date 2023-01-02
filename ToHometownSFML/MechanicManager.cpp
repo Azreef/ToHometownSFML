@@ -34,7 +34,7 @@ void MechanicManager::updateText()
 		inviTimerText.setString("");
 	}
 
-	timeLimitText.setString("Time: " + std::to_string(abs(timeLimit.asSeconds())));
+	timeLimitText.setString("Time: " + std::to_string(abs(timeLimitStart.asSeconds() - timeLimitEnd.asSeconds())));
 }
 
 void MechanicManager::inviTimerUpdate()
@@ -118,7 +118,6 @@ void MechanicManager::setFont()
 	timeLimitText.setString("Time: ");
 	timeLimitText.setPosition(sf::Vector2f(400, 50));
 
-
 }
 
 void MechanicManager::setCurrentDistance(int distance)
@@ -151,13 +150,18 @@ int MechanicManager::getDistance()
 
 void MechanicManager::timeLimitUpdate()
 {
-	timeLimit = clockTimer.getElapsedTime();
+	timeLimitStart = clockTimer.getElapsedTime();
+}
+
+sf::Time MechanicManager::getTimeLimit()
+{
+	return timeLimitStart;
 }
 
 
 void MechanicManager::setTimeLimit(sf::Time timeLimit)
 {
-	this->timeLimit = timeLimit;
+	this->timeLimitEnd = timeLimit;
 	clockTimer.restart();
 }
 

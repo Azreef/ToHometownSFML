@@ -9,18 +9,18 @@ SystemManager::SystemManager(int currentLevel)
         gamePlayManager =  new GamePlayManager(1000,1,0);
         maxDistance = 400;
 
-        sf::Time time = sf::seconds(60);
-        mechanicManager.setTimeLimit(time);
+        timeLimit = sf::seconds(10);
+        mechanicManager.setTimeLimit(timeLimit);
 
         setData();
     }
     if (currentLevel == 1)
     {
-        gamePlayManager = new GamePlayManager(1000, 1, 1);
+        gamePlayManager = new GamePlayManager(1000, 1000, 1);
         maxDistance = 600;
 
-        sf::Time time = sf::seconds(60);
-       mechanicManager.setTimeLimit(time);
+        timeLimit = sf::seconds(80);
+        mechanicManager.setTimeLimit(timeLimit);
 
         setData();
     }
@@ -78,17 +78,28 @@ void SystemManager::updateLive()
     }
 }
 
-int SystemManager::checkIfFinished()
+void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int* remainingLive)
 {
-    if (mechanicManager.getDistance() >= maxDistance)
+    
+    if (mechanicManager.getDistance() >= maxDistance * 100)
     {
-        return 1;
+        *gameState  = 1;
     }
-
     else if (mechanicManager.getLive() <= 0)
     {
-        return 2;
+        *gameState = 2;
     }
+    else if (mechanicManager.getTimeLimit().asSeconds() >= timeLimit.asSeconds())
+    {
+        *gameState = 3;
+    }
+    else
+    {
+        *gameState = 0;
+    }
+
+    *remainingTime = mechanicManager.getTimeLimit();
+    *remainingLive = mechanicManager.getLive();
 }
 //Draw   ==============================================================================
 void SystemManager::render(sf::RenderTarget* target)

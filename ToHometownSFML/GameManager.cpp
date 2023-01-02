@@ -29,7 +29,7 @@ void GameManager::update()
     {
         if (currentMenu == 0)
         {
-            menu.mainMenu(window, &isInmenu, &currentLevel);
+            menu.mainMenu(window, &isInmenu, &currentLevel,&currentMenu);
         }
 
 
@@ -52,6 +52,10 @@ void GameManager::update()
     if (!isInmenu)
     {
         systemManager->update();
+
+        systemManager->updateGameValue(&gameState, &remainingTime, &remainingLive);
+
+        std::cout << gameState << std::endl;
     }
 
     pollEvent();

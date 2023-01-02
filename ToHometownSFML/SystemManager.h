@@ -19,6 +19,7 @@ private:
 	bool isInvi;
 	
 	int maxDistance;
+	sf::Time timeLimit;
 
 public:
 	SystemManager();
@@ -29,7 +30,7 @@ public:
 	void updateData();
 	void setData();
 	void updateLive();
-	int checkIfFinished(); //0-Not Finished | 1-Completed |  2-Out of Lives | 3-Out of time
+	void updateGameValue(int* gameState,sf::Time* remainingTime, int* remainingLive); //0-Not Finished | 1-Completed |  2-Out of Lives | 3-Out of time
 
 };
 

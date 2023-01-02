@@ -33,8 +33,6 @@ void GamePlayManager::update()
 	repairPickup.update();
 	fuelPickup.update();
 
-	std::cout << powerUpSpawned << std::endl;
-	//std::cout << fuelPickup.getTempEntity().getPosition().x << std::endl;
 }
 
 int GamePlayManager::detectCollision()

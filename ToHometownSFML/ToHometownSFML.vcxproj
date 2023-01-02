@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GamePlayManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -145,6 +146,7 @@
     <Text Include="oldCode.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GamePlayManager.h" />
     <ClInclude Include="GameManager.h" />

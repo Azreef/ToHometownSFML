@@ -26,7 +26,8 @@ private:
 	sf::Clock clockInvi;
 	sf::Time inviTimer;
 
-	sf::Time timeLimit;
+	sf::Time timeLimitStart;
+	sf::Time timeLimitEnd;
 	sf::Clock clockTimer;
 
 public:
@@ -50,6 +51,7 @@ public:
 	int getDistance();
 	void setTimeLimit(sf::Time timeLimit);
 	void timeLimitUpdate();
+	sf::Time getTimeLimit();
 
 };
 
