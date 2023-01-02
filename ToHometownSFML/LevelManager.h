@@ -4,14 +4,13 @@
 class LevelManager
 {
 private:
-	SystemManager systemManager;
-	int currentLevel = 1;
-
+	SystemManager* systemManager = new SystemManager();
+	
 public:
 	LevelManager();
-	void levelSelect();
-	void setCurrentLevel(int currentLevel);
+	LevelManager(int currentLevel);
 	void update();
 	void render(sf::RenderTarget* target);
+
 };
 

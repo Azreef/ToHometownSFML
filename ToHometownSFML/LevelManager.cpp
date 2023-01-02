@@ -1,29 +1,27 @@
 #include "LevelManager.h"
 
+
+
 LevelManager::LevelManager()
 {
-	//levelSelect();
 }
 
-void LevelManager::levelSelect()
+LevelManager::LevelManager(int currentLevel)
 {
-	if (currentLevel == 1)
-	{
-		systemManager = SystemManager(1);
-	}
+	SystemManager* systemManager = new SystemManager(currentLevel);
 }
 
-void LevelManager::setCurrentLevel(int currentLevel)
-{
-	this->currentLevel = currentLevel;
-}
+
 
 void LevelManager::update()
 {
-	systemManager.update();
+	systemManager->update();
 }
 
 void LevelManager::render(sf::RenderTarget* target)
 {
-	systemManager.render(target);
+	systemManager->render(target);
 }
+
+
+

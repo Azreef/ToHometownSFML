@@ -83,6 +83,7 @@ void Player::render(sf::RenderTarget* target)
 
 void Player::setSprite()
 {
+ 
     if (!texture.loadFromFile("Asset/Player2.png"))
     {
         std::cout << "ERROR TEXTURE";

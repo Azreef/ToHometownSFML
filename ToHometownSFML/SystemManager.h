@@ -12,11 +12,13 @@
 class SystemManager
 {
 private:
-	GamePlayManager gamePlayManager;
+	GamePlayManager* gamePlayManager;
 	MechanicManager mechanicManager;
 	Player player;
 	Level level;
 	bool isInvi;
+	
+	int maxDistance;
 
 public:
 	SystemManager();

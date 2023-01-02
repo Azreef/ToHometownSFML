@@ -30,12 +30,13 @@ private:
 	int enemyInterval;
 	bool powerUpSpawned = false;
 	int spawnPickupRate;
+	int spawnEnemyType; //0 = cars only   1 = cars and truck
 
 
 public:
 	//Constructor
 	GamePlayManager();
-	GamePlayManager(float enemyInterval, int spawnPickupRate);
+	GamePlayManager(float enemyInterval, int spawnPickupRate,int spawnEnemyType);
 
 	//Function
 	void render(sf::RenderTarget* target);

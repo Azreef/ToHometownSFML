@@ -7,6 +7,10 @@ GameManager::GameManager()
 {
     initVariable();
     openWindow();
+    currentLevel = 0;
+    currentMenu = 0;
+    levelIsSet = false;
+    isInmenu = true;
 }
 
 GameManager::~GameManager()
@@ -20,7 +24,36 @@ GameManager::~GameManager()
 
 void GameManager::update()
 {
-    levelManager.update();
+    //Menu
+    if (isInmenu)
+    {
+        if (currentMenu == 0)
+        {
+            menu.mainMenu(window, &isInmenu, &currentLevel);
+        }
+
+
+    }
+    
+    //Load Levels
+    if (!isInmenu)
+    {
+        if (!levelIsSet)
+        {
+            systemManager = new SystemManager(currentLevel);
+            levelIsSet = true;
+        }
+
+
+    }
+    
+    //Update Levels
+
+    if (!isInmenu)
+    {
+        systemManager->update();
+    }
+
     pollEvent();
     
 }
@@ -54,10 +87,24 @@ void GameManager::render()
 {
     window->clear();
 
-    levelManager.render(window);
+    //levelManager.render(window);
+
+
+    if (isInmenu)
+    {
+        if (currentLevel == 0)
+        {
+            menu.render(window);
+        }
+    }
+   
+    else
+    {
+        systemManager->render(window);
+    }
 
     window->display();
-
+   
 }
 
 //Setter ==============================================================================

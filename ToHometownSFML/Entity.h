@@ -15,7 +15,7 @@ private:
 	int entityType; // 0 = enemy , 1 = power ups
 	int entitySubType; 
 	
-	
+
 public:
 	
 	//Constructor
