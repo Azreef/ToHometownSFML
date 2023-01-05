@@ -2,35 +2,42 @@
 
 
 //CONSTRUCTOR
-SystemManager::SystemManager(int currentLevel)
-{
-    if (currentLevel == 0)
-    {
-        gamePlayManager =  new GamePlayManager(1000,1,0);
-        maxDistance = 400;
 
-        timeLimit = sf::seconds(10);
-        mechanicManager.setTimeLimit(timeLimit);
-
-        setData();
-    }
-    if (currentLevel == 1)
-    {
-        gamePlayManager = new GamePlayManager(1000, 1000, 1);
-        maxDistance = 600;
-
-        timeLimit = sf::seconds(80);
-        mechanicManager.setTimeLimit(timeLimit);
-
-        setData();
-    }
-   
-}
 SystemManager::SystemManager()
 {
     setData();
 }
 
+SystemManager::SystemManager(int currentLevel)
+{
+    if (currentLevel == 0)
+    {
+        gamePlayManager = new GamePlayManager(1000, 300, 0);
+        maxDistance = 50;
+
+        timeLimit = sf::seconds(60);
+        mechanicManager.setTimeLimit(timeLimit);
+        mechanicManager.setMaxDistance(maxDistance);
+
+        setData();
+    }
+    if (currentLevel == 1)
+    {
+        gamePlayManager = new GamePlayManager(800, 1 , 1);
+        maxDistance = 600;
+
+        timeLimit = sf::seconds(80);
+        mechanicManager.setTimeLimit(timeLimit);
+        mechanicManager.setMaxDistance(maxDistance);
+
+        setData();
+    }
+
+}
+
+SystemManager::~SystemManager()
+{
+}
 //FUNCTION 
 
 //Update ==============================================================================
@@ -53,6 +60,7 @@ void SystemManager::updateData()
     mechanicManager.setCurrentDistance(level.getCurrentDistance());
     mechanicManager.setCurrentGear(level.getCurrentGear());
 }
+
 
 void SystemManager::updateLive()
 {

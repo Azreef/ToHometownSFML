@@ -11,7 +11,8 @@ GameManager::GameManager()
     currentMenu = 0;
     levelIsSet = false;
     isInmenu = true;
-}
+   
+}   
 
 GameManager::~GameManager()
 {
@@ -25,14 +26,42 @@ GameManager::~GameManager()
 void GameManager::update()
 {
     //Menu
+
+    //Menu UI
     if (isInmenu)
     {
-        if (currentMenu == 0)
+        levelIsSet = false;
+        if (!menuIsSet)
         {
-            menu.mainMenu(window, &isInmenu, &currentLevel,&currentMenu);
+            if (currentMenu == 0)
+            {
+                //Main Menu
+                
+                //gameState = 0;
+                menu.mainMenu(window, &isInmenu, &currentLevel, &currentMenu);
+                //menuIsSet = true;
+            }
+            else if (currentMenu == 1)
+            {
+                //Select Level
+                menu.selectMenu(window, &isInmenu, &currentLevel, &currentMenu);
+                //menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState,remainingLive,remainingTime);
+                //menu.mainMenu(window, &isInmenu, &currentLevel, &currentMenu);
+            }
+            else if (currentMenu == 2)
+            {
+                //Stage Screen
+                menu.stageMenu(window, &isInmenu, &currentLevel);
+            }
+            else if (currentMenu == 3)
+            {
+                //Result Screen
+            }
+            else if (currentMenu == 4)
+            {
+                //End Screen
+            }
         }
-
-
     }
     
     //Load Levels
@@ -40,22 +69,28 @@ void GameManager::update()
     {
         if (!levelIsSet)
         {
+            delete systemManager;
             systemManager = new SystemManager(currentLevel);
             levelIsSet = true;
         }
-
-
     }
     
-    //Update Levels
 
+    //Update Levels
     if (!isInmenu)
     {
         systemManager->update();
 
+        //Update Levels Variable
         systemManager->updateGameValue(&gameState, &remainingTime, &remainingLive);
 
-        std::cout << gameState << std::endl;
+        //Gameplay Finished (Stop Gameplay loop)
+        if (gameState != 0) 
+        {
+           currentMenu = 3;
+           isInmenu = true;
+        }
+ 
     }
 
     pollEvent();
@@ -91,18 +126,13 @@ void GameManager::render()
 {
     window->clear();
 
-    //levelManager.render(window);
-
-
-    if (isInmenu)
-    {
-        if (currentLevel == 0)
-        {
-            menu.render(window);
-        }
+    
+    if (isInmenu)//Render Menu UI
+    {       
+        menu.render(window);      
     }
    
-    else
+    else //Render Gameplay
     {
         systemManager->render(window);
     }

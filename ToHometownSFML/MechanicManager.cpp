@@ -22,19 +22,19 @@ void MechanicManager::update()
 void MechanicManager::updateText()
 {
 	livesText.setString("Lives: " + std::to_string(lives));
-	distanceText.setString("Distance: " + std::to_string(currentDistance/100));
+	distanceText.setString("Distance: " + std::to_string(abs(currentDistance / 100 - maxDistance)));
 	gearText.setString("Gear: " + std::to_string(currentGear));
 
 	if (isInvi)
 	{
-		inviTimerText.setString("Invincibility: " + std::to_string(abs(inviTimer.asSeconds() - 5)));
+		inviTimerText.setString("Invincibility: " + std::to_string((int)abs(inviTimer.asSeconds() - 5)));
 	}
 	else if (!isInvi)
 	{
 		inviTimerText.setString("");
 	}
 
-	timeLimitText.setString("Time: " + std::to_string(abs(timeLimitStart.asSeconds() - timeLimitEnd.asSeconds())));
+	timeLimitText.setString("Time: " + std::to_string((int)abs(timeLimitStart.asSeconds() - timeLimitEnd.asSeconds())));
 }
 
 void MechanicManager::inviTimerUpdate()
@@ -158,11 +158,18 @@ sf::Time MechanicManager::getTimeLimit()
 	return timeLimitStart;
 }
 
+void MechanicManager::setMaxDistance(int maxDistance)
+{
+	this->maxDistance = maxDistance;
+}
+
 
 void MechanicManager::setTimeLimit(sf::Time timeLimit)
 {
 	this->timeLimitEnd = timeLimit;
 	clockTimer.restart();
 }
+
+
 
 

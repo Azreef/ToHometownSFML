@@ -14,6 +14,7 @@ private:
 	int currentDistance;
 	int currentGear;
 	bool isInvi;
+	int maxDistance;
 	
 	Level level;
 	sf::Font font;
@@ -52,6 +53,7 @@ public:
 	void setTimeLimit(sf::Time timeLimit);
 	void timeLimitUpdate();
 	sf::Time getTimeLimit();
+	void setMaxDistance(int maxDistance);
 
 };
 

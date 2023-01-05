@@ -23,8 +23,11 @@ private:
 
 public:
 	SystemManager();
+	~SystemManager();
 	SystemManager(int currentLevel);
 	
+	
+
 	void update();
 	void render(sf::RenderTarget* target);
 	void updateData();
