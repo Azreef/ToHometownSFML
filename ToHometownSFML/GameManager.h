@@ -13,7 +13,6 @@ private:
 	//Variable
 	sf::RenderWindow* window;
 	sf::Event event;
-	//LevelManager levelManager;
 
 	Menu menu;
 	bool levelIsSet;
@@ -21,6 +20,7 @@ private:
 
 	//Menu variable
 	int currentLevel;
+	int completedLevel;
 	int currentMenu;
 	bool isInmenu;
 	bool menuIsSet;
@@ -29,7 +29,9 @@ private:
 	//gameplay Variable
 	int remainingLive;
 	sf::Time remainingTime;
+	int remainingDistance;
 	int gameState;
+	
 
 	SystemManager* systemManager;
 

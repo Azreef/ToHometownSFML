@@ -8,6 +8,7 @@ GameManager::GameManager()
     initVariable();
     openWindow();
     currentLevel = 0;
+    completedLevel = 0;
     currentMenu = 0;
     levelIsSet = false;
     isInmenu = true;
@@ -45,8 +46,7 @@ void GameManager::update()
             {
                 //Select Level
                 menu.selectMenu(window, &isInmenu, &currentLevel, &currentMenu);
-                //menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState,remainingLive,remainingTime);
-                //menu.mainMenu(window, &isInmenu, &currentLevel, &currentMenu);
+
             }
             else if (currentMenu == 2)
             {
@@ -56,6 +56,7 @@ void GameManager::update()
             else if (currentMenu == 3)
             {
                 //Result Screen
+                menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState, remainingLive, remainingTime, remainingDistance, &completedLevel);
             }
             else if (currentMenu == 4)
             {
@@ -82,7 +83,7 @@ void GameManager::update()
         systemManager->update();
 
         //Update Levels Variable
-        systemManager->updateGameValue(&gameState, &remainingTime, &remainingLive);
+        systemManager->updateGameValue(&gameState, &remainingTime, &remainingLive, &remainingDistance);
 
         //Gameplay Finished (Stop Gameplay loop)
         if (gameState != 0) 

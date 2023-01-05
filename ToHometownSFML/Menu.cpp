@@ -8,12 +8,15 @@ Menu::Menu()
 	timerStarted = false;
 }
 
+
+
 void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, int* currentMenu)
 {
 	refreshText();
 	refreshButton();
-	text[0].setCharacterSize(100);
-	text[0].setString("Main Menu");
+	stopDoubleClick();
+
+	setText(0, sf::Vector2f(0, 0), 100, "Main Menu");
 	button[0] = Button(sf::Vector2f(50, 200), sf::Vector2f(400, 150), "Select Level", 100, &font);
 
 	stopDoubleClick();
@@ -36,16 +39,16 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 {
 	refreshText();
 	refreshButton();
-	text[0].setCharacterSize(100);
-	text[0].setString("SELECT LEVEL");
+	stopDoubleClick();
+
+	setText(0, sf::Vector2f(0, 0), 100, "Select Level");
 
 	button[0] = Button(sf::Vector2f(50, 200), sf::Vector2f(400, 150), "Level 1", 100,&font);
 	button[1] = Button(sf::Vector2f(50, 400), sf::Vector2f(400, 150), "Level 2", 100, &font);
 	
-	stopDoubleClick();
+	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
 	{
-		hasClicked = false;
 		sf::RenderWindow& w = *window;
 		sf::Vector2i mousePos = sf::Mouse::getPosition(w);
 
@@ -71,70 +74,128 @@ void Menu::stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel
 {
 	refreshText();
 	refreshButton();
-	text[0].setCharacterSize(100);
-	text[0].setString("Level " + std::to_string(*currentLevel + 1));
+	stopDoubleClick();
 
-	if (currentLevel == 0)
+
+	//Stage Information
+	if (*currentLevel == 0)
 	{
-
-		text[1].setCharacterSize(100);
+		setText(1, sf::Vector2f(0, 0), 100, "Level 1-1");
+		setText(2, sf::Vector2f(0, 300), 100, "City");
 	}
+	else if (*currentLevel == 1)
+	{
+		setText(1, sf::Vector2f(0, 0), 100, "Level 1-2");
+		setText(2, sf::Vector2f(0, 300), 100, "City");
+	}
+
+
+	button[0] = Button(sf::Vector2f(50, 200), sf::Vector2f(400, 150), "Continue", 100, &font);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)//Continue to Gameplay
+	{
+		sf::RenderWindow& w = *window;
+		sf::Vector2i mousePos = sf::Mouse::getPosition(w);
+		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos)))
+		{
+			*isInMenu = false;
+		}
+		hasClicked = true;
+	}
+	
 }
 
 
 
-void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime)
+void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime, int remainingDistance, int* completedLevel)
 {
-	//std::cout << "RESULT" << std::endl;
-	//createButton();
-	font.loadFromFile("Asset/game_over.ttf");
-	//resultText.setFont(font);
+
+	refreshText();
+	refreshButton();
+	stopDoubleClick();
 
 	sf::RenderWindow& w = *window;
 	sf::Vector2i mousePos = sf::Mouse::getPosition(w);
 
-	if (gameState == 1)
+	if (gameState == 1) //Successfull
 	{
-		/*resultText[0].setFillColor(sf::Color::White);
-		resultText[0].setCharacterSize(100);
-		resultText[0].setString("STAGE COMPLETED");*/
+		*completedLevel = *currentLevel; //Set level as completed
 
-		button[0] = Button(sf::Vector2f(200, 50), sf::Vector2f(400, 150), "Level 1", 100,&font);
-		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos)))
+		setText(0, sf::Vector2f(0, 0), 100, "Stage Completed!");
+		setText(1, sf::Vector2f(0, 200), 100, "Time Left:" + std::to_string(remainingTime.asSeconds()));
+
+		button[0] = Button(sf::Vector2f(50, 300), sf::Vector2f(400, 150), "Continue", 100, &font);
+		button[1] = Button(sf::Vector2f(50, 500), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
+		
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
 		{
-			*currentLevel = 0;
-			*isInMenu = false;
-			std::cout << "CLICK" << std::endl;
+			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
+			{
+				*currentLevel = *currentLevel + 1;
+				*isInMenu = false;
+			}
+			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
+			{
+				*currentMenu = 0;
+				*isInMenu = true;
+			}
+
+			hasClicked = true;
+		}
+		
+	}
+	else if (gameState == 2) //Out if Lives
+	{
+		setText(0, sf::Vector2f(0, 0), 100, "Stage Failed!");
+		setText(1, sf::Vector2f(0, 200), 100, "Out of Lives");
+		setText(2, sf::Vector2f(0, 300), 100, "Distance Left: " + std::to_string(remainingDistance));
+
+		button[0] = Button(sf::Vector2f(50, 300), sf::Vector2f(400, 150), "Retry", 100, &font);
+		button[1] = Button(sf::Vector2f(50, 500), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
+
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
+		{
+			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Retry
+			{
+				*currentLevel = *currentLevel;
+				*isInMenu = false;
+			}
+			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
+			{
+				*currentMenu = 0;
+				*isInMenu = true;
+			}
+
+			hasClicked = true;
 		}
 
-
 	}
-	else if (gameState == 2)
+	else if (gameState == 3) //Out if Time
 	{
+		setText(0, sf::Vector2f(0, 0), 100, "Stage Failed!");
+		setText(1, sf::Vector2f(0, 200), 100, "Out of Time");
+		setText(2, sf::Vector2f(0, 300), 100, "Distance Left: " + std::to_string(remainingDistance));
 
-	}
-	else if (gameState == 3)
-	{
-		
-		/*resultText.setFont(font);
-		resultText.setString("OUT OF TIME");
-		resultText.setCharacterSize(100);
-		resultText.setFillColor(sf::Color::White);*/
+		button[0] = Button(sf::Vector2f(50, 300), sf::Vector2f(400, 150), "Retry", 100, &font);
+		button[1] = Button(sf::Vector2f(50, 500), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
 
-		/*button[0] = new Button(sf::Vector2f(50, 50), sf::Vector2f(400, 150), "Return To Menu", 100);
 
-		sf::RenderWindow& w = *window;
-		sf::Vector2i mousePos = sf::Mouse::getPosition(w);
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
 		{
-			if (button[0]->button.getGlobalBounds().contains(sf::Vector2f(mousePos)))
+			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Retry
 			{
-				std::cout << "CLICK" << std::endl;
-				*isInMenu = true;
-				*currentMenu = 0;
+				*currentLevel = *currentLevel;
+				*isInMenu = false;
 			}
-		}*/
-		
+			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
+			{
+				*currentMenu = 0;
+				*isInMenu = true;
+			}
+
+			hasClicked = true;
+		}
 		
 	}
 }
@@ -187,6 +248,13 @@ void Menu::refreshButton()
 	{
 		button[i] = Button();
 	}
+}
+
+void Menu::setText(int id, sf::Vector2f position, int size, sf::String content)
+{
+	text[id].setPosition(position);
+	text[id].setCharacterSize(size);
+	text[id].setString(content);
 }
 
 

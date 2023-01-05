@@ -86,7 +86,7 @@ void SystemManager::updateLive()
     }
 }
 
-void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int* remainingLive)
+void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int* remainingLive, int* remainingDistance)
 {
     
     if (mechanicManager.getDistance() >= maxDistance * 100)
@@ -108,6 +108,7 @@ void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int
 
     *remainingTime = mechanicManager.getTimeLimit();
     *remainingLive = mechanicManager.getLive();
+    *remainingDistance = (maxDistance * 100) - mechanicManager.getDistance();
 }
 //Draw   ==============================================================================
 void SystemManager::render(sf::RenderTarget* target)
