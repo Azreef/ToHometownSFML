@@ -12,18 +12,24 @@ SystemManager::SystemManager(int currentLevel)
 {
     if (currentLevel == 0)
     {
-        gamePlayManager = new GamePlayManager(1000, 300, 0);
-        maxDistance = 50;
+       //Set Gameplay
+        levelType = 1;
+        gamePlayManager = new GamePlayManager(400, 300, 1, levelType);
+        maxDistance = 500;
 
         timeLimit = sf::seconds(60);
         mechanicManager.setTimeLimit(timeLimit);
         mechanicManager.setMaxDistance(maxDistance);
 
         setData();
+
+        //Set Level
+        level = new Level(levelType);
+        player = new Player(levelType);
     }
     if (currentLevel == 1)
     {
-        gamePlayManager = new GamePlayManager(800, 1 , 1);
+        gamePlayManager = new GamePlayManager(800, 1 , 1,0);
         maxDistance = 600;
 
         timeLimit = sf::seconds(80);
@@ -31,6 +37,8 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setMaxDistance(maxDistance);
 
         setData();
+
+        level = new Level(0);
     }
 
 }
@@ -43,9 +51,9 @@ SystemManager::~SystemManager()
 //Update ==============================================================================
 void SystemManager::update()
 {
-	player.update();
+	player->update();
 	gamePlayManager->update();
-    level.update();
+    level->update();
     mechanicManager.update();
     updateLive();
     updateData();
@@ -53,12 +61,12 @@ void SystemManager::update()
 
 void SystemManager::updateData()
 {
-    gamePlayManager->setPlayerData(player.getPlayerData());
-    gamePlayManager->setCurrentDistance(level.getCurrentDistance());
-    gamePlayManager->setCurrentSpeed(level.getRoadSpeed());
+    gamePlayManager->setPlayerData(player->getPlayerData());
+    gamePlayManager->setCurrentDistance(level->getCurrentDistance());
+    gamePlayManager->setCurrentSpeed(level->getRoadSpeed());
 
-    mechanicManager.setCurrentDistance(level.getCurrentDistance());
-    mechanicManager.setCurrentGear(level.getCurrentGear());
+    mechanicManager.setCurrentDistance(level->getCurrentDistance());
+    mechanicManager.setCurrentGear(level->getCurrentGear());
 }
 
 
@@ -113,8 +121,8 @@ void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int
 //Draw   ==============================================================================
 void SystemManager::render(sf::RenderTarget* target)
 {
-    level.render(target);
-    player.render(target);
+    level->render(target);
+    player->render(target);
 	gamePlayManager->render(target);
     
     mechanicManager.render(target);

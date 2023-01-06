@@ -14,12 +14,13 @@ class SystemManager
 private:
 	GamePlayManager* gamePlayManager;
 	MechanicManager mechanicManager;
-	Player player;
-	Level level;
+	Player* player;
+	Level* level;
 	bool isInvi;
 	
 	int maxDistance;
 	sf::Time timeLimit;
+	int levelType;
 
 public:
 	SystemManager();

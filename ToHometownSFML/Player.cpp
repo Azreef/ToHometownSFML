@@ -3,14 +3,16 @@
 //CONSTRUCTOR
 Player::Player()
 {
-    initVariable();
+    initVariable(0);
     setSprite();
 }
 
-Player::Player(float posX, float posY)
+Player::Player(int levelType)
 {
-
+    initVariable(levelType);
+    setSprite();
 }
+
 
 
 //FUNCTION 
@@ -52,9 +54,9 @@ void Player::moveUpdate()
     }
 
     //Top
-    if (playerSprite.getPosition().y < 600)
+    if (playerSprite.getPosition().y < maxTop)
     {
-        playerSprite.setPosition(playerSprite.getPosition().x, 600);
+        playerSprite.setPosition(playerSprite.getPosition().x, maxTop);
     }
 
     //Right
@@ -64,9 +66,9 @@ void Player::moveUpdate()
     }
 
     //Bottom
-    if (playerSprite.getPosition().y + playerSprite.getGlobalBounds().height > 980)
+    if (playerSprite.getPosition().y + playerSprite.getGlobalBounds().height > maxBottom)
     {
-        playerSprite.setPosition(playerSprite.getPosition().x, 980 - playerSprite.getGlobalBounds().height);
+        playerSprite.setPosition(playerSprite.getPosition().x, maxBottom - playerSprite.getGlobalBounds().height);
     }
 }
 
@@ -94,10 +96,23 @@ void Player::setSprite()
     playerSprite.setScale(sf::Vector2f(0.2, 0.2));
 }
 
-void Player::initVariable()
+void Player::initVariable(int levelType)
 {
     movementSpeed = 10;
     position = { 0,700 };
+
+
+    if (levelType == 0)
+    {
+        maxTop = 600;
+        maxBottom = 980;
+    }
+
+    else if (levelType == 1)
+    {
+        maxTop = 400;
+        maxBottom = 980;
+    }
 }
 
 void Player::setPlayerSprite(sf::Sprite playerData)

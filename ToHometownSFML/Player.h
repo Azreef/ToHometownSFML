@@ -14,21 +14,22 @@ private:
 	float posX;
 	float posY;
 	float movementSpeed;
-
+	float maxTop;
+	float maxBottom;
 
 
 public:
 	
 	//Constructor
 	Player();
-	Player(float posX, float pos);
+	Player(int levelType);
 
 	//Function
 	void setSprite();
 	void render(sf::RenderTarget* target);
 	void update();
 	void moveUpdate();
-	void initVariable();
+	void initVariable(int levelType);
 	sf::Sprite getPlayerData();
 	void setPlayerSprite(sf::Sprite playerData);
 

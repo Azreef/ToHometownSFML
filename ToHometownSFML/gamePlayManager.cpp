@@ -10,7 +10,7 @@ GamePlayManager::GamePlayManager()
 
 }
 
-GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int spawnEnemyType)
+GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int spawnEnemyType,int levelType)
 {
 	repairPickup = Entity(0, -100, 1, 0);
 	fuelPickup = Entity(0, -100, 1, 1);
@@ -19,6 +19,7 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 	this->enemyInterval = enemyInterval;
 	this->spawnPickupRate = spawnPickupRate;
 	this->spawnEnemyType = spawnEnemyType;
+	this->levelType = levelType;
 }
 
 
@@ -172,7 +173,19 @@ void GamePlayManager::setEnemiesData()
 {
 	std::cout << "Loading Enemies" << std::endl;
 
-	std::uniform_int_distribution<int> dist(650, 850);
+	int min;
+
+	if (levelType == 0)
+	{
+		min = 650;
+	}
+	else if (levelType == 1)
+	{
+		min = 420;	
+	}
+
+
+	std::uniform_int_distribution<int> dist(min, 850);
 	std::mt19937 randomNum;
 	int randomPos[TOTAL_ENEMY];
 	int randomType[TOTAL_ENEMY];

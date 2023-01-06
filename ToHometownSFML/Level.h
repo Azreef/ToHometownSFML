@@ -13,21 +13,23 @@ private:
 	int maxGear;
 	int minGear;
 
+	float roadYPos;
 	int currentGear;
 	bool keyIsPressed;
+	
 	
 
 public:
 	
 	//Constructor
 	Level();
-	
+	Level(int levelType);
 	void render(sf::RenderTarget* target);
 	void update();
-	void setSprite();
+	void setSprite(int levelType);
 	void scrollRoad();
-	void setPosition();
-	void initVariable();
+	//void setPosition(int levelType);
+	void initVariable(int levelType);
 	void roadSpeedControl();
 	float getRoadSpeed();
 	void setCurrentDistance();

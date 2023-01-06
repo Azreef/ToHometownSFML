@@ -4,9 +4,16 @@
 //CONSTRUCTOR
 Level::Level()
 {
-	setPosition();
-	initVariable();
-	setSprite();
+	//setPosition();
+	initVariable(0);
+	setSprite(0);
+}
+
+Level::Level(int levelType)
+{
+	//setPosition();
+	initVariable(levelType);
+	setSprite(levelType);
 }
 
 //FUNCTION 
@@ -25,7 +32,7 @@ void Level::scrollRoad()
 
 	if (roadSprite.getPosition().x <= -1550)
 	{
-		roadSprite.setPosition(sf::Vector2f(0, 350));
+		roadSprite.setPosition(sf::Vector2f(0, roadYPos));
 	}
 }
 
@@ -53,7 +60,6 @@ void Level::roadSpeedControl()
 	{
 		keyIsPressed = false;
 	}
-
 
 
 	//Set Speed
@@ -87,30 +93,51 @@ void Level::render(sf::RenderTarget* target)
 
 //Setter ==============================================================================
 
-void Level::setSprite()
+void Level::setSprite(int levelType)
 {
-
-	if (!texture.loadFromFile("Asset/road3.png"))
+	if (levelType == 0)
 	{
-		std::cout << "ERROR TEXTURE";
+		if (!texture.loadFromFile("Asset/road3.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 	}
+	else if (levelType == 1)
+	{
+		if (!texture.loadFromFile("Asset/road4.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+	}
+
 	roadSprite.setTexture(texture);
 	roadSprite.setScale(sf::Vector2f(0.6, 0.6));
 	roadSprite.setPosition(position);
 }
 
-void Level::setPosition()
-{
-	position = { 0,350 };
-}
+//void Level::setPosition()
+//{
+//	
+//}
 
-void Level::initVariable()
+void Level::initVariable(int levelType)
 {
+	
 	roadSpeed = 10;
 	maxGear = 5;
 	minGear = 1;
 	currentDistance = 0;
 	currentGear = 1;
+	if (levelType == 0)
+	{
+		roadYPos = 350;
+		position = { 0,roadYPos };
+	}
+	else if (levelType == 1)
+	{
+		roadYPos = 175;
+		position = { 0,roadYPos };
+	}
 }
 
 void Level::setCurrentDistance()
