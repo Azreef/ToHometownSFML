@@ -23,7 +23,7 @@ public:
 	Menu();
 	void setText(int id, sf::Vector2f position, int size, sf::String content);
 	void mainMenu(sf::RenderWindow *window,bool *isInMenu, int *currentLevel,int *currentMenu);
-	void selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu);
+	void selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int completedLevel);
 	void stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel);
 	void resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime,int remainingDistance, int* completedLevel);
 	void render(sf::RenderTarget* target);

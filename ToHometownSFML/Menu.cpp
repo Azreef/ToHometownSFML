@@ -35,7 +35,7 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 	}
 }
 
-void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu)
+void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int completedLevel)
 {
 	refreshText();
 	refreshButton();
@@ -44,8 +44,13 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 	setText(0, sf::Vector2f(0, 0), 100, "Select Level");
 
 	button[0] = Button(sf::Vector2f(50, 200), sf::Vector2f(400, 150), "Level 1", 100,&font);
-	button[1] = Button(sf::Vector2f(50, 400), sf::Vector2f(400, 150), "Level 2", 100, &font);
-	
+
+	//Lock Unfinished Levels
+	if (completedLevel >= 1)
+	{
+		button[1] = Button(sf::Vector2f(50, 400), sf::Vector2f(400, 150), "Level 2", 100, &font);
+	}
+
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
 	{
@@ -119,7 +124,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 
 	if (gameState == 1) //Successfull
 	{
-		*completedLevel = *currentLevel; //Set level as completed
+		*completedLevel = *currentLevel + 1; //Set level as completed
 
 		setText(0, sf::Vector2f(0, 0), 100, "Stage Completed!");
 		setText(1, sf::Vector2f(0, 200), 100, "Time Left:" + std::to_string(remainingTime.asSeconds()));

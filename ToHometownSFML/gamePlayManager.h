@@ -49,6 +49,7 @@ public:
 	int detectCollision();
 	void spawnEntity();
 	void initVariable();
+	void pickupFixPos();
 
 };
 

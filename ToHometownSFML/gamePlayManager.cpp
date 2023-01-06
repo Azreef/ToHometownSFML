@@ -32,6 +32,7 @@ void GamePlayManager::update()
 	spawnPickup();
 	repairPickup.update();
 	fuelPickup.update();
+	pickupFixPos();
 
 }
 
@@ -101,8 +102,7 @@ void GamePlayManager::spawnPickup()
 	repairPickup.setEntitySpeed(enemySpeed);
 
 	fuelPickup.setEntitySpeed(enemySpeed);
-	//std::cout << powerUpSpawned  << " | " << repairPickup.getTempEntity().getPosition().x << std::endl;
-	//std::cout << spawnPickupRate << std::endl;
+	
 	if (!powerUpSpawned)
 	{
 		int randomChanceSpawn;
@@ -220,6 +220,24 @@ void GamePlayManager::initVariable()
 {
 	enemyInterval = 800;
 	spawnPickupRate = 1; // spawn chance every enemy spawn
+}
+void GamePlayManager::pickupFixPos()
+{
+	//for (int i = 0; i < TOTAL_ENEMY; i++)
+	//{
+		if (fuelPickup.getTempEntity().getGlobalBounds().intersects(enemy[currentEnemy - 1].getTempEntity().getGlobalBounds()))
+		{
+			fuelPickup.setEntityPosition(fuelPickup.getTempEntity().getPosition().x + 50, fuelPickup.getTempEntity().getPosition().y);
+			std::cout << "Fixed" << std::endl;
+		}
+
+		if (repairPickup.getTempEntity().getGlobalBounds().intersects(enemy[currentEnemy - 1].getTempEntity().getGlobalBounds()))
+		{
+			repairPickup.setEntityPosition(repairPickup.getTempEntity().getPosition().x + 50, repairPickup.getTempEntity().getPosition().y);
+			std::cout << "Fixed" << std::endl;
+		}
+
+	//}
 }
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {

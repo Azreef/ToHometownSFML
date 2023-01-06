@@ -45,7 +45,7 @@ void GameManager::update()
             else if (currentMenu == 1)
             {
                 //Select Level
-                menu.selectMenu(window, &isInmenu, &currentLevel, &currentMenu);
+                menu.selectMenu(window, &isInmenu, &currentLevel, &currentMenu,completedLevel);
 
             }
             else if (currentMenu == 2)
@@ -145,7 +145,7 @@ void GameManager::render()
 //Setter ==============================================================================
 void GameManager::openWindow()
 {
-    window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown");
+    window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown", sf::Style::Close);
     window->setFramerateLimit(60);
 }
 
