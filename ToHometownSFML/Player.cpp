@@ -86,14 +86,14 @@ void Player::render(sf::RenderTarget* target)
 void Player::setSprite()
 {
  
-    if (!texture.loadFromFile("Asset/Player2.png"))
+    if (!texture.loadFromFile("Asset/car.png"))
     {
         std::cout << "ERROR TEXTURE";
     }
 
     playerSprite.setTexture(texture);
     playerSprite.setPosition(position);
-    playerSprite.setScale(sf::Vector2f(0.2, 0.2));
+    playerSprite.setScale(sf::Vector2f(0.05, 0.05));
 }
 
 void Player::initVariable(int levelType)

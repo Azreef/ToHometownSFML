@@ -9,6 +9,7 @@
 #include "Player.h"
 
 
+
 #define TOTAL_ENEMY 150
 
 class GamePlayManager
@@ -22,6 +23,7 @@ private:
 	Player player;
 	
 	
+	
 	sf::Time gameTime = sf::seconds(0);
 	sf::Clock gameClock;
 	int currentEnemy = 1;
@@ -32,6 +34,8 @@ private:
 	int spawnPickupRate;
 	int spawnEnemyType; //0 = cars only   1 = cars and truck
 	int levelType;
+	
+
 
 
 public:

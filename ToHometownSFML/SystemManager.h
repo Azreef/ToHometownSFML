@@ -6,8 +6,10 @@
 
 #include "Level.h"
 #include "Player.h"
+
 #include "GamePlayManager.h"
 #include "MechanicManager.h"
+
 
 class SystemManager
 {
@@ -16,6 +18,8 @@ private:
 	MechanicManager mechanicManager;
 	Player* player;
 	Level* level;
+	
+
 	bool isInvi;
 	
 	int maxDistance;

@@ -4,8 +4,8 @@
 //CONSTRUCTOR
 GamePlayManager::GamePlayManager()
 {
-	repairPickup = Entity(0,-100, 1, 0);
-	fuelPickup = Entity(0, -100, 1, 1);
+	/*repairPickup = Entity(0,-100, 1, 0, t);
+	fuelPickup = Entity(0, -100, 1, 1, t);*/
 	initVariable();
 
 }
@@ -42,7 +42,7 @@ int GamePlayManager::detectCollision()
 	int returnInt = 0;
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
-		if (player.getPlayerData().getGlobalBounds().intersects(enemy[i].getTempEntity().getGlobalBounds()))
+		if (player.getPlayerData().getGlobalBounds().intersects(enemy[i].getEntity().getGlobalBounds()))
 		{
 			if (!enemy[i].getIsDestroyed())
 			{
@@ -51,7 +51,7 @@ int GamePlayManager::detectCollision()
 			}
 		}
 
-		if (player.getPlayerData().getGlobalBounds().intersects(repairPickup.getTempEntity().getGlobalBounds()))
+		if (player.getPlayerData().getGlobalBounds().intersects(repairPickup.getEntity().getGlobalBounds()))
 		{
 			if (!repairPickup.getIsDestroyed())
 			{
@@ -61,7 +61,7 @@ int GamePlayManager::detectCollision()
 			}
 		}
 
-		if (player.getPlayerData().getGlobalBounds().intersects(fuelPickup.getTempEntity().getGlobalBounds()))
+		if (player.getPlayerData().getGlobalBounds().intersects(fuelPickup.getEntity().getGlobalBounds()))
 		{
 			if (!fuelPickup.getIsDestroyed())
 			{
@@ -139,7 +139,7 @@ void GamePlayManager::spawnPickup()
 		}
 	}
 	
-	if (repairPickup.getTempEntity().getPosition().x < 0 && fuelPickup.getTempEntity().getPosition().x < 0)
+	if (repairPickup.getEntity().getPosition().x < 0 && fuelPickup.getEntity().getPosition().x < 0)
 	{
 		powerUpSpawned = false;
 		
@@ -172,7 +172,6 @@ void GamePlayManager::render(sf::RenderTarget* target)
 void GamePlayManager::setEnemiesData()
 {
 	std::cout << "Loading Enemies" << std::endl;
-
 	int min;
 
 	if (levelType == 0)
@@ -188,7 +187,7 @@ void GamePlayManager::setEnemiesData()
 	std::uniform_int_distribution<int> dist(min, 850);
 	std::mt19937 randomNum;
 	int randomPos[TOTAL_ENEMY];
-	int randomType[TOTAL_ENEMY];
+	int randomID[TOTAL_ENEMY];
 
 
 	//Randomnize Position
@@ -205,7 +204,7 @@ void GamePlayManager::setEnemiesData()
 	{
 		for (int i = 0; i < TOTAL_ENEMY; i++)
 		{
-			randomType[i] = 0;
+			randomID[i] = 0;
 		}
 
 	}
@@ -214,7 +213,7 @@ void GamePlayManager::setEnemiesData()
 		std::uniform_int_distribution<int> dist2(0, 1);
 		for (int i = 0; i < TOTAL_ENEMY; i++)
 		{
-			randomType[i] = dist2(randomNum);
+			randomID[i] = dist2(randomNum);
 		}
 	}
 	
@@ -223,7 +222,9 @@ void GamePlayManager::setEnemiesData()
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
 		std::cout << i << std::endl;
-		enemy[i] = Entity(1400, randomPos[i], 0, randomType[i]);
+
+
+		enemy[i] = Entity(1400, randomPos[i], 0, randomID[i]);
 	}
 
 	std::cout << "Done Loading" << std::endl;
@@ -238,15 +239,15 @@ void GamePlayManager::pickupFixPos()
 {
 	//for (int i = 0; i < TOTAL_ENEMY; i++)
 	//{
-		if (fuelPickup.getTempEntity().getGlobalBounds().intersects(enemy[currentEnemy - 1].getTempEntity().getGlobalBounds()))
+		if (fuelPickup.getEntity().getGlobalBounds().intersects(enemy[currentEnemy - 1].getEntity().getGlobalBounds()))
 		{
-			fuelPickup.setEntityPosition(fuelPickup.getTempEntity().getPosition().x + 50, fuelPickup.getTempEntity().getPosition().y);
+			fuelPickup.setEntityPosition(fuelPickup.getEntity().getPosition().x + 50, fuelPickup.getEntity().getPosition().y);
 			std::cout << "Fixed" << std::endl;
 		}
 
-		if (repairPickup.getTempEntity().getGlobalBounds().intersects(enemy[currentEnemy - 1].getTempEntity().getGlobalBounds()))
+		if (repairPickup.getEntity().getGlobalBounds().intersects(enemy[currentEnemy - 1].getEntity().getGlobalBounds()))
 		{
-			repairPickup.setEntityPosition(repairPickup.getTempEntity().getPosition().x + 50, repairPickup.getTempEntity().getPosition().y);
+			repairPickup.setEntityPosition(repairPickup.getEntity().getPosition().x + 50, repairPickup.getEntity().getPosition().y);
 			std::cout << "Fixed" << std::endl;
 		}
 

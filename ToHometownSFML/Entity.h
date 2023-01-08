@@ -4,18 +4,22 @@
 #include <iostream>
 #include "Level.h"
 
+
+
 class Entity
 {
 private:
 	//Variable
 	sf::Vector2f position;
-	sf::RectangleShape tempEntity;
+	//sf::RectangleShape Entity;
+	sf::Sprite entitySprite;
 	bool isDestroyed;
 	int entitySpeed;
 	int entityType; // 0 = enemy , 1 = power ups
 	int entitySubType; 
-	
 
+	sf::Texture* texture;
+	
 public:
 	
 	//Constructor
@@ -24,15 +28,15 @@ public:
 		
 	//Function
 	void setSprite();
-	void setTempCar();
-	void setTempBus();
-	void setTempRepair();
-	void setTempFuel();
+	void setCar();
+	void setBus();
+	void setRepair();
+	void setFuel();
 	void initVariable(float x, float y);
 	void render(sf::RenderTarget* target);
 	void update();
 	void entityScroll();
-	sf::RectangleShape getTempEntity();
+	sf::Sprite getEntity();
 	bool getIsDestroyed();
 	void setIsDestroyed(bool isDestoyed);
 	void setEntitySpeed(int enemySpeed);

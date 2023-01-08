@@ -139,6 +139,7 @@
     <ClCompile Include="MechanicManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SystemManager.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ToHometownSFML.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SystemManager.h" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ToHometownSFML.rc" />

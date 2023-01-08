@@ -10,6 +10,7 @@ SystemManager::SystemManager()
 
 SystemManager::SystemManager(int currentLevel)
 {
+
     if (currentLevel == 0)
     {
        //Set Gameplay
