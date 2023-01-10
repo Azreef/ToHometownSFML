@@ -10,7 +10,7 @@
 
 
 
-#define TOTAL_ENEMY 10
+#define TOTAL_ENEMY 50
 
 class GamePlayManager
 {

@@ -1,10 +1,5 @@
 #include "TextureManager.h"
 
-TextureManager::TextureManager()
-{
-	
-}
-
 std::shared_ptr<sf::Texture> TextureManager::getTexture(const std::string& path)
 {
     if (textures.count(path) > 0) {

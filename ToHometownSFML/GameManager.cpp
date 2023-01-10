@@ -70,8 +70,10 @@ void GameManager::update()
     {
         if (!levelIsSet)
         {
-            delete systemManager;
-            systemManager = new SystemManager(currentLevel);
+          
+            std::shared_ptr<SystemManager> systemManager(new SystemManager(currentLevel));
+            this->systemManager = systemManager;
+
             levelIsSet = true;
         }
     }

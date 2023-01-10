@@ -16,11 +16,12 @@ class SystemManager
 {
 private:
 	
+	std::shared_ptr <GamePlayManager> gamePlayManager;
 
-	GamePlayManager* gamePlayManager;
 	MechanicManager mechanicManager;
-	Player* player;
-	Level* level;
+
+	std::shared_ptr <Player> player;
+	std::shared_ptr <Level> level;
 	
 
 	bool isInvi;

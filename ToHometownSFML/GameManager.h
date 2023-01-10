@@ -33,7 +33,7 @@ private:
 	int gameState;
 	
 
-	SystemManager* systemManager;
+	std::shared_ptr <SystemManager> systemManager;
 
 	
 public:

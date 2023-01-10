@@ -15,7 +15,10 @@ SystemManager::SystemManager(int currentLevel)
     {
        //Set Gameplay
         levelType = 1;
-        gamePlayManager = new GamePlayManager(400, 300, 0, levelType);
+
+        std::shared_ptr<GamePlayManager> gamePlayManager(new GamePlayManager(400, 300, 0, levelType));
+        this->gamePlayManager = gamePlayManager;
+
         maxDistance = 500;
 
         timeLimit = sf::seconds(60);
@@ -25,12 +28,15 @@ SystemManager::SystemManager(int currentLevel)
         setData();
 
         //Set Level
-        level = new Level(levelType);
-        player = new Player(levelType);
+        std::shared_ptr<Level> level(new Level(levelType));
+        this->level = level;
+
+        std::shared_ptr<Player> player(new Player(levelType));
+        this->player = player;
     }
     if (currentLevel == 1)
     {
-        gamePlayManager = new GamePlayManager(800, 1 , 1,0);
+        //gamePlayManager = new GamePlayManager(800, 1 , 1,0);
         maxDistance = 600;
 
         timeLimit = sf::seconds(80);
@@ -39,7 +45,7 @@ SystemManager::SystemManager(int currentLevel)
 
         setData();
 
-        level = new Level(0);
+        //level = new Level(0);
     }
 
 }
@@ -100,20 +106,16 @@ void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int
     
     if (mechanicManager.getDistance() >= maxDistance * 100)
     {
-        *gameState  = 1;
-       // delete gamePlayManager;
-        
+        *gameState  = 1;     
     }
     else if (mechanicManager.getLive() <= 0)
     {
         *gameState = 2;
-        //delete gamePlayManager;
         
     }
     else if (mechanicManager.getTimeLimit().asSeconds() >= timeLimit.asSeconds())
     {
         *gameState = 3;
-        //delete gamePlayManager;
     }
     else
     {

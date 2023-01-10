@@ -4,10 +4,7 @@
 //CONSTRUCTOR
 GamePlayManager::GamePlayManager()
 {
-	/*repairPickup = Entity(0,-100, 1, 0, t);
-	fuelPickup = Entity(0, -100, 1, 1, t);*/
 	initVariable();
-
 }
 
 GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int spawnEnemyType,int levelType)
@@ -25,11 +22,6 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 
 GamePlayManager::~GamePlayManager()
 {
-	
-	
-
-	//delete repairPickup;
-	//delete fuelPickup;
 }
 
 
