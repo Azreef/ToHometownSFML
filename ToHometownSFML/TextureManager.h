@@ -3,21 +3,22 @@
 #include <SFML/Window.hpp>
 #include <cstdlib>
 #include <iostream>
+#include <map>
 #include <memory>
+#include <string>
 class TextureManager
 {
+
+
 private:
-	sf::Texture* carTexture;
-	sf::Texture* busTexture;
-	sf::Texture* fuelTexture;
-	sf::Texture* repairTexture;
+	std::map<std::string, std::shared_ptr<sf::Texture>> textures;
 
 
 public:
-	TextureManager();
-	~TextureManager();
-	void setTexture();
+	TextureManager() {}
+	~TextureManager() {}
 
-	sf::Texture* getTexture(int type, int id);
+	std::shared_ptr<sf::Texture> getTexture(const std::string& path);
+    
 };
 

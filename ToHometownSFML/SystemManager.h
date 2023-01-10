@@ -16,6 +16,7 @@ class SystemManager
 {
 private:
 	
+
 	GamePlayManager* gamePlayManager;
 	MechanicManager mechanicManager;
 	Player* player;

@@ -4,7 +4,6 @@
 //CONSTRUCTOR
 Entity::Entity(float x, float y, int entityType, int entitySubtype)
 {
-	textureManager = new TextureManager();
 	if (entityType == 0)
 	{
 		//Entity Type Car
@@ -76,7 +75,11 @@ void Entity::render(sf::RenderTarget* target)
 
 void Entity::setCar()
 {
-
+	
+	std::shared_ptr<sf::Texture> tex = textureManager.getTexture("Asset/car2.png");
+	
+	entitySprite.setTexture(*tex);
+	
 	/*sf::Texture texture;
 	texture.loadFromFile("Asset/car2.png");*/
 	//texture = new sf::Texture;
@@ -84,14 +87,14 @@ void Entity::setCar()
 	//sf::Texture* texture;
 	//texture = new sf::Texture;
 	//texture->loadFromFile("Asset/car2.png");
-	entitySprite.setTexture(*textureManager->getTexture(0,0));
-
+	//entitySprite.setTexture(*textureManager->getTexture(0,0));
+	
 
 	entitySprite.setScale(sf::Vector2f(0.06, 0.06));
 	entitySprite.setPosition(position);
 	entityType = 0;
 	entitySubType = 0;
-	delete textureManager;
+	
 	
 	/*Entity.setSize(sf::Vector2f(100, 100));
 	Entity.setPosition(position);

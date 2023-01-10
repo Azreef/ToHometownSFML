@@ -19,7 +19,7 @@ private:
 	int entitySpeed;
 	int entityType; // 0 = enemy , 1 = power ups
 	int entitySubType; 
-	TextureManager* textureManager;
+	TextureManager textureManager;
 
 	
 	//sf::Texture* texture;
