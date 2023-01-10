@@ -15,7 +15,7 @@ SystemManager::SystemManager(int currentLevel)
     {
        //Set Gameplay
         levelType = 1;
-        gamePlayManager = new GamePlayManager(400, 300, 1, levelType);
+        gamePlayManager = new GamePlayManager(400, 300, 0, levelType);
         maxDistance = 500;
 
         timeLimit = sf::seconds(60);
@@ -101,14 +101,19 @@ void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int
     if (mechanicManager.getDistance() >= maxDistance * 100)
     {
         *gameState  = 1;
+       // delete gamePlayManager;
+        
     }
     else if (mechanicManager.getLive() <= 0)
     {
         *gameState = 2;
+        //delete gamePlayManager;
+        
     }
     else if (mechanicManager.getTimeLimit().asSeconds() >= timeLimit.asSeconds())
     {
         *gameState = 3;
+        //delete gamePlayManager;
     }
     else
     {

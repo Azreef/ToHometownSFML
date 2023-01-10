@@ -20,6 +20,16 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 	this->spawnPickupRate = spawnPickupRate;
 	this->spawnEnemyType = spawnEnemyType;
 	this->levelType = levelType;
+	
+}
+
+GamePlayManager::~GamePlayManager()
+{
+	
+	
+
+	//delete repairPickup;
+	//delete fuelPickup;
 }
 
 
@@ -83,18 +93,29 @@ void GamePlayManager::spawnEntity()
 	{
 		enemy[i].setEntitySpeed(enemySpeed);
 	}
-
+	std::cout << currentEnemy << std::endl;
 	//Find current number of enemy spawn
 	if (currentDistance / currentEnemy > enemyInterval && currentEnemy < TOTAL_ENEMY)
 	{
 		currentEnemy++;
+		if (currentEnemy > TOTAL_ENEMY)
+		{
+
+		}
 		spawnPickup();
 	}
-
 
 	for (int i = 0; i < currentEnemy; i++)
 	{
 		enemy[i].update();
+	}
+
+	if (currentEnemy > TOTAL_ENEMY)
+	{
+		//currentEnemy = 0;
+		resetEnemyPos();
+		//reset pos
+
 	}
 }
 
@@ -217,7 +238,6 @@ void GamePlayManager::setEnemiesData()
 		}
 	}
 	
-
 	//Set Entity Data
 	for (int i = 0; i < TOTAL_ENEMY; i++)
 	{
@@ -252,6 +272,30 @@ void GamePlayManager::pickupFixPos()
 		}
 
 	//}
+}
+
+void GamePlayManager::resetEnemyPos()
+{
+	int min;
+
+	if (levelType == 0)
+	{
+		min = 650;
+	}
+	else if (levelType == 1)
+	{
+		min = 420;
+	}
+
+	std::uniform_int_distribution<int> dist(min, 850);
+	std::mt19937 randomNum;
+	
+	//Randomnize Position
+	for (int i = 0; i < TOTAL_ENEMY; i++)
+	{
+		enemy[i].setEntityPosition(1400, dist(randomNum));
+	}
+	
 }
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {

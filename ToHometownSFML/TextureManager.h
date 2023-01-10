@@ -3,19 +3,19 @@
 #include <SFML/Window.hpp>
 #include <cstdlib>
 #include <iostream>
-
+#include <memory>
 class TextureManager
 {
 private:
-	sf::Texture* carTexture = new sf::Texture;
-	sf::Texture* busTexture = new sf::Texture;;
-	sf::Texture* fuelTexture = new sf::Texture;;
-	sf::Texture* repairTexture = new sf::Texture;;
+	sf::Texture* carTexture;
+	sf::Texture* busTexture;
+	sf::Texture* fuelTexture;
+	sf::Texture* repairTexture;
 
 
 public:
 	TextureManager();
-
+	~TextureManager();
 	void setTexture();
 
 	sf::Texture* getTexture(int type, int id);

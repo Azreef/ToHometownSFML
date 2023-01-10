@@ -10,7 +10,7 @@
 
 
 
-#define TOTAL_ENEMY 150
+#define TOTAL_ENEMY 10
 
 class GamePlayManager
 {
@@ -42,6 +42,7 @@ public:
 	//Constructor
 	GamePlayManager();
 	GamePlayManager(float enemyInterval, int spawnPickupRate,int spawnEnemyType,int levelType);
+	~GamePlayManager();
 
 	//Function
 	void render(sf::RenderTarget* target);
@@ -55,6 +56,7 @@ public:
 	void spawnEntity();
 	void initVariable();
 	void pickupFixPos();
+	void resetEnemyPos();
 
 };
 

@@ -3,6 +3,8 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include "Level.h"
+#include <memory>
+#include "TextureManager.h"
 
 
 
@@ -17,8 +19,10 @@ private:
 	int entitySpeed;
 	int entityType; // 0 = enemy , 1 = power ups
 	int entitySubType; 
+	TextureManager* textureManager;
 
-	sf::Texture* texture;
+	
+	//sf::Texture* texture;
 	
 public:
 	

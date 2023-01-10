@@ -3,6 +3,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Main.hpp>
+#include <memory>
 
 #include "Level.h"
 #include "Player.h"
@@ -14,6 +15,7 @@
 class SystemManager
 {
 private:
+	
 	GamePlayManager* gamePlayManager;
 	MechanicManager mechanicManager;
 	Player* player;

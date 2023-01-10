@@ -1,10 +1,10 @@
 #include "Entity.h"
-#include <iostream>
+
 
 //CONSTRUCTOR
 Entity::Entity(float x, float y, int entityType, int entitySubtype)
 {
-
+	textureManager = new TextureManager();
 	if (entityType == 0)
 	{
 		//Entity Type Car
@@ -79,18 +79,20 @@ void Entity::setCar()
 
 	/*sf::Texture texture;
 	texture.loadFromFile("Asset/car2.png");*/
-	texture = new sf::Texture;
-
-	texture->loadFromFile("Asset/car2.png");
-	entitySprite.setTexture(*texture);
+	//texture = new sf::Texture;
+	//std::unique_ptr<sf::Texture> texture(new sf::Texture);
+	//sf::Texture* texture;
+	//texture = new sf::Texture;
+	//texture->loadFromFile("Asset/car2.png");
+	entitySprite.setTexture(*textureManager->getTexture(0,0));
 
 
 	entitySprite.setScale(sf::Vector2f(0.06, 0.06));
 	entitySprite.setPosition(position);
 	entityType = 0;
 	entitySubType = 0;
-
-
+	delete textureManager;
+	
 	/*Entity.setSize(sf::Vector2f(100, 100));
 	Entity.setPosition(position);
 	entityType = 0;
@@ -99,10 +101,13 @@ void Entity::setCar()
 
 void Entity::setBus()
 {
-	texture = new sf::Texture;
+	//std::unique_ptr<sf::Texture> texture(new sf::Texture);
+	//texture = new sf::Texture;
+	//sf::Texture* texture;
+	//texture = new sf::Texture;
 
-	texture->loadFromFile("Asset/bus.png");
-	entitySprite.setTexture(*texture);
+	//texture->loadFromFile("Asset/bus.png");
+	//entitySprite.setTexture(*textureManager->getTexture(0, 1));
 
 	entitySprite.setScale(sf::Vector2f(0.13, 0.13));
 	entitySprite.setPosition(position);
@@ -115,10 +120,12 @@ void Entity::setRepair()
 {
 	//sf::Texture texture;
 	//texture.loadFromFile("Asset/repairKit.png");
-	texture = new sf::Texture;
+	//sf::Texture* texture;
+	//texture = new sf::Texture;
 
-	texture->loadFromFile("Asset/repairKit.png");
-	entitySprite.setTexture(*texture);
+	//std::unique_ptr<sf::Texture> texture;
+	//texture->loadFromFile("Asset/repairKit.png");
+	//entitySprite.setTexture(*textureManager->getTexture(1, 0));
 
 	entitySprite.setScale(sf::Vector2f(0.05, 0.05));
 	entitySprite.setPosition(position);
@@ -132,10 +139,12 @@ void Entity::setFuel()
 {
 	//sf::Texture texture;
 	//texture.loadFromFile("Asset/fuel.png");
-	texture = new sf::Texture;
+	//texture = new sf::Texture;
+	//std::unique_ptr<sf::Texture> texture;
+	//texture->loadFromFile("Asset/fuel.png");
 
-	texture->loadFromFile("Asset/fuel.png");
-	entitySprite.setTexture(*texture);
+
+	//entitySprite.setTexture(*textureManager->getTexture(1, 1));
 
 	entitySprite.setScale(sf::Vector2f(0.05, 0.05));
 	entitySprite.setPosition(position);
