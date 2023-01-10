@@ -16,7 +16,8 @@ class GamePlayManager
 {
 private:
 	//Variable
-	Entity enemy[TOTAL_ENEMY];
+	//Entity enemy[TOTAL_ENEMY];
+	std::shared_ptr<Entity> enemy[TOTAL_ENEMY];
 	Entity repairPickup;
 	Entity fuelPickup;
 	Level level;
