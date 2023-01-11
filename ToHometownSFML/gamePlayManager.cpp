@@ -17,6 +17,7 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 	this->spawnEnemyType = spawnEnemyType;
 	this->levelType = levelType;
 	setEnemies();
+	setSoundFX();
 }
 
 GamePlayManager::~GamePlayManager()
@@ -47,6 +48,7 @@ int GamePlayManager::detectCollision()
 		{
 			if (!enemy[i]->getIsDestroyed())
 			{
+				hitSound.play();
 				enemy[i]->setIsDestroyed(true);
 				returnInt = 1;
 			}
@@ -344,6 +346,11 @@ void GamePlayManager::setEnemies()
 	{
 		spawnEnemy();
 	}
+}
+void GamePlayManager::setSoundFX()
+{
+	std::shared_ptr<sf::SoundBuffer> so = resourceManager.getSound("Asset/hitSound.wav");
+	hitSound.setBuffer(*so);
 }
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {

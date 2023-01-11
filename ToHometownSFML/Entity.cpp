@@ -73,7 +73,7 @@ void Entity::render(sf::RenderTarget* target)
 void Entity::setCar()
 {
 	
-	std::shared_ptr<sf::Texture> tex = textureManager.getTexture("Asset/car2.png");
+	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/car2.png");
 	entitySprite.setTexture(*tex);
 	
 	entitySprite.setScale(sf::Vector2f(0.06, 0.06));
@@ -85,7 +85,7 @@ void Entity::setCar()
 
 void Entity::setBus()
 {
-	std::shared_ptr<sf::Texture> tex = textureManager.getTexture("Asset/bus.png");
+	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/bus.png");
 	entitySprite.setTexture(*tex);
 
 	entitySprite.setScale(sf::Vector2f(0.13, 0.13));
@@ -97,7 +97,7 @@ void Entity::setBus()
 
 void Entity::setRepair()
 {
-	std::shared_ptr<sf::Texture> tex = textureManager.getTexture("Asset/repairKit.png");
+	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/repairKit.png");
 	entitySprite.setTexture(*tex);
 
 	entitySprite.setScale(sf::Vector2f(0.05, 0.05));
@@ -110,7 +110,7 @@ void Entity::setRepair()
 
 void Entity::setFuel()
 {
-	std::shared_ptr<sf::Texture> tex = textureManager.getTexture("Asset/fuel.png");
+	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/fuel.png");
 	entitySprite.setTexture(*tex);
 
 	entitySprite.setScale(sf::Vector2f(0.05, 0.05));

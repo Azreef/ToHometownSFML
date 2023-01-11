@@ -9,7 +9,8 @@
 #include "Player.h"
 
 #include <algorithm>
-
+#include "ResourceManager.h"
+#include <SFML/Audio.hpp>
 
 #define TOTAL_ENEMY 50
 
@@ -26,9 +27,9 @@ private:
 	Entity fuelPickup;
 	Level level;
 	Player player;
+	ResourceManager resourceManager;
 	
-	
-	
+	sf::SoundBuffer so;
 	sf::Time gameTime = sf::seconds(0);
 	sf::Clock gameClock;
 	int currentEnemy = 1;
@@ -40,7 +41,7 @@ private:
 	int spawnEnemyType; //0 = cars only   1 = cars and truck
 	int levelType;
 	
-
+	sf::Sound hitSound;
 
 
 public:
@@ -64,6 +65,7 @@ public:
 	void resetEnemyPos();
 	void spawnEnemy();
 	void setEnemies();
+	void setSoundFX();
 
 };
 

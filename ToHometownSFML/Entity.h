@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Level.h"
 #include <memory>
-#include "TextureManager.h"
+#include "ResourceManager.h"
 
 
 
@@ -19,7 +19,7 @@ private:
 	int entitySpeed;
 	int entityType; // 0 = enemy , 1 = power ups
 	int entitySubType; 
-	TextureManager textureManager;
+	ResourceManager resourceManager;
 
 	
 	//sf::Texture* texture;
