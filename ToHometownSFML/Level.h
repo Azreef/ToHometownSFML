@@ -5,14 +5,18 @@
 class Level
 {
 private:
-	sf::Texture texture;
+	sf::Texture roadTexture;
 	sf::Sprite roadSprite;
 	sf::Vector2f position;
+	sf::Vector2f backgroundPos;
+	sf::Texture backGroundTexture;
+	sf::Sprite backGroundSprite;
 	float currentDistance;
 	float roadSpeed;
 	int maxGear;
 	int minGear;
 
+	float backgroundYPos;
 	float roadYPos;
 	int currentGear;
 	bool keyIsPressed;

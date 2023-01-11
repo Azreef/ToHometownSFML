@@ -29,6 +29,7 @@ void Level::update()
 void Level::scrollRoad()
 {
 	roadSprite.move(-roadSpeed, 0);
+	backGroundSprite.move(-roadSpeed * 0.005, 0);
 
 	if (roadSprite.getPosition().x <= -1550)
 	{
@@ -88,6 +89,7 @@ void Level::roadSpeedControl()
 
 void Level::render(sf::RenderTarget* target)
 {
+	target->draw(backGroundSprite);
 	target->draw(roadSprite);
 }
 
@@ -97,22 +99,37 @@ void Level::setSprite(int levelType)
 {
 	if (levelType == 0)
 	{
-		if (!texture.loadFromFile("Asset/road3.png"))
+		if (!roadTexture.loadFromFile("Asset/road3.png"))
 		{
 			std::cout << "ERROR TEXTURE";
 		}
+
+		if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+		
 	}
 	else if (levelType == 1)
 	{
-		if (!texture.loadFromFile("Asset/road4.png"))
+		if (!roadTexture.loadFromFile("Asset/road4.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+		if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
 		{
 			std::cout << "ERROR TEXTURE";
 		}
 	}
 
-	roadSprite.setTexture(texture);
+	roadSprite.setTexture(roadTexture);
 	roadSprite.setScale(sf::Vector2f(0.6, 0.6));
 	roadSprite.setPosition(position);
+
+	backGroundSprite.setTexture(backGroundTexture);
+	backGroundSprite.setScale(sf::Vector2f(1.2, 1.2));
+	backGroundSprite.setPosition(backgroundPos);
+
 }
 
 //void Level::setPosition()
@@ -131,13 +148,17 @@ void Level::initVariable(int levelType)
 	if (levelType == 0)
 	{
 		roadYPos = 350;
-		position = { 0,roadYPos };
+		backgroundYPos = -300;
+		
 	}
 	else if (levelType == 1)
 	{
 		roadYPos = 175;
-		position = { 0,roadYPos };
+		backgroundYPos = -300;
 	}
+
+	position = { 0,roadYPos};
+	backgroundPos = { 0,backgroundYPos };
 }
 
 void Level::setCurrentDistance()

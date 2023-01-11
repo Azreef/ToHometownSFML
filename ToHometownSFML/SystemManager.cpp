@@ -5,7 +5,7 @@
 
 SystemManager::SystemManager()
 {
-    setData();
+    //setData();
 }
 
 SystemManager::SystemManager(int currentLevel)
@@ -25,7 +25,7 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
         mechanicManager.setMaxDistance(maxDistance);
 
-        setData();
+        //setData();
 
         //Set Level
         std::shared_ptr<Level> level(new Level(levelType));
@@ -43,7 +43,7 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
         mechanicManager.setMaxDistance(maxDistance);
 
-        setData();
+       // setData();
 
         //level = new Level(0);
     }
@@ -142,7 +142,7 @@ void SystemManager::render(sf::RenderTarget* target)
 
 void SystemManager::setData()
 {
-    gamePlayManager->setEnemiesData();
+    //gamePlayManager->setEnemiesData();
 }
 
 

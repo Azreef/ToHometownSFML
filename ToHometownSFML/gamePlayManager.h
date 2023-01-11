@@ -8,16 +8,20 @@
 
 #include "Player.h"
 
+#include <algorithm>
 
 
-#define TOTAL_ENEMY 50
+#define TOTAL_ENEMY 5
 
 class GamePlayManager
 {
 private:
 	//Variable
 	//Entity enemy[TOTAL_ENEMY];
-	std::shared_ptr<Entity> enemy[TOTAL_ENEMY];
+
+	std::vector<std::shared_ptr<Entity>> enemy;
+
+	//std::shared_ptr<Entity> enemy[TOTAL_ENEMY];
 	Entity repairPickup;
 	Entity fuelPickup;
 	Level level;
@@ -58,6 +62,8 @@ public:
 	void initVariable();
 	void pickupFixPos();
 	void resetEnemyPos();
+	void spawnEnemy();
+	void setEnemies();
 
 };
 

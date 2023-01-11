@@ -12,12 +12,11 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 	repairPickup = Entity(0, -100, 1, 0);
 	fuelPickup = Entity(0, -100, 1, 1);
 
-
 	this->enemyInterval = enemyInterval;
 	this->spawnPickupRate = spawnPickupRate;
 	this->spawnEnemyType = spawnEnemyType;
 	this->levelType = levelType;
-	
+	setEnemies();
 }
 
 GamePlayManager::~GamePlayManager()
@@ -36,13 +35,12 @@ void GamePlayManager::update()
 	repairPickup.update();
 	fuelPickup.update();
 	pickupFixPos();
-
 }
 
 int GamePlayManager::detectCollision()
 {
 	int returnInt = 0;
-	for (int i = 0; i < TOTAL_ENEMY; i++)
+	for (int i = 0; i < enemy.size(); i++)
 	{
 		if (player.getPlayerData().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
 		{
@@ -81,20 +79,20 @@ int GamePlayManager::detectCollision()
 
 void GamePlayManager::spawnEntity()
 {
-	for (int i = 0; i < TOTAL_ENEMY; i++)
+	for (int i = 0; i < enemy.size(); i++)
 	{
 		enemy[i]->setEntitySpeed(enemySpeed);
 	}
-	std::cout << currentEnemy << std::endl;
+	//std::cout << enemy.size() << std::endl;
+
 	//Find current number of enemy spawn
 	if (currentDistance / currentEnemy > enemyInterval && currentEnemy < TOTAL_ENEMY)
 	{
-		currentEnemy++;
-		if (currentEnemy > TOTAL_ENEMY)
-		{
-
-		}
+		//spawnEnemy();
 		spawnPickup();
+		
+		currentEnemy++;
+
 	}
 
 	for (int i = 0; i < currentEnemy; i++)
@@ -102,13 +100,13 @@ void GamePlayManager::spawnEntity()
 		enemy[i]->update();
 	}
 
-	if (currentEnemy > TOTAL_ENEMY)
-	{
-		//currentEnemy = 0;
-		resetEnemyPos();
-		//reset pos
+	//if (currentEnemy > TOTAL_ENEMY)
+	//{
+	//	//currentEnemy = 0;
+	//	resetEnemyPos();
+	//	//reset pos
 
-	}
+	//}
 }
 
 void GamePlayManager::spawnPickup()
@@ -168,7 +166,7 @@ void GamePlayManager::spawnPickup()
 
 void GamePlayManager::render(sf::RenderTarget* target)
 {
-	for (int i = 0; i < currentEnemy; i++)
+	for (int i = 0; i < enemy.size(); i++)
 	{
 		if (!enemy[i]->getIsDestroyed())
 		{
@@ -182,65 +180,73 @@ void GamePlayManager::render(sf::RenderTarget* target)
 
 //Setter ==============================================================================
 
-void GamePlayManager::setEnemiesData()
-{
-	std::cout << "Loading Enemies" << std::endl;
-	int min;
+//void GamePlayManager::setEnemiesData()
+//{
+//	std::cout << "Loading Enemies" << std::endl;
+//	int min;
+//
+//	if (levelType == 0)
+//	{
+//		min = 650;
+//	}
+//	else if (levelType == 1)
+//	{
+//		min = 420;	
+//	}
+//
+//
+//	std::uniform_int_distribution<int> dist(min, 850);
+//	std::uniform_int_distribution<int> dist2(0, 1);
+//	std::mt19937 randomNum;
+//	int randomPos[TOTAL_ENEMY];
+//	int randomID[TOTAL_ENEMY];
+//
+//
+//	//Randomnize Position
+//	 
+//	for (int i = 0; i < TOTAL_ENEMY; i++)
+//	{
+//		randomPos[i] = dist(randomNum);
+//	}
+//
+//	//Randomnize subType
+//
+//	//Spawn Type 1
+//	if (spawnEnemyType == 0)
+//	{
+//		for (int i = 0; i < TOTAL_ENEMY; i++)
+//		{
+//			randomID[i] = 0;
+//		}
+//
+//	}
+//	else if (spawnEnemyType == 1)
+//	{
+//		std::uniform_int_distribution<int> dist2(0, 1);
+//		for (int i = 0; i < TOTAL_ENEMY; i++)
+//		{
+//			randomID[i] = dist2(randomNum);
+//		}
+//	}
+//	
+//	//Set Entity Data
+//	//for (int i = 0; i < TOTAL_ENEMY; i = i + 1)
+//	//{
+//		//std::cout << i << std::endl;
+//
+//		/*enemy[i] = std::make_shared<Entity>(1400, randomPos[i], 0, randomID[i]);
+//		enemy[i+1] = std::make_shared<Entity>(1400, randomPos[i+1], 0, randomID[i+1]);
+//		enemy[i + 2] = std::make_shared<Entity>(1400, randomPos[i + 1], 0, randomID[i + 1]);*/
+//		//enemy[i] = Entity(1400, randomPos[i], 0, randomID[i]);
+//		enemy.push_back(std::make_shared<Entity>(1400, randomPos[i], 0, randomID[i]));
+//	
+//	//}
+//
+//	std::cout << "Done Loading" << std::endl;
+//}
 
-	if (levelType == 0)
-	{
-		min = 650;
-	}
-	else if (levelType == 1)
-	{
-		min = 420;	
-	}
 
 
-	std::uniform_int_distribution<int> dist(min, 850);
-	std::mt19937 randomNum;
-	int randomPos[TOTAL_ENEMY];
-	int randomID[TOTAL_ENEMY];
-
-
-	//Randomnize Position
-	 
-	for (int i = 0; i < TOTAL_ENEMY; i++)
-	{
-		randomPos[i] = dist(randomNum);
-	}
-
-	//Randomnize subType
-
-	//Spawn Type 1
-	if (spawnEnemyType == 0)
-	{
-		for (int i = 0; i < TOTAL_ENEMY; i++)
-		{
-			randomID[i] = 0;
-		}
-
-	}
-	else if (spawnEnemyType == 1)
-	{
-		std::uniform_int_distribution<int> dist2(0, 1);
-		for (int i = 0; i < TOTAL_ENEMY; i++)
-		{
-			randomID[i] = dist2(randomNum);
-		}
-	}
-	
-	//Set Entity Data
-	for (int i = 0; i < TOTAL_ENEMY; i++)
-	{
-		std::cout << i << std::endl;
-
-		enemy[i] = std::make_shared<Entity>(1400, randomPos[i], 0, randomID[i]);
-		//enemy[i] = Entity(1400, randomPos[i], 0, randomID[i]);
-	}
-
-	std::cout << "Done Loading" << std::endl;
-}
 
 void GamePlayManager::initVariable()
 {
@@ -283,11 +289,60 @@ void GamePlayManager::resetEnemyPos()
 	std::mt19937 randomNum;
 	
 	//Randomnize Position
-	for (int i = 0; i < TOTAL_ENEMY; i++)
+	for (int i = 0; i < enemy.size(); i++)
 	{
 		enemy[i]->setEntityPosition(1400, dist(randomNum));
 	}
 	
+}
+void GamePlayManager::spawnEnemy()
+{
+	//
+	//Determine Type
+	
+	int enemyType;
+	if (spawnEnemyType == 0)
+	{
+		enemyType = 0;
+			
+	}
+	else if (spawnEnemyType == 1)
+	{
+		std::uniform_int_distribution<int> dist1(0, 1);
+		std::mt19937 rng;
+		rng.seed(std::random_device()());
+		enemyType = dist1(rng);
+	}
+
+	//Determine position
+	int min;
+	if (levelType == 0)
+	{
+		min = 650;
+	}
+	else if (levelType == 1)
+	{
+		min = 420;
+	}
+
+	std::uniform_int_distribution<int> dist2(min, 850);
+	std::mt19937 rng;
+	rng.seed(std::random_device()());
+	int pos = dist2(rng);
+
+	enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType));
+	
+
+	std::cout << enemy.size() << std::endl;
+	
+	
+}
+void GamePlayManager::setEnemies()
+{
+	for (int i = 0; i < TOTAL_ENEMY; i++)
+	{
+		spawnEnemy();
+	}
 }
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {
