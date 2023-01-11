@@ -29,10 +29,8 @@ private:
 	Player player;
 	ResourceManager resourceManager;
 	
-	sf::SoundBuffer so;
 	sf::Time gameTime = sf::seconds(0);
 	sf::Clock gameClock;
-	int currentEnemy = 1;
 	float enemySpeed;
 	float currentDistance;
 	int enemyInterval;
@@ -40,6 +38,11 @@ private:
 	int spawnPickupRate;
 	int spawnEnemyType; //0 = cars only   1 = cars and truck
 	int levelType;
+
+	std::shared_ptr<sf::Texture> carTexture = resourceManager.getTexture("Asset/car2.png");
+	std::shared_ptr<sf::Texture> busTexture = resourceManager.getTexture("Asset/bus.png");
+	std::shared_ptr<sf::Texture> repairTexture = resourceManager.getTexture("Asset/repairKit.png");
+	std::shared_ptr<sf::Texture> fuelTexture = resourceManager.getTexture("Asset/fuel.png");
 	
 	sf::Sound hitSound;
 
@@ -53,7 +56,6 @@ public:
 	//Function
 	void render(sf::RenderTarget* target);
 	void update();
-	void setEnemiesData();
 	void spawnPickup();
 	void setPlayerData(sf::Sprite);
 	void setCurrentDistance(int distance);
@@ -62,7 +64,6 @@ public:
 	void spawnEntity();
 	void initVariable();
 	void pickupFixPos();
-	void resetEnemyPos();
 	void spawnEnemy();
 	void setEnemies();
 	void setSoundFX();

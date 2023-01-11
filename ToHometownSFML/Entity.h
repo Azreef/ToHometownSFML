@@ -27,7 +27,7 @@ private:
 public:
 	
 	//Constructor
-	Entity(float x, float y,int type,int subtype);
+	Entity(float x, float y, int type, int subtype, std::shared_ptr<sf::Texture> Texture);
 	Entity();
 		
 	//Function

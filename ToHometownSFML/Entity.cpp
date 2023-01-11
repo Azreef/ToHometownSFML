@@ -2,7 +2,7 @@
 
 
 //CONSTRUCTOR
-Entity::Entity(float x, float y, int entityType, int entitySubtype)
+Entity::Entity(float x, float y, int entityType, int entitySubtype, std::shared_ptr<sf::Texture> texture)
 {
 	if (entityType == 0)
 	{
@@ -10,12 +10,17 @@ Entity::Entity(float x, float y, int entityType, int entitySubtype)
 		if (entitySubtype == 0)
 		{
 			initVariable(x, y);
+
+			entitySprite.setTexture(*texture);
 			setCar();
+			
 		}
 
 		//Entity Type Bus
 		else if (entitySubtype == 1)
 		{
+			
+			entitySprite.setTexture(*texture);
 			initVariable(x, y);
 			setBus();
 		}
@@ -27,11 +32,13 @@ Entity::Entity(float x, float y, int entityType, int entitySubtype)
 		if (entitySubtype == 0)
 		{
 			initVariable(x, y);
+			entitySprite.setTexture(*texture);
 			setRepair();
 		}
 		else if (entitySubtype == 1)
 		{
 			initVariable(x, y);
+			entitySprite.setTexture(*texture);
 			setFuel();
 		}
 
@@ -73,8 +80,8 @@ void Entity::render(sf::RenderTarget* target)
 void Entity::setCar()
 {
 	
-	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/car2.png");
-	entitySprite.setTexture(*tex);
+	/*std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/car2.png");
+	entitySprite.setTexture(*tex);*/
 	
 	entitySprite.setScale(sf::Vector2f(0.06, 0.06));
 	entitySprite.setPosition(position);
@@ -85,8 +92,8 @@ void Entity::setCar()
 
 void Entity::setBus()
 {
-	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/bus.png");
-	entitySprite.setTexture(*tex);
+	/*std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/bus.png");
+	entitySprite.setTexture(*tex);*/
 
 	entitySprite.setScale(sf::Vector2f(0.13, 0.13));
 	entitySprite.setPosition(position);
@@ -97,8 +104,8 @@ void Entity::setBus()
 
 void Entity::setRepair()
 {
-	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/repairKit.png");
-	entitySprite.setTexture(*tex);
+	/*std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/repairKit.png");
+	entitySprite.setTexture(*tex);*/
 
 	entitySprite.setScale(sf::Vector2f(0.05, 0.05));
 	entitySprite.setPosition(position);
@@ -110,8 +117,8 @@ void Entity::setRepair()
 
 void Entity::setFuel()
 {
-	std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/fuel.png");
-	entitySprite.setTexture(*tex);
+	/*std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/fuel.png");
+	entitySprite.setTexture(*tex);*/
 
 	entitySprite.setScale(sf::Vector2f(0.05, 0.05));
 	entitySprite.setPosition(position);
