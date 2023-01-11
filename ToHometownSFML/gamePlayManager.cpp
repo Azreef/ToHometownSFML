@@ -212,25 +212,11 @@ void GamePlayManager::pickupFixPos()
 
 void GamePlayManager::enemyFixPos()
 {
-	/*for (int i = 0; i < enemy.size(); i++)
-	{
-		for (int j = 0; j < enemy.size(); j++)
-		{
-			if (i != j)
-			{
-				if (enemy[i]->getEntity().getGlobalBounds().intersects(enemy[j]->getEntity().getGlobalBounds()))
-				{
-					
-					enemy[i]->setEntityPosition(enemy[i]->getEntity().getPosition().x + 5, enemy[i]->getEntity().getPosition().y);
-				}
-			}
-		}
-	}*/
-
 	if (enemy[enemy.size() - 1]->getEntity().getGlobalBounds().intersects(enemy[enemy.size() - 2]->getEntity().getGlobalBounds()))
 	{
 		std::cout << "HIT";
-		enemy[enemy.size() - 1]->setEntityPosition(enemy[enemy.size() - 1]->getEntity().getPosition().x + 15, enemy[enemy.size() - 1]->getEntity().getPosition().y);
+		enemy[enemy.size() - 1]->setEntityPosition(enemy[enemy.size() - 1]->getEntity().getPosition().x + 100, enemy[enemy.size() - 1]->getEntity().getPosition().y);
+		//enemy[enemy.size() - 1]->setIsDestroyed(true);
 	}
 }
 
@@ -245,10 +231,17 @@ void GamePlayManager::spawnEnemy()
 	}
 	else if (spawnEnemyType == 1)
 	{
-		std::uniform_int_distribution<int> dist1(0, 1);
+		std::uniform_int_distribution<int> dist1(0, 5);
 		std::mt19937 rng;
 		rng.seed(std::random_device()());
-		enemyType = dist1(rng);
+		if (dist1(rng) < 5)
+		{
+			enemyType = 0;
+		}
+		else
+		{
+			enemyType = 1;
+		}
 	}
 
 	std::cout << "TYPE: " + std::to_string(enemyType) << std::endl;
