@@ -22,7 +22,7 @@ void MechanicManager::update()
 void MechanicManager::updateText()
 {
 	livesText.setString("Lives: " + std::to_string(lives));
-	distanceText.setString("Distance: " + std::to_string(abs(currentDistance / 100 - maxDistance)));
+	scoreText.setString("Score: " + std::to_string(abs(currentDistance / 100 )));
 	gearText.setString("Gear: " + std::to_string(currentGear));
 
 	if (isInvi)
@@ -35,6 +35,11 @@ void MechanicManager::updateText()
 	}
 
 	timeLimitText.setString("Time: " + std::to_string((int)abs(timeLimitStart.asSeconds() - timeLimitEnd.asSeconds())));
+
+	
+	float percent = currentDistance  / maxDistance;
+	std::cout << percent << std::endl;
+	destinationBar.setSize(sf::Vector2f(1280 * (percent/100), 30));
 }
 
 void MechanicManager::inviTimerUpdate()
@@ -50,8 +55,9 @@ void MechanicManager::inviTimerUpdate()
 //Draw   ==============================================================================
 void MechanicManager::render(sf::RenderTarget* target)
 {
+	target->draw(destinationBar);
 	target->draw(livesText);
-	target->draw(distanceText);
+	target->draw(scoreText);
 	target->draw(gearText);
 	target->draw(inviTimerText);
 	target->draw(timeLimitText);
@@ -64,6 +70,10 @@ void MechanicManager::initVariable()
 	score = 0;
 	lives = 5;
 	isInvi = false;
+
+	destinationBar.setFillColor(sf::Color::Red);
+	destinationBar.setPosition(sf::Vector2f(0, 0));
+	//destinationBar.setSize(sf::Vector2f(10, 100));
 }
 void MechanicManager::removeLive()
 {
@@ -94,11 +104,11 @@ void MechanicManager::setFont()
 	livesText.setPosition(sf::Vector2f(20, -80));
 
 
-	distanceText.setFont(font);
-	distanceText.setCharacterSize(150);
-	distanceText.setFillColor(sf::Color::White);
-	distanceText.setString("Distance: ");
-	distanceText.setPosition(sf::Vector2f(400, -80));
+	scoreText.setFont(font);
+	scoreText.setCharacterSize(150);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setString("Distance: ");
+	scoreText.setPosition(sf::Vector2f(400, -80));
 
 	gearText.setFont(font);
 	gearText.setCharacterSize(150);

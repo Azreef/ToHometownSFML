@@ -107,7 +107,7 @@ void Entity::setRepair()
 	/*std::shared_ptr<sf::Texture> tex = resourceManager.getTexture("Asset/repairKit.png");
 	entitySprite.setTexture(*tex);*/
 
-	entitySprite.setScale(sf::Vector2f(0.05, 0.05));
+	entitySprite.setScale(sf::Vector2f(0.08, 0.08));
 	entitySprite.setPosition(position);
 
 	entityType = 1;

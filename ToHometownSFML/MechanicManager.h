@@ -19,7 +19,7 @@ private:
 	Level level;
 	sf::Font font;
 	sf::Text livesText;
-	sf::Text distanceText;
+	sf::Text scoreText;
 	sf::Text gearText;
 	sf::Text inviTimerText;
 	sf::Text timeLimitText;
@@ -31,6 +31,7 @@ private:
 	sf::Time timeLimitEnd;
 	sf::Clock clockTimer;
 
+	sf::RectangleShape destinationBar;
 public:
 	
 	MechanicManager();
