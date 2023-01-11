@@ -48,6 +48,7 @@ void GamePlayManager::update()
 	repairPickup.update();
 	fuelPickup.update();
 	pickupFixPos();
+	enemyFixPos();
 }
 
 int GamePlayManager::detectCollision()
@@ -209,6 +210,30 @@ void GamePlayManager::pickupFixPos()
 	
 }
 
+void GamePlayManager::enemyFixPos()
+{
+	/*for (int i = 0; i < enemy.size(); i++)
+	{
+		for (int j = 0; j < enemy.size(); j++)
+		{
+			if (i != j)
+			{
+				if (enemy[i]->getEntity().getGlobalBounds().intersects(enemy[j]->getEntity().getGlobalBounds()))
+				{
+					
+					enemy[i]->setEntityPosition(enemy[i]->getEntity().getPosition().x + 5, enemy[i]->getEntity().getPosition().y);
+				}
+			}
+		}
+	}*/
+
+	if (enemy[enemy.size() - 1]->getEntity().getGlobalBounds().intersects(enemy[enemy.size() - 2]->getEntity().getGlobalBounds()))
+	{
+		std::cout << "HIT";
+		enemy[enemy.size() - 1]->setEntityPosition(enemy[enemy.size() - 1]->getEntity().getPosition().x + 15, enemy[enemy.size() - 1]->getEntity().getPosition().y);
+	}
+}
+
 void GamePlayManager::spawnEnemy()
 {
 	//Determine Type
@@ -251,6 +276,7 @@ void GamePlayManager::setEnemies()
 {
 	
 	spawnEnemy();
+
 	
 }
 void GamePlayManager::setSoundFX()

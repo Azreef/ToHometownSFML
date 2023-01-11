@@ -65,6 +65,7 @@ public:
 	void spawnEntity();
 	void initVariable();
 	void pickupFixPos();
+	void enemyFixPos();
 	void spawnEnemy();
 	void setEnemies();
 	void setSoundFX();
