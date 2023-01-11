@@ -38,6 +38,7 @@ private:
 	int spawnPickupRate;
 	int spawnEnemyType; //0 = cars only   1 = cars and truck
 	int levelType;
+	int levelMin;
 
 	std::shared_ptr<sf::Texture> carTexture = resourceManager.getTexture("Asset/car2.png");
 	std::shared_ptr<sf::Texture> busTexture = resourceManager.getTexture("Asset/bus.png");

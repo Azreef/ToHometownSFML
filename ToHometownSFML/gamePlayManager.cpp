@@ -9,6 +9,15 @@ GamePlayManager::GamePlayManager()
 
 GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int spawnEnemyType,int levelType)
 {
+	if (levelType == 0)
+	{
+		levelMin = 650;
+	}
+	else if (levelType == 1)
+	{
+		levelMin = 420;
+	}
+	
 	repairPickup = Entity(0, -100, 1, 0, repairTexture);
 	fuelPickup = Entity(0, -100, 1, 1, fuelTexture);
 
@@ -119,7 +128,7 @@ void GamePlayManager::spawnPickup()
 		std::mt19937 mt(rd());
 		std::uniform_real_distribution<double> dist(1, spawnPickupRate);
 		std::uniform_real_distribution<double> dist1(1, 3);
-		std::uniform_real_distribution<double> dist2(650, 850);
+		std::uniform_real_distribution<double> dist2(levelMin, 850);
 
 		randomChanceSpawn = dist(mt);
 		randomChooseType = dist1(mt);
@@ -181,18 +190,21 @@ void GamePlayManager::initVariable()
 }
 void GamePlayManager::pickupFixPos()
 {
-	
-	if (fuelPickup.getEntity().getGlobalBounds().intersects(enemy[enemy.size() - 1]->getEntity().getGlobalBounds()))
+	for (int i = 0; i < enemy.size(); i++)
 	{
-		fuelPickup.setEntityPosition(fuelPickup.getEntity().getPosition().x + 50, fuelPickup.getEntity().getPosition().y);
-		std::cout << "Fixed" << std::endl;
-	}
+		if (fuelPickup.getEntity().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
+		{
+			fuelPickup.setEntityPosition(fuelPickup.getEntity().getPosition().x + 50, fuelPickup.getEntity().getPosition().y);
+			std::cout << "Fixed" << std::endl;
+		}
 
-	if (repairPickup.getEntity().getGlobalBounds().intersects(enemy[enemy.size() - 1]->getEntity().getGlobalBounds()))
-	{
-		repairPickup.setEntityPosition(repairPickup.getEntity().getPosition().x + 50, repairPickup.getEntity().getPosition().y);
-		std::cout << "Fixed" << std::endl;
+		if (repairPickup.getEntity().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
+		{
+			repairPickup.setEntityPosition(repairPickup.getEntity().getPosition().x + 50, repairPickup.getEntity().getPosition().y);
+			std::cout << "Fixed" << std::endl;
+		}
 	}
+	
 
 	
 }
@@ -216,17 +228,9 @@ void GamePlayManager::spawnEnemy()
 
 	std::cout << "TYPE: " + std::to_string(enemyType) << std::endl;
 	//Determine position
-	int min;
-	if (levelType == 0)
-	{
-		min = 650;
-	}
-	else if (levelType == 1)
-	{
-		min = 420;
-	}
+	
 
-	std::uniform_int_distribution<int> dist2(min, 850);
+	std::uniform_int_distribution<int> dist2(levelMin, 850);
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	int pos = dist2(rng);

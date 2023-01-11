@@ -16,7 +16,7 @@ SystemManager::SystemManager(int currentLevel)
        //Set Gameplay
         levelType = 1;
 
-        std::shared_ptr<GamePlayManager> gamePlayManager(new GamePlayManager(400, 300, 1, levelType));
+        std::shared_ptr<GamePlayManager> gamePlayManager(new GamePlayManager(400, 1, 1, levelType));
         this->gamePlayManager = gamePlayManager;
 
         maxDistance = 500;
