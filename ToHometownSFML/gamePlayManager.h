@@ -11,7 +11,7 @@
 #include <algorithm>
 
 
-#define TOTAL_ENEMY 5
+#define TOTAL_ENEMY 50
 
 class GamePlayManager
 {

@@ -39,10 +39,11 @@ void GamePlayManager::update()
 
 int GamePlayManager::detectCollision()
 {
+	std::cout << player.getPlayerHitBox().getGlobalBounds().left << std::endl;
 	int returnInt = 0;
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		if (player.getPlayerData().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
+		if (player.getPlayerHitBox().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
 		{
 			if (!enemy[i]->getIsDestroyed())
 			{
@@ -51,7 +52,7 @@ int GamePlayManager::detectCollision()
 			}
 		}
 
-		if (player.getPlayerData().getGlobalBounds().intersects(repairPickup.getEntity().getGlobalBounds()))
+		if (player.getPlayerHitBox().getGlobalBounds().intersects(repairPickup.getEntity().getGlobalBounds()))
 		{
 			if (!repairPickup.getIsDestroyed())
 			{
@@ -61,7 +62,7 @@ int GamePlayManager::detectCollision()
 			}
 		}
 
-		if (player.getPlayerData().getGlobalBounds().intersects(fuelPickup.getEntity().getGlobalBounds()))
+		if (player.getPlayerHitBox().getGlobalBounds().intersects(fuelPickup.getEntity().getGlobalBounds()))
 		{
 			if (!fuelPickup.getIsDestroyed())
 			{
@@ -347,6 +348,7 @@ void GamePlayManager::setEnemies()
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {
 	player.setPlayerSprite(playerData);
+	player.updateHitbox();
 }
 
 void GamePlayManager::setCurrentDistance(int distance)

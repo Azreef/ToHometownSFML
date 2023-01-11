@@ -25,7 +25,7 @@ void Player::update()
 }
 
 void Player::moveUpdate()
-{
+{ 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         playerSprite.move(0, -movementSpeed);
@@ -70,6 +70,8 @@ void Player::moveUpdate()
     {
         playerSprite.setPosition(playerSprite.getPosition().x, maxBottom - playerSprite.getGlobalBounds().height);
     }
+
+    playerHitbox.setPosition(sf::Vector2f(playerSprite.getPosition().x + 20, playerSprite.getPosition().y + 10));
 }
 
 
@@ -77,7 +79,10 @@ void Player::moveUpdate()
 
 void Player::render(sf::RenderTarget* target)
 {
+
     target->draw(playerSprite);
+    //target->draw(playerHitbox);
+    
 }
 
 
@@ -94,6 +99,9 @@ void Player::setSprite()
     playerSprite.setTexture(texture);
     playerSprite.setPosition(position);
     playerSprite.setScale(sf::Vector2f(0.05, 0.05));
+
+    playerHitbox.setSize(sf::Vector2f(80, 50));
+    playerHitbox.setFillColor(sf::Color::White);
 }
 
 void Player::initVariable(int levelType)
@@ -120,10 +128,20 @@ void Player::setPlayerSprite(sf::Sprite playerData)
     playerSprite = playerData;
 }
 
+void Player::updateHitbox()
+{
+    playerHitbox.setPosition(sf::Vector2f(playerSprite.getPosition().x + 20, playerSprite.getPosition().y + 10));
+}
+
 
 //Getter ==============================================================================
 
 sf::Sprite Player::getPlayerData()
 {
     return playerSprite;
+}
+
+sf::RectangleShape Player::getPlayerHitBox()
+{
+    return playerHitbox;
 }
