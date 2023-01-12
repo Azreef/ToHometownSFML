@@ -9,13 +9,13 @@
 class MechanicManager
 {
 private:
-	int score;
+	int minScore;
 	int lives;
 	int currentDistance;
 	int currentGear;
 	bool isInvi;
 	int maxDistance;
-	
+
 	Level level;
 	sf::Font font;
 	sf::Text livesText;
@@ -32,6 +32,8 @@ private:
 	sf::Clock clockTimer;
 
 	sf::RectangleShape destinationBar;
+	sf::RectangleShape gearBar;
+	sf::RectangleShape gearBorder;
 public:
 	
 	MechanicManager();
@@ -55,6 +57,8 @@ public:
 	void timeLimitUpdate();
 	sf::Time getTimeLimit();
 	void setMaxDistance(int maxDistance);
+
+	int getMinScore();
 
 };
 

@@ -4,8 +4,9 @@
 //CONSTRUCTOR
 MechanicManager::MechanicManager()
 {
+	setFont();
 	initVariable();
-	setFont(); 
+	
 }
 
 
@@ -21,10 +22,25 @@ void MechanicManager::update()
 
 void MechanicManager::updateText()
 {
-	livesText.setString("Lives: " + std::to_string(lives));
-	scoreText.setString("Score: " + std::to_string(abs(currentDistance / 100 )));
-	gearText.setString("Gear: " + std::to_string(currentGear));
+	minScore = abs(currentDistance / 100);
+	
+	gearBar.setSize(sf::Vector2f(currentGear*40, 40));
+	if (currentGear <= 2)
+	{
+		gearBar.setFillColor(sf::Color::Green);
+	}
+	else if (currentGear >= 4 && currentGear < 5)
+	{
+		gearBar.setFillColor(sf::Color::Yellow);
+	}
+	else if (currentGear == 5)
+	{
+		gearBar.setFillColor(sf::Color::Red);
+	}
 
+	livesText.setString("Lives: " + std::to_string(lives));
+	scoreText.setString("Score: " + std::to_string(abs(minScore)));
+	
 	if (isInvi)
 	{
 		inviTimerText.setString("Invincibility: " + std::to_string((int)abs(inviTimer.asSeconds() - 5)));
@@ -61,19 +77,28 @@ void MechanicManager::render(sf::RenderTarget* target)
 	target->draw(gearText);
 	target->draw(inviTimerText);
 	target->draw(timeLimitText);
+	target->draw(gearBorder);
+	target->draw(gearBar);
 }
 
 
 //Setter ==============================================================================
 void MechanicManager::initVariable()
 {
-	score = 0;
+	minScore = 0;
 	lives = 5;
 	isInvi = false;
 
 	destinationBar.setFillColor(sf::Color::Red);
 	destinationBar.setPosition(sf::Vector2f(0, 0));
-	//destinationBar.setSize(sf::Vector2f(10, 100));
+
+	gearBar.setFillColor(sf::Color::Green);
+	gearBar.setPosition(sf::Vector2f(gearText.getPosition().x + gearText.getCharacterSize() + 30 , gearText.getPosition().y + gearText.getCharacterSize() - 35));
+	gearBar.setSize(sf::Vector2f(40, 40));
+
+	gearBorder.setFillColor(sf::Color::Black);
+	gearBorder.setPosition(sf::Vector2f(gearText.getPosition().x + gearText.getCharacterSize() - 2.5 + 30, gearText.getPosition().y + gearText.getCharacterSize() - 35 - 2.5));
+	gearBorder.setSize(sf::Vector2f(205, 45));
 }
 void MechanicManager::removeLive()
 {
@@ -100,33 +125,33 @@ void MechanicManager::setFont()
 	livesText.setFont(font);
 	livesText.setCharacterSize(150);
 	livesText.setFillColor(sf::Color::White);
-	livesText.setString("Lives: ");
-	livesText.setPosition(sf::Vector2f(20, -80));
+	livesText.setString("Lives: 00");
+	livesText.setPosition(sf::Vector2f(20, -50));
 
 
 	scoreText.setFont(font);
 	scoreText.setCharacterSize(150);
 	scoreText.setFillColor(sf::Color::White);
-	scoreText.setString("Distance: ");
-	scoreText.setPosition(sf::Vector2f(400, -80));
+	scoreText.setString("Distance: 00");
+	scoreText.setPosition(sf::Vector2f(sf::Vector2f(1280 / 2 - scoreText.getGlobalBounds().width /2, -50)));
 
 	gearText.setFont(font);
 	gearText.setCharacterSize(150);
 	gearText.setFillColor(sf::Color::White);
-	gearText.setString("Distance: ");
+	gearText.setString("Speed: ");
 	gearText.setPosition(sf::Vector2f(20, 50));
 
 	inviTimerText.setFont(font);
 	inviTimerText.setCharacterSize(150);
 	inviTimerText.setFillColor(sf::Color::White);
-	inviTimerText.setString("Invincible: ");
+	inviTimerText.setString("Invincible: 00");
 	inviTimerText.setPosition(sf::Vector2f(20, 200));
 
 	timeLimitText.setFont(font);
 	timeLimitText.setCharacterSize(150);
 	timeLimitText.setFillColor(sf::Color::White);
-	timeLimitText.setString("Time: ");
-	timeLimitText.setPosition(sf::Vector2f(400, 50));
+	timeLimitText.setString("Time: 00");
+	timeLimitText.setPosition(sf::Vector2f(1280 - timeLimitText.getGlobalBounds().width - 30, -50));
 
 }
 
@@ -181,5 +206,9 @@ void MechanicManager::setTimeLimit(sf::Time timeLimit)
 }
 
 
+int MechanicManager::getMinScore()
+{
+	return minScore;
+}
 
 

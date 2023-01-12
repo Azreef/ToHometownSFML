@@ -25,7 +25,7 @@ public:
 	void mainMenu(sf::RenderWindow *window,bool *isInMenu, int *currentLevel,int *currentMenu);
 	void selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int completedLevel);
 	void stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel);
-	void resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime,int remainingDistance, int* completedLevel);
+	void resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime,int remainingDistance, int* completedLevel, int*currentScore);
 	void render(sf::RenderTarget* target);
 	void stopDoubleClick();
 

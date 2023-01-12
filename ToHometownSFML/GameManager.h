@@ -31,6 +31,9 @@ private:
 	sf::Time remainingTime;
 	int remainingDistance;
 	int gameState;
+
+	int maxScore[4];
+	int currentScore;
 	
 
 	std::shared_ptr <SystemManager> systemManager;

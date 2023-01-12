@@ -56,7 +56,7 @@ void GameManager::update()
             else if (currentMenu == 3)
             {
                 //Result Screen
-                menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState, remainingLive, remainingTime, remainingDistance, &completedLevel);
+                menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState, remainingLive, remainingTime, remainingDistance, &completedLevel,&currentScore);
             }
             else if (currentMenu == 4)
             {
@@ -85,7 +85,7 @@ void GameManager::update()
         systemManager->update();
 
         //Update Levels Variable
-        systemManager->updateGameValue(&gameState, &remainingTime, &remainingLive, &remainingDistance);
+        systemManager->updateGameValue(&gameState, &remainingTime, &remainingLive, &remainingDistance,&currentScore);
 
         //Gameplay Finished (Stop Gameplay loop)
         if (gameState != 0) 

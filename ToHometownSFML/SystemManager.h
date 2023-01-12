@@ -42,7 +42,7 @@ public:
 	void updateData();
 	void setData();
 	void updateLive();
-	void updateGameValue(int* gameState,sf::Time* remainingTime, int* remainingLive, int* remainingDistance); //0-Not Finished | 1-Completed |  2-Out of Lives | 3-Out of time
+	void updateGameValue(int* gameState,sf::Time* remainingTime, int* remainingLive, int* remainingDistance,int* score); //0-Not Finished | 1-Completed |  2-Out of Lives | 3-Out of time
 
 };
 
