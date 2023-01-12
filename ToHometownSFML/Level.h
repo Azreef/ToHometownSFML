@@ -8,15 +8,30 @@ private:
 	sf::Texture roadTexture;
 	sf::Sprite roadSprite;
 	sf::Vector2f position;
-	sf::Vector2f backgroundPos;
+
+	sf::Vector2f backGroundPos;
 	sf::Texture backGroundTexture;
 	sf::Sprite backGroundSprite;
+
+	sf::Vector2f subBackGroundPos[2];
+	sf::Texture subBackGroundTexture;
+	sf::Sprite subBackGroundSprite[2];
+	int currentSub = 0;
+
+	sf::Vector2f cloudBackGroundPos[2];
+	sf::Texture cloudBackGroundTexture;
+	sf::Sprite cloudBackGroundSprite[2];
+	int currentCloud = 0;
+
+
 	float currentDistance;
 	float roadSpeed;
 	int maxGear;
 	int minGear;
 
 	float backgroundYPos;
+	float subBackgroundYPos;
+	float cloudBackgroundYPos;
 	float roadYPos;
 	int currentGear;
 	bool keyIsPressed;
@@ -32,7 +47,6 @@ public:
 	void update();
 	void setSprite(int levelType);
 	void scrollRoad();
-	//void setPosition(int levelType);
 	void initVariable(int levelType);
 	void roadSpeedControl();
 	float getRoadSpeed();

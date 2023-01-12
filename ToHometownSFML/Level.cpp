@@ -31,9 +31,45 @@ void Level::scrollRoad()
 	roadSprite.move(-roadSpeed, 0);
 	backGroundSprite.move(-roadSpeed * 0.005, 0);
 
+	subBackGroundSprite[0].move(-roadSpeed * 0.2, 0);
+	subBackGroundSprite[1].move(-roadSpeed * 0.2, 0);
+
+	cloudBackGroundSprite[0].move(-roadSpeed * 0.02, 0);
+	cloudBackGroundSprite[1].move(-roadSpeed * 0.02, 0);
+
 	if (roadSprite.getPosition().x <= -1550)
 	{
 		roadSprite.setPosition(sf::Vector2f(0, roadYPos));
+	}
+
+	if (subBackGroundSprite[currentSub].getPosition().x  <= -subBackGroundSprite[currentSub].getGlobalBounds().width)
+	{
+		if (currentSub == 0)
+		{
+			subBackGroundSprite[currentSub].setPosition(sf::Vector2f(subBackGroundSprite[currentSub].getGlobalBounds().width, subBackgroundYPos));
+			currentSub = 1;
+		}
+		else if (currentSub == 1)
+		{
+			subBackGroundSprite[currentSub].setPosition(sf::Vector2f(subBackGroundSprite[currentSub].getGlobalBounds().width, subBackgroundYPos));
+			currentSub = 0;
+		}
+		
+	}
+
+	if (cloudBackGroundSprite[currentCloud].getPosition().x <= -cloudBackGroundSprite[currentCloud].getGlobalBounds().width)
+	{
+		if (currentCloud == 0)
+		{
+			cloudBackGroundSprite[currentCloud].setPosition(sf::Vector2f(cloudBackGroundSprite[currentCloud].getGlobalBounds().width, cloudBackgroundYPos));
+			currentCloud = 1;
+		}
+		else if (currentCloud == 1)
+		{
+			cloudBackGroundSprite[currentCloud].setPosition(sf::Vector2f(cloudBackGroundSprite[currentCloud].getGlobalBounds().width, cloudBackgroundYPos));
+			currentCloud = 0;
+		}
+
 	}
 }
 
@@ -90,6 +126,12 @@ void Level::roadSpeedControl()
 void Level::render(sf::RenderTarget* target)
 {
 	target->draw(backGroundSprite);
+
+	target->draw(cloudBackGroundSprite[0]);
+	target->draw(cloudBackGroundSprite[1]);
+
+	target->draw(subBackGroundSprite[0]);
+	target->draw(subBackGroundSprite[1]);
 	target->draw(roadSprite);
 }
 
@@ -108,6 +150,16 @@ void Level::setSprite(int levelType)
 		{
 			std::cout << "ERROR TEXTURE";
 		}
+
+		if (!subBackGroundTexture.loadFromFile("Asset/building.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+
+		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 		
 	}
 	else if (levelType == 1)
@@ -120,6 +172,14 @@ void Level::setSprite(int levelType)
 		{
 			std::cout << "ERROR TEXTURE";
 		}
+		if (!subBackGroundTexture.loadFromFile("Asset/building.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 	}
 
 	roadSprite.setTexture(roadTexture);
@@ -128,14 +188,25 @@ void Level::setSprite(int levelType)
 
 	backGroundSprite.setTexture(backGroundTexture);
 	backGroundSprite.setScale(sf::Vector2f(1.2, 1.2));
-	backGroundSprite.setPosition(backgroundPos);
+	backGroundSprite.setPosition(backGroundPos);
+
+	for (int i = 0; i < 2; i++)
+	{
+		subBackGroundSprite[i].setTexture(subBackGroundTexture);
+		subBackGroundSprite[i].setScale(sf::Vector2f(0.5, 0.5));
+
+		cloudBackGroundSprite[i].setTexture(cloudBackGroundTexture);
+		cloudBackGroundSprite[i].setScale(sf::Vector2f(0.4, 0.4));
+	}
+
+	subBackGroundSprite[0].setPosition((sf::Vector2f(0, subBackgroundYPos)));
+	subBackGroundSprite[1].setPosition((sf::Vector2f(subBackGroundSprite[0].getGlobalBounds().width, subBackgroundYPos)));
+
+	cloudBackGroundSprite[0].setPosition((sf::Vector2f(0, cloudBackgroundYPos)));
+	cloudBackGroundSprite[1].setPosition((sf::Vector2f(cloudBackGroundSprite[0].getGlobalBounds().width, cloudBackgroundYPos)));
+
 
 }
-
-//void Level::setPosition()
-//{
-//	
-//}
 
 void Level::initVariable(int levelType)
 {
@@ -149,16 +220,19 @@ void Level::initVariable(int levelType)
 	{
 		roadYPos = 350;
 		backgroundYPos = -300;
-		
+		subBackgroundYPos = -20;
+		cloudBackgroundYPos = 0;
 	}
 	else if (levelType == 1)
 	{
 		roadYPos = 175;
 		backgroundYPos = -300;
+		subBackgroundYPos = 175;
+		cloudBackgroundYPos = 0;
 	}
 
 	position = { 0,roadYPos};
-	backgroundPos = { 0,backgroundYPos };
+	backGroundPos = { 0,backgroundYPos };
 }
 
 void Level::setCurrentDistance()

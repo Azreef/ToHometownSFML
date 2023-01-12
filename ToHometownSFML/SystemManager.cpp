@@ -28,7 +28,7 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
-        enemyInterval = 400;
+        enemyInterval = 10000;
 
         //Item Spawn frequency
         spawnPickupRate = 1;

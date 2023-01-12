@@ -196,13 +196,13 @@ void GamePlayManager::pickupFixPos()
 		if (fuelPickup.getEntity().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
 		{
 			fuelPickup.setEntityPosition(fuelPickup.getEntity().getPosition().x + 50, fuelPickup.getEntity().getPosition().y);
-			std::cout << "Fixed" << std::endl;
+			//std::cout << "Fixed" << std::endl;
 		}
 
 		if (repairPickup.getEntity().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
 		{
 			repairPickup.setEntityPosition(repairPickup.getEntity().getPosition().x + 50, repairPickup.getEntity().getPosition().y);
-			std::cout << "Fixed" << std::endl;
+			//std::cout << "Fixed" << std::endl;
 		}
 	}
 	
@@ -214,7 +214,6 @@ void GamePlayManager::enemyFixPos()
 {
 	if (enemy[enemy.size() - 1]->getEntity().getGlobalBounds().intersects(enemy[enemy.size() - 2]->getEntity().getGlobalBounds()))
 	{
-		std::cout << "HIT";
 		enemy[enemy.size() - 1]->setEntityPosition(enemy[enemy.size() - 1]->getEntity().getPosition().x + 100, enemy[enemy.size() - 1]->getEntity().getPosition().y);
 		//enemy[enemy.size() - 1]->setIsDestroyed(true);
 	}
@@ -244,10 +243,7 @@ void GamePlayManager::spawnEnemy()
 		}
 	}
 
-	std::cout << "TYPE: " + std::to_string(enemyType) << std::endl;
 	//Determine position
-	
-
 	std::uniform_int_distribution<int> dist2(levelMin, 850);
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
