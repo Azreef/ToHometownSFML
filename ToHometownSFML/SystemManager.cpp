@@ -5,48 +5,60 @@
 
 SystemManager::SystemManager()
 {
-    //setData();
 }
 
 SystemManager::SystemManager(int currentLevel)
 {
+    float enemyInterval;
+    int spawnPickupRate;
+    int spawnEnemyType;
 
+    //Set Level Variable
     if (currentLevel == 0)
     {
-       //Set Gameplay
-        levelType = 1;
+        //Road Type
+        levelType = 0;
 
-        std::shared_ptr<GamePlayManager> gamePlayManager(new GamePlayManager(400, 1, 1, levelType));
-        this->gamePlayManager = gamePlayManager;
-
+        //Destination Distance
         maxDistance = 500;
+        mechanicManager.setMaxDistance(maxDistance);
 
+        //Time Limit
         timeLimit = sf::seconds(60);
         mechanicManager.setTimeLimit(timeLimit);
-        mechanicManager.setMaxDistance(maxDistance);
 
-        //setData();
+        //Enemy spawn frequency 
+        enemyInterval = 400;
 
-        //Set Level
-        std::shared_ptr<Level> level(new Level(levelType));
-        this->level = level;
+        //Item Spawn frequency
+        spawnPickupRate = 1;
 
-        std::shared_ptr<Player> player(new Player(levelType));
-        this->player = player;
+        //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
+        spawnEnemyType = 1;
+       
     }
-    if (currentLevel == 1)
+    else if (currentLevel == 1)
     {
-        //gamePlayManager = new GamePlayManager(800, 1 , 1,0);
-        maxDistance = 600;
 
-        timeLimit = sf::seconds(80);
-        mechanicManager.setTimeLimit(timeLimit);
-        mechanicManager.setMaxDistance(maxDistance);
 
-       // setData();
-
-        //level = new Level(0);
     }
+    else if (currentLevel == 2)
+    {
+
+
+    }
+
+    //Create Gameplay
+    std::shared_ptr<GamePlayManager> gamePlayManager(new GamePlayManager(enemyInterval, spawnPickupRate, spawnEnemyType, levelType));
+    this->gamePlayManager = gamePlayManager;
+
+    //Create Level
+    std::shared_ptr<Level> level(new Level(levelType));
+    this->level = level;
+
+    //Create Player
+    std::shared_ptr<Player> player(new Player(levelType));
+    this->player = player;
 
 }
 
