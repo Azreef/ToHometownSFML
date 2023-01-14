@@ -3,6 +3,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Main.hpp>
+#include <fstream>
+#include <sstream>
+#include "ResourceManager.h"
 
 //include "LevelManager.h"
 #include "SystemManager.h";
@@ -32,12 +35,15 @@ private:
 	int remainingDistance;
 	int gameState;
 
-	int maxScore[4];
+	int highScore[4];
 	int currentScore;
 	
-
+	ResourceManager resourceManager;
 	std::shared_ptr <SystemManager> systemManager;
 
+	//std::shared_ptr<sf::Texture>loadingTexture = resourceManager.getTexture("Asset/UI/loading.png");
+	//sf::Sprite loadingImage;
+	
 	
 public:
 	// Constructor
@@ -52,6 +58,9 @@ public:
 	void render();
 	void update();
 	void pollEvent();
+	void loadSave();
+	void setSave();
+	void resetSave();
 
 };
 

@@ -4,16 +4,14 @@
 //CONSTRUCTOR
 Level::Level()
 {
-	//setPosition();
-	initVariable(0);
-	setSprite(0);
+	initVariable(0,0);
+	setSprite(0,0);
 }
 
-Level::Level(int levelType)
+Level::Level(int levelType,int backGroundType)
 {
-	//setPosition();
-	initVariable(levelType);
-	setSprite(levelType);
+	initVariable(levelType,backGroundType);
+	setSprite(levelType,backGroundType);
 }
 
 //FUNCTION 
@@ -22,6 +20,7 @@ Level::Level(int levelType)
 void Level::update()
 {
 	scrollRoad();
+	scrollBackground();
 	roadSpeedControl();
 	setCurrentDistance();
 }
@@ -29,21 +28,27 @@ void Level::update()
 void Level::scrollRoad()
 {
 	roadSprite.move(-roadSpeed, 0);
-	backGroundSprite.move(-roadSpeed * 0.005, 0);
+	
+	if (roadSprite.getPosition().x <= -1550)
+	{
+		roadSprite.setPosition(sf::Vector2f(0, roadYPos));
+	}
 
+}
+
+void Level::scrollBackground()
+{
 	subBackGroundSprite[0].move(-roadSpeed * 0.2, 0);
 	subBackGroundSprite[1].move(-roadSpeed * 0.2, 0);
 
 	cloudBackGroundSprite[0].move(-roadSpeed * 0.02, 0);
 	cloudBackGroundSprite[1].move(-roadSpeed * 0.02, 0);
 
-	if (roadSprite.getPosition().x <= -1550)
-	{
-		roadSprite.setPosition(sf::Vector2f(0, roadYPos));
-	}
+	backGroundSprite.move(-roadSpeed * 0.005, 0);
 
-	if (subBackGroundSprite[currentSub].getPosition().x  <= -subBackGroundSprite[currentSub].getGlobalBounds().width)
+	if (subBackGroundSprite[currentSub].getPosition().x <= -subBackGroundSprite[currentSub].getGlobalBounds().width)
 	{
+		std::cout << "Lalu";
 		if (currentSub == 0)
 		{
 			subBackGroundSprite[currentSub].setPosition(sf::Vector2f(subBackGroundSprite[currentSub].getGlobalBounds().width, subBackgroundYPos));
@@ -54,7 +59,6 @@ void Level::scrollRoad()
 			subBackGroundSprite[currentSub].setPosition(sf::Vector2f(subBackGroundSprite[currentSub].getGlobalBounds().width, subBackgroundYPos));
 			currentSub = 0;
 		}
-		
 	}
 
 	if (cloudBackGroundSprite[currentCloud].getPosition().x <= -cloudBackGroundSprite[currentCloud].getGlobalBounds().width)
@@ -69,7 +73,6 @@ void Level::scrollRoad()
 			cloudBackGroundSprite[currentCloud].setPosition(sf::Vector2f(cloudBackGroundSprite[currentCloud].getGlobalBounds().width, cloudBackgroundYPos));
 			currentCloud = 0;
 		}
-
 	}
 }
 
@@ -137,46 +140,19 @@ void Level::render(sf::RenderTarget* target)
 
 //Setter ==============================================================================
 
-void Level::setSprite(int levelType)
+void Level::setSprite(int levelType,int backGroundType)
 {
+	//Set Road Sprite
 	if (levelType == 0)
 	{
 		if (!roadTexture.loadFromFile("Asset/road3.png"))
 		{
 			std::cout << "ERROR TEXTURE";
 		}
-
-		if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		if (!subBackGroundTexture.loadFromFile("Asset/building.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-		
 	}
 	else if (levelType == 1)
 	{
 		if (!roadTexture.loadFromFile("Asset/road4.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-		if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-		if (!subBackGroundTexture.loadFromFile("Asset/building.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
 		{
 			std::cout << "ERROR TEXTURE";
 		}
@@ -186,50 +162,137 @@ void Level::setSprite(int levelType)
 	roadSprite.setScale(sf::Vector2f(0.6, 0.6));
 	roadSprite.setPosition(position);
 
-	backGroundSprite.setTexture(backGroundTexture);
-	backGroundSprite.setScale(sf::Vector2f(1.2, 1.2));
-	backGroundSprite.setPosition(backGroundPos);
-
-	for (int i = 0; i < 2; i++)
+	
+	//Set Background
+	if (backGroundType == 0)
 	{
-		subBackGroundSprite[i].setTexture(subBackGroundTexture);
-		subBackGroundSprite[i].setScale(sf::Vector2f(0.5, 0.5));
+		if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 
-		cloudBackGroundSprite[i].setTexture(cloudBackGroundTexture);
-		cloudBackGroundSprite[i].setScale(sf::Vector2f(0.4, 0.4));
+		if (!subBackGroundTexture.loadFromFile("Asset/building.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+
+		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
+
+		for (int i = 0; i < 2; i++)
+		{
+			subBackGroundSprite[i].setTexture(subBackGroundTexture);
+			subBackGroundSprite[i].setScale(sf::Vector2f(0.5, 0.5));
+
+			cloudBackGroundSprite[i].setTexture(cloudBackGroundTexture);
+			cloudBackGroundSprite[i].setScale(sf::Vector2f(0.4, 0.4));
+		}
+
+		backGroundSprite.setTexture(backGroundTexture);
+		backGroundSprite.setScale(sf::Vector2f(1.2, 1.2));
+		backGroundSprite.setPosition(backGroundPos);
+
+		subBackGroundSprite[0].setPosition((sf::Vector2f(0, subBackgroundYPos)));
+		subBackGroundSprite[1].setPosition((sf::Vector2f(subBackGroundSprite[0].getGlobalBounds().width, subBackgroundYPos)));
+
+		cloudBackGroundSprite[0].setPosition((sf::Vector2f(0, cloudBackgroundYPos)));
+		cloudBackGroundSprite[1].setPosition((sf::Vector2f(cloudBackGroundSprite[0].getGlobalBounds().width, cloudBackgroundYPos)));
+
+		
 	}
 
-	subBackGroundSprite[0].setPosition((sf::Vector2f(0, subBackgroundYPos)));
-	subBackGroundSprite[1].setPosition((sf::Vector2f(subBackGroundSprite[0].getGlobalBounds().width, subBackgroundYPos)));
+	else if (backGroundType == 1)
+	{
+		if (!backGroundTexture.loadFromFile("Asset/countryBackground.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 
-	cloudBackGroundSprite[0].setPosition((sf::Vector2f(0, cloudBackgroundYPos)));
-	cloudBackGroundSprite[1].setPosition((sf::Vector2f(cloudBackGroundSprite[0].getGlobalBounds().width, cloudBackgroundYPos)));
+		if (!subBackGroundTexture.loadFromFile("Asset/tree.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 
+		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
+		{
+			std::cout << "ERROR TEXTURE";
+		}
 
+		for (int i = 0; i < 2; i++)
+		{
+			subBackGroundSprite[i].setTexture(subBackGroundTexture);
+			subBackGroundSprite[i].setScale(sf::Vector2f(0.8, 0.8));
+
+			cloudBackGroundSprite[i].setTexture(cloudBackGroundTexture);
+			cloudBackGroundSprite[i].setScale(sf::Vector2f(0.4, 0.4));
+		}
+
+		backGroundSprite.setTexture(backGroundTexture);
+		backGroundSprite.setScale(sf::Vector2f(0.5, 0.5));
+		backGroundSprite.setPosition(backGroundPos);
+
+		subBackGroundSprite[0].setPosition((sf::Vector2f(0, subBackgroundYPos)));
+		subBackGroundSprite[1].setPosition((sf::Vector2f(subBackGroundSprite[0].getGlobalBounds().width, subBackgroundYPos)));
+
+		cloudBackGroundSprite[0].setPosition((sf::Vector2f(0, cloudBackgroundYPos)));
+		cloudBackGroundSprite[1].setPosition((sf::Vector2f(cloudBackGroundSprite[0].getGlobalBounds().width, cloudBackgroundYPos)));
+
+	}
+
+	
 }
 
-void Level::initVariable(int levelType)
+void Level::initVariable(int levelType, int backGroundType)
 {
-	
 	roadSpeed = 10;
 	maxGear = 5;
 	minGear = 1;
 	currentDistance = 0;
 	currentGear = 1;
+
+	//Set road variable
 	if (levelType == 0)
 	{
 		roadYPos = 350;
-		backgroundYPos = -300;
-		subBackgroundYPos = -20;
-		cloudBackgroundYPos = 0;
+
+		//Set background Variable
+		if (backGroundType == 0)
+		{
+			backgroundYPos = -300;
+			subBackgroundYPos = -20;
+			cloudBackgroundYPos = 0;
+		}
+		else if (backGroundType == 1)
+		{
+			backgroundYPos = -350;
+			subBackgroundYPos = 150;
+			cloudBackgroundYPos = 0;
+		}
+		
 	}
 	else if (levelType == 1)
 	{
 		roadYPos = 175;
-		backgroundYPos = -300;
-		subBackgroundYPos = 175;
-		cloudBackgroundYPos = 0;
+
+		//Set background Variable
+		if (backGroundType == 0)
+		{
+			backgroundYPos = -400;
+			subBackgroundYPos = -80;
+			cloudBackgroundYPos = 0;
+		}
+		else if (backGroundType == 1)
+		{
+			backgroundYPos = -520;
+			subBackgroundYPos = 80;
+			cloudBackgroundYPos = 0;
+		}
+		
 	}
+
+	
 
 	position = { 0,roadYPos};
 	backGroundPos = { 0,backgroundYPos };
@@ -261,5 +324,3 @@ int Level::getCurrentGear()
 {
 	return currentGear;
 }
-
-

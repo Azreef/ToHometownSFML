@@ -21,7 +21,7 @@ public:
 	sf::RectangleShape button;
 
 	sf::RectangleShape getButtonBox();
-	//sf::Text getButtonText();
+	
 	sf::Font font;
 	
 	sf::Text text;

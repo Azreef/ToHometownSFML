@@ -12,12 +12,42 @@ SystemManager::SystemManager(int currentLevel)
     float enemyInterval;
     int spawnPickupRate;
     int spawnEnemyType;
+    int backGroundType;
 
     //Set Level Variable
     if (currentLevel == 0)
     {
         //Road Type
         levelType = 0;
+
+        //Background Type
+        backGroundType = 0;
+
+        //Destination Distance
+        maxDistance = 5;
+        mechanicManager.setMaxDistance(maxDistance);
+
+        //Time Limit
+        timeLimit = sf::seconds(60);
+        mechanicManager.setTimeLimit(timeLimit);
+
+        //Enemy spawn frequency 
+        enemyInterval = 800;
+
+        //Item Spawn frequency
+        spawnPickupRate = 1;
+
+        //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
+        spawnEnemyType = 1;
+       
+    }
+    else if (currentLevel == 1)
+    {
+        //Road Type
+        levelType = 1;
+
+        //Background Type
+        backGroundType = 0;
 
         //Destination Distance
         maxDistance = 500;
@@ -35,16 +65,58 @@ SystemManager::SystemManager(int currentLevel)
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 1;
-       
-    }
-    else if (currentLevel == 1)
-    {
-
 
     }
     else if (currentLevel == 2)
     {
+        //Road Type
+        levelType = 1;
 
+        //Background Type
+        backGroundType = 0;
+
+        //Destination Distance
+        maxDistance = 500;
+        mechanicManager.setMaxDistance(maxDistance);
+
+        //Time Limit
+        timeLimit = sf::seconds(60);
+        mechanicManager.setTimeLimit(timeLimit);
+
+        //Enemy spawn frequency 
+        enemyInterval = 10000;
+
+        //Item Spawn frequency
+        spawnPickupRate = 1;
+
+        //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
+        spawnEnemyType = 1;
+
+    }
+    else if (currentLevel == 3)
+    {
+        //Road Type
+        levelType = 1;
+
+        //Background Type
+        backGroundType = 0;
+
+        //Destination Distance
+        maxDistance = 500;
+        mechanicManager.setMaxDistance(maxDistance);
+
+        //Time Limit
+        timeLimit = sf::seconds(60);
+        mechanicManager.setTimeLimit(timeLimit);
+
+        //Enemy spawn frequency 
+        enemyInterval = 10000;
+
+        //Item Spawn frequency
+        spawnPickupRate = 1;
+
+        //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
+        spawnEnemyType = 1;
 
     }
 
@@ -53,7 +125,7 @@ SystemManager::SystemManager(int currentLevel)
     this->gamePlayManager = gamePlayManager;
 
     //Create Level
-    std::shared_ptr<Level> level(new Level(levelType));
+    std::shared_ptr<Level> level(new Level(levelType, backGroundType));
     this->level = level;
 
     //Create Player

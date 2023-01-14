@@ -22,7 +22,6 @@ private:
 
 	std::vector<std::shared_ptr<Entity>> enemy;
 
-	//std::shared_ptr<Entity> enemy[TOTAL_ENEMY];
 	Entity repairPickup;
 	Entity fuelPickup;
 	Level level;

@@ -37,17 +37,17 @@ private:
 	bool keyIsPressed;
 	
 	
-
 public:
 	
 	//Constructor
 	Level();
-	Level(int levelType);
+	Level(int levelType, int backGroundType);
 	void render(sf::RenderTarget* target);
 	void update();
-	void setSprite(int levelType);
+	void setSprite(int levelType, int backGroundType);
 	void scrollRoad();
-	void initVariable(int levelType);
+	void scrollBackground();
+	void initVariable(int levelType, int backGroundType);
 	void roadSpeedControl();
 	float getRoadSpeed();
 	void setCurrentDistance();

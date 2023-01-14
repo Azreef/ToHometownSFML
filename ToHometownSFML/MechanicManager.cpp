@@ -54,7 +54,7 @@ void MechanicManager::updateText()
 
 	
 	float percent = currentDistance  / maxDistance;
-	std::cout << percent << std::endl;
+	//std::cout << percent << std::endl;
 	destinationBar.setSize(sf::Vector2f(1280 * (percent/100), 30));
 }
 

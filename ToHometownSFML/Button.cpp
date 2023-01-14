@@ -2,28 +2,12 @@
 
 Button::Button()
 {
-    //isExist = false;
-    //std::cout << "LALU1";
-     // Create the button's shape
     button.setPosition(sf::Vector2f(0,0));
     button.setSize(sf::Vector2f(0, 0));
     button.setFillColor(sf::Color::White);
     button.setOutlineColor(sf::Color::Black);
     button.setOutlineThickness(2);
 
-    // Create the button's text label
-    //font1.loadFromFile("Asset/game_over.ttf");
-
-    //text.setFont(font1);
-    //text.setString("textContent");
-   // text.setCharacterSize(26);
-    //text.setFillColor(sf::Color::Black);
-
-    // Position the text relative to the button
-   //sf::FloatRect textRect = text.getLocalBounds();
-    //text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-
-    //text.setPosition(sf::Vector2f(button.getSize().x / 2.0f + button.getPosition().x, button.getSize().y / 2.0f + button.getPosition().y));
     isExist = true;
 }
 

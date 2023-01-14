@@ -13,7 +13,6 @@ class Entity
 private:
 	//Variable
 	sf::Vector2f position;
-	//sf::RectangleShape Entity;
 	sf::Sprite entitySprite;
 	bool isDestroyed;
 	int entitySpeed;
@@ -22,8 +21,6 @@ private:
 	ResourceManager resourceManager;
 
 	
-	//sf::Texture* texture;
-	
 public:
 	
 	//Constructor
@@ -31,7 +28,6 @@ public:
 	Entity();
 		
 	//Function
-	void setSprite();
 	void setCar();
 	void setBus();
 	void setRepair();

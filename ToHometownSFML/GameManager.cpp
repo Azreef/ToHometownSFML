@@ -12,6 +12,9 @@ GameManager::GameManager()
     currentMenu = 0;
     levelIsSet = false;
     isInmenu = true;
+    loadSave();
+
+    loadingImage.setTexture(*loadingTexture);
    
 }   
 
@@ -97,7 +100,6 @@ void GameManager::update()
     }
 
     pollEvent();
-    
 }
 
 void GameManager::pollEvent()
@@ -118,6 +120,93 @@ void GameManager::pollEvent()
     }
 }
 
+void GameManager::loadSave()
+{
+    // Create a text string, which is used to output the text file
+   std::string myText;
+
+    // Read from the text file
+    std::ifstream saveFile("save.txt");
+
+    int currentLine = 0;
+    // Use a while loop together with the getline() function to read the file line by line
+    while (std::getline(saveFile, myText)) 
+{
+        // Output the text from the file
+        if (currentLine == 0)
+        {
+            completedLevel = std::stoi(myText);
+        }
+        else if (currentLine == 1)
+        {
+            highScore[0] = std::stoi(myText);
+        }
+        else if (currentLine == 2)
+        {
+            highScore[1] = std::stoi(myText);
+        }
+        else if (currentLine == 3)
+        {
+            highScore[2] = std::stoi(myText);
+        }
+        else if (currentLine == 4)
+        {
+            highScore[3] = std::stoi(myText);
+        }
+
+        currentLine++;
+    }
+   
+    saveFile.close();
+}
+
+void GameManager::setSave()
+{
+    //set save.txt
+    std::ofstream saveFile("save.txt"); // open the file
+
+    if (saveFile.is_open())
+    {
+        saveFile << completedLevel <<std::endl;
+        saveFile << highScore[0] << std::endl;
+        saveFile << highScore[1] << std::endl;
+        saveFile << highScore[2] << std::endl;
+        saveFile << highScore[3] << std::endl;
+        saveFile.close();
+    }
+    else
+    {
+        std::cout << "Unable to open file" << std::endl;
+    }
+}
+
+void GameManager::resetSave()
+{
+    //Reset save.txt
+    std::ofstream saveFile("save.txt"); // open the file
+
+    if (saveFile.is_open())
+    {
+        saveFile << 0 << std::endl;
+        saveFile << 0 << std::endl;
+        saveFile << 0 << std::endl;
+        saveFile << 0 << std::endl;
+        saveFile << 0 << std::endl;
+        saveFile.close();
+    }
+    else
+    {
+        std::cout << "Unable to open file" << std::endl;
+    }
+
+    //Reset Variable
+    completedLevel = 0;
+    highScore[0] = 0;
+    highScore[1] = 0;
+    highScore[2] = 0;
+    highScore[3] = 0;
+}
+
 bool GameManager::running()
 {
     return window->isOpen();
@@ -132,6 +221,7 @@ void GameManager::render()
     
     if (isInmenu)//Render Menu UI
     {       
+        //window->draw(loadingImage);
         menu.render(window);      
     }
    
@@ -147,13 +237,19 @@ void GameManager::render()
 //Setter ==============================================================================
 void GameManager::openWindow()
 {
-    window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown", sf::Style::Close);
+    window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown", sf::Style::None);
     window->setFramerateLimit(60);
 }
 
 void GameManager::initVariable()
 {
     window = nullptr;
+
+    completedLevel = 0;
+    highScore[0] = 0;
+    highScore[1] = 0;
+    highScore[2] = 0;
+    highScore[3] = 0;
 }
 
 
