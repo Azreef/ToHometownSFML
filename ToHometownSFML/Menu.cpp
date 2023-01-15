@@ -23,8 +23,9 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 	backGroundTexture = resourceManager.getTexture("Asset/UI/mainMenu.png");
 	backGroundImage.setTexture(*backGroundTexture);
 
-	//setText(0, sf::Vector2f(0, 0), 100, "Main Menu");
-	button[0] = Button(sf::Vector2f(800, 600), sf::Vector2f(400, 150), "Play", 100, &font);
+
+	button[0] = Button(sf::Vector2f(800, 600), sf::Vector2f(400, 100), "Play", 100, &font);
+	button[1] = Button(sf::Vector2f(800, 750), sf::Vector2f(400, 100), "How To Play", 100, &font);
 
 	stopDoubleClick();
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false) 
@@ -36,6 +37,12 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 		{
 			clickSound.play();
 			*currentMenu = 1;
+			*isInMenu = true;
+		}
+		if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to select level
+		{
+			clickSound.play();
+			*currentMenu = 5;
 			*isInMenu = true;
 		}
 		hasClicked = true;
@@ -166,8 +173,6 @@ void Menu::stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel
 	
 }
 
-
-
 void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime, int remainingDistance, int* completedLevel,int* currentScore)
 {
 
@@ -200,9 +205,18 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 				backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
 				backGroundImage.setTexture(*backGroundTexture);
 				
-				*currentLevel = *currentLevel + 1;
-				*currentMenu = 2;
-				*isInMenu = true;
+				if (*currentLevel < 3)
+				{
+					*currentLevel = *currentLevel + 1;
+					*currentMenu = 2;
+					*isInMenu = true;
+				}
+				else if (*currentLevel >= 3)
+				{
+					*currentMenu = 4;
+					*isInMenu = true;
+				}
+				
 			}
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{
@@ -267,6 +281,59 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		}
 
 	}
+}
+
+void Menu::endMenu(sf::RenderWindow* window, int* currentMenu)
+{
+	refreshText();
+	refreshButton();
+	stopDoubleClick();
+
+	sf::RenderWindow& w = *window;
+	sf::Vector2i mousePos = sf::Mouse::getPosition(w);
+
+	backGroundTexture = resourceManager.getTexture("Asset/UI/endScreen.png");
+	backGroundImage.setTexture(*backGroundTexture);
+
+	button[0] = Button(sf::Vector2f(450, 750), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
+	{
+		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
+		{
+			clickSound.play();
+
+			*currentMenu = 0;
+		}
+		hasClicked = true;
+	}
+}
+
+void Menu::howToPlayMenu(sf::RenderWindow* window, int* currentMenu)
+{
+	refreshText();
+	refreshButton();
+	stopDoubleClick();
+
+	sf::RenderWindow& w = *window;
+	sf::Vector2i mousePos = sf::Mouse::getPosition(w);
+
+	backGroundTexture = resourceManager.getTexture("Asset/UI/howToPlay.png");
+	backGroundImage.setTexture(*backGroundTexture);
+
+	button[0] = Button(sf::Vector2f(800, 50), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
+	{
+		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
+		{
+			clickSound.play();
+
+			*currentMenu = 0;
+		}
+		hasClicked = true;
+	}
+
 }
 
 

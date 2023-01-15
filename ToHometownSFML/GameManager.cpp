@@ -58,8 +58,12 @@ void GameManager::update()
         else if (currentMenu == 4)
         {
             //End Screen
+            menu.endMenu(window, &currentMenu);
         }
-
+        else if (currentMenu == 5)
+        {
+            menu.howToPlayMenu(window, &currentMenu);
+        }
         //std::cout << currentMenu << std::endl;;
         if (musicIsPlaying == false || currentMusic != currentMenu)
         {
@@ -83,7 +87,6 @@ void GameManager::update()
 
             loadingWindow = new sf::RenderWindow(sf::VideoMode(1280, 1080), "Loading", sf::Style::None);
 
-            std::cout << "lalu" << std::endl;
             loadingWindow->draw(loadingImage);
             loadingWindow->display();
 
@@ -241,6 +244,7 @@ void GameManager::loadBGM()
         {
             std::cout << "Cant Open Music Files";
         }
+        backgroundMusic.setVolume(25);
     }
     else if (currentMenu == 2) //Stage Screen
     {
@@ -248,6 +252,7 @@ void GameManager::loadBGM()
         {
             std::cout << "Cant Open Music Files";
         }
+        backgroundMusic.setVolume(25);
     }
     else if (currentMenu == 3) //result
     {
@@ -265,14 +270,29 @@ void GameManager::loadBGM()
                 std::cout << "Cant Open Music Files";
             }
         }
+        backgroundMusic.setVolume(25);
     }
     else if (currentMenu == 4) //end
     {
-        if (!backgroundMusic.openFromFile("Asset/sound/selectScreen.wav"))
+        if (!backgroundMusic.openFromFile("Asset/sound/endScreen.wav"))
         {
             std::cout << "Cant Open Music Files";
         }
-    } 
+    }
+    else if (currentMenu == 5) //How To Play
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/howToPlay.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
+    else if (currentMenu == 6) //Score
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/scoreScreen.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
         backgroundMusic.play();
         musicIsPlaying = true;
         currentMusic = currentMenu;

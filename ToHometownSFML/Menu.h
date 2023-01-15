@@ -36,6 +36,8 @@ public:
 	void stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel);
 
 	void resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int gameState, int remainingLive, sf::Time remainingTime,int remainingDistance, int* completedLevel, int*currentScore);
+	void endMenu(sf::RenderWindow* window, int* currentMenu);
+	void howToPlayMenu(sf::RenderWindow* window, int* currentMenu);
 	void render(sf::RenderTarget* target);
 	void stopDoubleClick();
 
