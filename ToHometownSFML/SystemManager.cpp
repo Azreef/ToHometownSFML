@@ -13,6 +13,7 @@ SystemManager::SystemManager(int currentLevel)
     int spawnPickupRate;
     int spawnEnemyType;
     int backGroundType;
+    setSoundFX();
 
     //Set Level Variable
     if (currentLevel == 0)
@@ -84,7 +85,7 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
-        enemyInterval = 10000;
+        enemyInterval = 800;
 
         //Item Spawn frequency
         spawnPickupRate = 1;
@@ -166,25 +167,58 @@ void SystemManager::updateLive()
     int detectType = gamePlayManager->detectCollision();
     isInvi = mechanicManager.getIsInvi();
 
-    if (!isInvi)
+    
+    if (detectType == 1)
     {
-        if (detectType == 1)
+        hitSound.play();
+        if (!isInvi)
         {
             mechanicManager.removeLive();
         }
+            
     }
-
+    
     if (detectType == 2)
     {
+        repairSound.play();
         mechanicManager.addLive();
     }
 
     if (detectType == 3)
     {
+        fuelSound.play();
+        inviSoundPlayed = true;
         mechanicManager.setInvi();
+    }
+
+    std::cout << isInvi << std::endl;
+    if (!mechanicManager.getIsInvi() && inviSoundPlayed)
+    {
+        fuelDoneSound.play();
+        inviSoundPlayed = false;
     }
 }
 
+void SystemManager::setSoundFX()
+{
+    std::shared_ptr<sf::SoundBuffer> hitSo = resourceManager.getSound("Asset/sound/hitSound.wav");
+    hitSound.setBuffer(*hitSo);
+
+    std::shared_ptr<sf::SoundBuffer> fuelSo = resourceManager.getSound("Asset/sound/fuel.wav");
+    fuelSound.setBuffer(*fuelSo);
+
+    fuelSound.setVolume(25);
+
+    std::shared_ptr<sf::SoundBuffer> repairSo = resourceManager.getSound("Asset/sound/repairKit.wav");
+    repairSound.setBuffer(*repairSo);
+
+    repairSound.setVolume(40);
+
+    std::shared_ptr<sf::SoundBuffer> fuelDoneSo = resourceManager.getSound("Asset/sound/fuelDone.wav");
+    fuelDoneSound.setBuffer(*fuelDoneSo);
+
+    fuelDoneSound.setVolume(25);
+}
 void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int* remainingLive, int* remainingDistance,int* score)
 {
     
@@ -223,12 +257,6 @@ void SystemManager::render(sf::RenderTarget* target)
 
 
 //Setter ==============================================================================
-
-
-void SystemManager::setData()
-{
-    //gamePlayManager->setEnemiesData();
-}
 
 
 

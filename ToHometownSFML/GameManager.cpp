@@ -81,8 +81,6 @@ void GameManager::update()
                 loadGameMusic();
             }
 
-
-            sf::RenderWindow* loadingWindow;
             loadingWindow = new sf::RenderWindow(sf::VideoMode(1280, 1080), "Loading", sf::Style::None);
 
             std::cout << "lalu" << std::endl;
@@ -92,7 +90,7 @@ void GameManager::update()
 
             std::shared_ptr<SystemManager> systemManager(new SystemManager(currentLevel));
             this->systemManager = systemManager;
-            loadingWindow->close();
+           
 
             levelIsSet = true;
         }
@@ -336,6 +334,7 @@ void GameManager::render()
     else //Render Gameplay
     {
         systemManager->render(window);
+        loadingWindow->close();
     }
 
     window->display();

@@ -48,7 +48,6 @@ void Level::scrollBackground()
 
 	if (subBackGroundSprite[currentSub].getPosition().x <= -subBackGroundSprite[currentSub].getGlobalBounds().width)
 	{
-		std::cout << "Lalu";
 		if (currentSub == 0)
 		{
 			subBackGroundSprite[currentSub].setPosition(sf::Vector2f(subBackGroundSprite[currentSub].getGlobalBounds().width, subBackgroundYPos));

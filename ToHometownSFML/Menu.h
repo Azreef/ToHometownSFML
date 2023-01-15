@@ -7,8 +7,7 @@
 #include "Button.h"
 #include <string>
 #include "ResourceManager.h"
-#include <chrono>
-#include <thread>
+
 
 
 class Menu
@@ -27,6 +26,7 @@ private:
 	sf::Sprite backGroundImage;
 	std::shared_ptr<sf::Texture> backGroundTexture;
 
+	sf::Sound clickSound;
 
 public:
 	Menu();

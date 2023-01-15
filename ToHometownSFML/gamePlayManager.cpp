@@ -21,6 +21,9 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 	repairPickup = Entity(0, -100, 1, 0, repairTexture);
 	fuelPickup = Entity(0, -100, 1, 1, fuelTexture);
 
+	explosion.setTexture(*explosionTexture);
+	explosion.setScale(0.15, 0.15);
+	explosionTimer = sf::seconds(4);
 	this->enemyInterval = enemyInterval;
 	this->spawnPickupRate = spawnPickupRate;
 	this->spawnEnemyType = spawnEnemyType;
@@ -29,7 +32,6 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 
 	setEnemies();
 	spawnEnemy();
-	setSoundFX();
 }
 
 GamePlayManager::~GamePlayManager()
@@ -49,6 +51,9 @@ void GamePlayManager::update()
 	fuelPickup.update();
 	pickupFixPos();
 	enemyFixPos();
+
+	explosion.setPosition(sf::Vector2f (player.getPlayerData().getPosition().x + 45, player.getPlayerData().getPosition().y - 15));
+	explosionTimer = explosionClock.getElapsedTime();
 }
 
 int GamePlayManager::detectCollision()
@@ -60,7 +65,7 @@ int GamePlayManager::detectCollision()
 		{
 			if (!enemy[i]->getIsDestroyed())
 			{
-				hitSound.play();
+				explosionClock.restart();
 				enemy[i]->setIsDestroyed(true);
 				returnInt = 1;
 			}
@@ -180,6 +185,12 @@ void GamePlayManager::render(sf::RenderTarget* target)
 
 	repairPickup.render(target);
 	fuelPickup.render(target);
+
+	if (explosionTimer.asSeconds() < 0.3)
+	{
+		target->draw(explosion);
+	}
+	
 }
 
 //Setter ==============================================================================
@@ -268,11 +279,7 @@ void GamePlayManager::setEnemies()
 
 	
 }
-void GamePlayManager::setSoundFX()
-{
-	std::shared_ptr<sf::SoundBuffer> so = resourceManager.getSound("Asset/sound/hitSound.wav");
-	hitSound.setBuffer(*so);
-}
+
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {
 	player.setPlayerSprite(playerData);

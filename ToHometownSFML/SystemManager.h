@@ -10,6 +10,7 @@
 
 #include "GamePlayManager.h"
 #include "MechanicManager.h"
+#include "ResourceManager.h"
 
 
 class SystemManager
@@ -19,6 +20,7 @@ private:
 	std::shared_ptr <GamePlayManager> gamePlayManager;
 
 	MechanicManager mechanicManager;
+	ResourceManager resourceManager;
 
 	std::shared_ptr <Player> player;
 	std::shared_ptr <Level> level;
@@ -30,18 +32,25 @@ private:
 	sf::Time timeLimit;
 	int levelType;
 
+	sf::Sound hitSound;
+	sf::Sound fuelSound;
+	sf::Sound fuelDoneSound;
+	sf::Sound repairSound;
+
+	bool inviSoundPlayed = false;
+
 public:
 	SystemManager();
 	~SystemManager();
 	SystemManager(int currentLevel);
 	
 	
-
+	
 	void update();
 	void render(sf::RenderTarget* target);
 	void updateData();
-	void setData();
 	void updateLive();
+	void setSoundFX();
 	void updateGameValue(int* gameState,sf::Time* remainingTime, int* remainingLive, int* remainingDistance,int* score); //0-Not Finished | 1-Completed |  2-Out of Lives | 3-Out of time
 
 };

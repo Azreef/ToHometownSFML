@@ -7,6 +7,10 @@ Menu::Menu()
 	refreshButton();
 	hasClicked = true;
 	timerStarted = false;
+
+	std::shared_ptr<sf::SoundBuffer> clickSo = resourceManager.getSound("Asset/sound/button.ogg");
+	clickSound.setBuffer(*clickSo);
+	clickSound.setVolume(50);
 }
 
 
@@ -30,9 +34,9 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 
 		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to select level
 		{
+			clickSound.play();
 			*currentMenu = 1;
 			*isInMenu = true;
-			std::cout << "CLICK" << std::endl;
 		}
 		hasClicked = true;
 	}
@@ -75,24 +79,28 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		
 		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to level 1
 		{
+			clickSound.play();
 			*currentLevel = 0;
 			*currentMenu = 2;
 			*isInMenu = true;	
 		}
 		if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to level 2
 		{
+			clickSound.play();
 			*currentLevel = 1;
 			*currentMenu = 2;
 			*isInMenu = true;
 		}
 		if (button[2].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to level 2
 		{
+			clickSound.play();
 			*currentLevel = 2;
 			*currentMenu = 2;
 			*isInMenu = true;
 		}
 		if (button[3].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to level 2
 		{
+			clickSound.play();
 			*currentLevel = 3;
 			*currentMenu = 2;
 			*isInMenu = true;
@@ -141,14 +149,16 @@ void Menu::stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel
 	{
 		sf::RenderWindow& w = *window;
 		sf::Vector2i mousePos = sf::Mouse::getPosition(w);
+
 		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos)))
 		{
+			clickSound.play();
 			backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
 			backGroundImage.setTexture(*backGroundTexture);
 			
-			
+			refreshButton();
 			*isInMenu = false;
-			//refreshButton();
+			
 
 		}
 		hasClicked = true;
@@ -186,6 +196,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		{
 			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
 			{
+				clickSound.play();
 				backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
 				backGroundImage.setTexture(*backGroundTexture);
 				
@@ -195,6 +206,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 			}
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{
+				clickSound.play();
 				*currentMenu = 0;
 				*isInMenu = true;
 			}
@@ -232,6 +244,8 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		{
 			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Retry
 			{
+				clickSound.play();
+
 				backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
 				backGroundImage.setTexture(*backGroundTexture);
 				
@@ -244,6 +258,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 			}
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{
+				clickSound.play();
 				*currentMenu = 0;
 				*isInMenu = true;
 			}

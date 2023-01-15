@@ -27,6 +27,7 @@ private:
 	Level level;
 	Player player;
 	ResourceManager resourceManager;
+	sf::Sprite explosion;
 	
 	sf::Time gameTime = sf::seconds(0);
 	sf::Clock gameClock;
@@ -43,8 +44,13 @@ private:
 	std::shared_ptr<sf::Texture> busTexture = resourceManager.getTexture("Asset/bus.png");
 	std::shared_ptr<sf::Texture> repairTexture = resourceManager.getTexture("Asset/repairKit.png");
 	std::shared_ptr<sf::Texture> fuelTexture = resourceManager.getTexture("Asset/fuel.png");
-	
-	sf::Sound hitSound;
+
+
+
+	std::shared_ptr<sf::Texture> explosionTexture = resourceManager.getTexture("Asset/explosion.png");
+	sf::Time explosionTimer;
+	sf::Clock explosionClock;
+
 
 
 public:
@@ -67,7 +73,6 @@ public:
 	void enemyFixPos();
 	void spawnEnemy();
 	void setEnemies();
-	void setSoundFX();
 
 };
 
