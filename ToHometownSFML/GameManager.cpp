@@ -7,12 +7,7 @@ GameManager::GameManager()
 {
     initVariable();
     openWindow();
-    currentLevel = 0;
-    completedLevel = 0;
-    currentMenu = 0;
-    levelIsSet = false;
-    isInmenu = true;
-    isLoading = false;
+    
     loadSave();
 
     loadingImage.setTexture(*loadingTexture);
@@ -30,42 +25,48 @@ GameManager::~GameManager()
 void GameManager::update()
 {
     //Menu
-    std::cout << isLoading << std::endl;
+   
     //Menu UI
     if (isInmenu)
     {
         levelIsSet = false;
-        if (!menuIsSet)
+       
+       
+        if (currentMenu == 0)
         {
-            if (currentMenu == 0)
-            {
-                //Main Menu
-                
-                //gameState = 0;
-                menu.mainMenu(window, &isInmenu, &currentLevel, &currentMenu);
-                //menuIsSet = true;
-            }
-            else if (currentMenu == 1)
-            {
-                //Select Level
-                menu.selectMenu(window, &isInmenu, &currentLevel, &currentMenu,completedLevel);
+            //Main Menu
+               
+            menu.mainMenu(window, &isInmenu, &currentLevel, &currentMenu);
 
-            }
-            else if (currentMenu == 2)
-            {
-                //Stage Screen
-                menu.stageMenu(window, &isInmenu, &currentLevel);
-            }
-            else if (currentMenu == 3)
-            {
-                //Result Screen
-                menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState, remainingLive, remainingTime, remainingDistance, &completedLevel,&currentScore);
-            }
-            else if (currentMenu == 4)
-            {
-                //End Screen
-            }
         }
+        else if (currentMenu == 1)
+        {
+            //Select Level
+            menu.selectMenu(window, &isInmenu, &currentLevel, &currentMenu,completedLevel);
+
+        }
+        else if (currentMenu == 2)
+        {
+            //Stage Screen
+            menu.stageMenu(window, &isInmenu, &currentLevel);
+        }
+        else if (currentMenu == 3)
+        {
+            //Result Screen
+            menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState, remainingLive, remainingTime, remainingDistance, &completedLevel,&currentScore);
+        }
+        else if (currentMenu == 4)
+        {
+            //End Screen
+        }
+
+        //std::cout << currentMenu << std::endl;;
+        if (musicIsPlaying == false || currentMusic != currentMenu)
+        {
+            loadBGM();
+            
+        }
+        
     }
     
     //Load Levels
@@ -73,6 +74,14 @@ void GameManager::update()
     { 
         if (!levelIsSet)
         {
+            //backgroundMusic.stop();
+            musicIsPlaying = false;
+            if (musicIsPlaying == false)
+            {
+                loadGameMusic();
+            }
+
+
             sf::RenderWindow* loadingWindow;
             loadingWindow = new sf::RenderWindow(sf::VideoMode(1280, 1080), "Loading", sf::Style::None);
 
@@ -216,6 +225,98 @@ void GameManager::resetSave()
     highScore[3] = 0;
 }
 
+void GameManager::loadBGM()
+{
+    backgroundMusic.stop();
+    if (currentMenu == 0) //main Theme
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/mainTheme.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+
+        backgroundMusic.setVolume(25);
+    }
+    else if (currentMenu == 1) //select Level
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/selectScreen.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
+    else if (currentMenu == 2) //Stage Screen
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/stageScreen.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
+    else if (currentMenu == 3) //result
+    {
+        if (gameState == 1) // win
+        {
+            if (!backgroundMusic.openFromFile("Asset/sound/resultSuccess.wav"))
+            {
+                std::cout << "Cant Open Music Files";
+            }
+        }
+        else if(gameState == 2 || gameState == 3)// lose
+        {
+            if (!backgroundMusic.openFromFile("Asset/sound/resultFailed.wav"))
+            {
+                std::cout << "Cant Open Music Files";
+            }
+        }
+    }
+    else if (currentMenu == 4) //end
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/selectScreen.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    } 
+        backgroundMusic.play();
+        musicIsPlaying = true;
+        currentMusic = currentMenu;
+   
+}
+
+void GameManager::loadGameMusic()
+{
+    if (currentLevel == 0) //main Theme
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/cityStage.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+
+        backgroundMusic.setVolume(25);
+    }
+    else if (currentLevel == 1) //select Level
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/cityStage2.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
+    else if (currentLevel == 2) //Stage Screen
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/countryStage.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
+    else if (currentLevel == 3) //Stage Screen
+    {
+        if (!backgroundMusic.openFromFile("Asset/sound/countryStage2.wav"))
+        {
+            std::cout << "Cant Open Music Files";
+        }
+    }
+    backgroundMusic.play();
+    musicIsPlaying = true;
+}
+
 bool GameManager::running()
 {
     return window->isOpen();
@@ -232,7 +333,7 @@ void GameManager::render()
     {       
         menu.render(window);      
     }
-    else if(!isLoading  && !isInmenu) //Render Gameplay
+    else //Render Gameplay
     {
         systemManager->render(window);
     }
@@ -253,11 +354,17 @@ void GameManager::initVariable()
 {
     window = nullptr;
 
+    currentMenu = 0;
+    currentLevel = 0;
     completedLevel = 0;
     highScore[0] = 0;
     highScore[1] = 0;
     highScore[2] = 0;
     highScore[3] = 0;
+
+    musicIsPlaying = false;
+    levelIsSet = false;
+    isInmenu = true;
 }
 
 

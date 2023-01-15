@@ -27,7 +27,7 @@ private:
 	int completedLevel;
 	int currentMenu;
 	bool isInmenu;
-	bool menuIsSet;
+	int currentMusic;
 
 
 	//gameplay Variable
@@ -38,12 +38,18 @@ private:
 
 	int highScore[4];
 	int currentScore;
+
+	bool musicIsPlaying;
 	
 	ResourceManager resourceManager;
 	std::shared_ptr <SystemManager> systemManager;
 
 	std::shared_ptr<sf::Texture>loadingTexture = resourceManager.getTexture("Asset/UI/loading.png");
 	sf::Sprite loadingImage;
+
+	sf::Music backgroundMusic;
+
+	//sf::RenderWindow* loadingWindow;
 	
 	
 public:
@@ -62,6 +68,8 @@ public:
 	void loadSave();
 	void setSave();
 	void resetSave();
+	void loadBGM();
+	void loadGameMusic();
 
 };
 

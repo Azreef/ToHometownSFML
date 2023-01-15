@@ -270,7 +270,7 @@ void GamePlayManager::setEnemies()
 }
 void GamePlayManager::setSoundFX()
 {
-	std::shared_ptr<sf::SoundBuffer> so = resourceManager.getSound("Asset/hitSound.wav");
+	std::shared_ptr<sf::SoundBuffer> so = resourceManager.getSound("Asset/sound/hitSound.wav");
 	hitSound.setBuffer(*so);
 }
 void GamePlayManager::setPlayerData(sf::Sprite playerData)

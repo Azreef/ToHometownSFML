@@ -143,16 +143,12 @@ void Menu::stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel
 		sf::Vector2i mousePos = sf::Mouse::getPosition(w);
 		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos)))
 		{
-			backGroundTexture = resourceManager.getTexture("Asset/UI/loading.png");
+			backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
 			backGroundImage.setTexture(*backGroundTexture);
 			
-			refreshText();
-			refreshButton();
-			stopDoubleClick();
-
-
+			
 			*isInMenu = false;
-			refreshButton();
+			//refreshButton();
 
 		}
 		hasClicked = true;
@@ -190,8 +186,12 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		{
 			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
 			{
+				backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
+				backGroundImage.setTexture(*backGroundTexture);
+				
 				*currentLevel = *currentLevel + 1;
-				*isInMenu = false;
+				*currentMenu = 2;
+				*isInMenu = true;
 			}
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{
@@ -232,12 +232,15 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		{
 			if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Retry
 			{
+				backGroundTexture = resourceManager.getTexture("Asset/UI/transition.png");
+				backGroundImage.setTexture(*backGroundTexture);
+				
 				*currentLevel = *currentLevel;
-				*isInMenu = false;
+				*currentMenu = 2;
 
 				refreshButton();
-				backGroundTexture = resourceManager.getTexture("Asset/UI/loading.png");
-				backGroundImage.setTexture(*backGroundTexture);
+				*isInMenu = true;
+				
 			}
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{

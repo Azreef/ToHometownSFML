@@ -50,7 +50,7 @@ SystemManager::SystemManager(int currentLevel)
         backGroundType = 0;
 
         //Destination Distance
-        maxDistance = 500;
+        maxDistance = 10;
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
@@ -70,10 +70,10 @@ SystemManager::SystemManager(int currentLevel)
     else if (currentLevel == 2)
     {
         //Road Type
-        levelType = 1;
+        levelType = 0;
 
         //Background Type
-        backGroundType = 0;
+        backGroundType = 1;
 
         //Destination Distance
         maxDistance = 500;
@@ -99,7 +99,7 @@ SystemManager::SystemManager(int currentLevel)
         levelType = 1;
 
         //Background Type
-        backGroundType = 0;
+        backGroundType = 1;
 
         //Destination Distance
         maxDistance = 500;
