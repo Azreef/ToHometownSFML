@@ -78,7 +78,7 @@ void Level::scrollBackground()
 void Level::roadSpeedControl()
 {
 	//Set Gear
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if (currentGear < maxGear && !keyIsPressed)
 		{
@@ -86,7 +86,7 @@ void Level::roadSpeedControl()
 			keyIsPressed = true;
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		if (currentGear > minGear && !keyIsPressed)
 		{
@@ -95,7 +95,7 @@ void Level::roadSpeedControl()
 		}
 	}
 
-	if (!((sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) || (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))))
+	if (!((sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))))
 	{
 		keyIsPressed = false;
 	}
