@@ -35,6 +35,7 @@ private:
 	float roadYPos;
 	int currentGear;
 	bool keyIsPressed;
+
 	
 	
 public:

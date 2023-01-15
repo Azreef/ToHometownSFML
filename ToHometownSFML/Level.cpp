@@ -241,7 +241,6 @@ void Level::setSprite(int levelType,int backGroundType)
 
 	}
 
-	
 }
 
 void Level::initVariable(int levelType, int backGroundType)

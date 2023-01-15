@@ -146,7 +146,10 @@ void Menu::stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel
 			backGroundTexture = resourceManager.getTexture("Asset/UI/loading.png");
 			backGroundImage.setTexture(*backGroundTexture);
 			
-			//std::this_thread::sleep_for(std::chrono::seconds(5));
+			refreshText();
+			refreshButton();
+			stopDoubleClick();
+
 
 			*isInMenu = false;
 			refreshButton();

@@ -12,10 +12,10 @@ GameManager::GameManager()
     currentMenu = 0;
     levelIsSet = false;
     isInmenu = true;
+    isLoading = false;
     loadSave();
 
     loadingImage.setTexture(*loadingTexture);
-   
 }   
 
 GameManager::~GameManager()
@@ -30,7 +30,7 @@ GameManager::~GameManager()
 void GameManager::update()
 {
     //Menu
-
+    std::cout << isLoading << std::endl;
     //Menu UI
     if (isInmenu)
     {
@@ -70,15 +70,24 @@ void GameManager::update()
     
     //Load Levels
     if (!isInmenu)
-    {
+    { 
         if (!levelIsSet)
         {
-          
+            sf::RenderWindow* loadingWindow;
+            loadingWindow = new sf::RenderWindow(sf::VideoMode(1280, 1080), "Loading", sf::Style::None);
+
+            std::cout << "lalu" << std::endl;
+            loadingWindow->draw(loadingImage);
+            loadingWindow->display();
+
+
             std::shared_ptr<SystemManager> systemManager(new SystemManager(currentLevel));
             this->systemManager = systemManager;
+            loadingWindow->close();
 
             levelIsSet = true;
         }
+        
     }
     
 
@@ -221,23 +230,22 @@ void GameManager::render()
     
     if (isInmenu)//Render Menu UI
     {       
-        //window->draw(loadingImage);
         menu.render(window);      
     }
-   
-    else //Render Gameplay
+    else if(!isLoading  && !isInmenu) //Render Gameplay
     {
         systemManager->render(window);
     }
 
     window->display();
-   
+
 }
 
 //Setter ==============================================================================
 void GameManager::openWindow()
 {
     window = new sf::RenderWindow(sf::VideoMode(1280, 1080), "To Hometown", sf::Style::None);
+    
     window->setFramerateLimit(60);
 }
 

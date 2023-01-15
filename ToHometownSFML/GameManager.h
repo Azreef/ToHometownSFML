@@ -15,6 +15,7 @@ class GameManager
 private:
 	//Variable
 	sf::RenderWindow* window;
+	sf::RenderWindow* loadingWindow;
 	sf::Event event;
 
 	Menu menu;
@@ -41,8 +42,8 @@ private:
 	ResourceManager resourceManager;
 	std::shared_ptr <SystemManager> systemManager;
 
-	//std::shared_ptr<sf::Texture>loadingTexture = resourceManager.getTexture("Asset/UI/loading.png");
-	//sf::Sprite loadingImage;
+	std::shared_ptr<sf::Texture>loadingTexture = resourceManager.getTexture("Asset/UI/loading.png");
+	sf::Sprite loadingImage;
 	
 	
 public:
