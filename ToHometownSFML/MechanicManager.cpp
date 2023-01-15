@@ -40,22 +40,26 @@ void MechanicManager::updateText()
 
 	livesText.setString("Lives: " + std::to_string(lives));
 	scoreText.setString("Score: " + std::to_string(abs(minScore)));
-	
+
 	if (isInvi)
 	{
-		inviTimerText.setString("Invincibility: " + std::to_string((int)abs(inviTimer.asSeconds() - 5)));
+		inviTimerText.setString("Invincibility: ");
+		inviBorder.setSize(sf::Vector2f(500, 45));
+		inviBar.setSize(sf::Vector2f(abs(inviTimer.asSeconds() - 5) *100, 40));
 	}
 	else if (!isInvi)
 	{
+		inviBorder.setSize(sf::Vector2f(0, 0));
 		inviTimerText.setString("");
+		inviBar.setSize(sf::Vector2f(0, 0));
 	}
 
 	timeLimitText.setString("Time: " + std::to_string((int)abs(timeLimitStart.asSeconds() - timeLimitEnd.asSeconds())));
 
 	
 	float percent = currentDistance  / maxDistance;
-	//std::cout << percent << std::endl;
 	destinationBar.setSize(sf::Vector2f(1280 * (percent/100), 30));
+
 }
 
 void MechanicManager::inviTimerUpdate()
@@ -72,13 +76,19 @@ void MechanicManager::inviTimerUpdate()
 void MechanicManager::render(sf::RenderTarget* target)
 {
 	target->draw(destinationBar);
+
 	target->draw(livesText);
 	target->draw(scoreText);
 	target->draw(gearText);
 	target->draw(inviTimerText);
 	target->draw(timeLimitText);
+
 	target->draw(gearBorder);
 	target->draw(gearBar);
+
+	target->draw(inviBorder);
+	target->draw(inviBar);
+	
 }
 
 
@@ -99,6 +109,15 @@ void MechanicManager::initVariable()
 	gearBorder.setFillColor(sf::Color::Black);
 	gearBorder.setPosition(sf::Vector2f(gearText.getPosition().x + gearText.getCharacterSize() - 2.5 + 30, gearText.getPosition().y + gearText.getCharacterSize() - 35 - 2.5));
 	gearBorder.setSize(sf::Vector2f(205, 45));
+
+
+	inviBar.setFillColor(sf::Color::Green);
+	inviBar.setPosition(sf::Vector2f(inviTimerText.getPosition().x + inviTimerText.getCharacterSize() + 200, inviTimerText.getPosition().y + inviTimerText.getCharacterSize() - 35));
+	inviBar.setSize(sf::Vector2f(40, 40));
+
+	inviBorder.setFillColor(sf::Color::Black);
+	inviBorder.setPosition(sf::Vector2f(inviTimerText.getPosition().x + inviTimerText.getCharacterSize() - 2.5 + 200, inviTimerText.getPosition().y + inviTimerText.getCharacterSize() - 35 - 2.5));
+	inviBorder.setSize(sf::Vector2f(205, 45));
 }
 void MechanicManager::removeLive()
 {

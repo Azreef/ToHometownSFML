@@ -11,7 +11,7 @@ class MechanicManager
 private:
 	int minScore;
 	int lives;
-	int currentDistance;
+	float currentDistance;
 	int currentGear;
 	bool isInvi;
 	int maxDistance;
@@ -34,6 +34,10 @@ private:
 	sf::RectangleShape destinationBar;
 	sf::RectangleShape gearBar;
 	sf::RectangleShape gearBorder;
+
+	sf::RectangleShape inviBar;
+	sf::RectangleShape inviBorder;
+
 public:
 	
 	MechanicManager();
