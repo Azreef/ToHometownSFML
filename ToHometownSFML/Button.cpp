@@ -21,8 +21,6 @@ Button::Button(sf::Vector2f position, sf::Vector2f size, sf::String textContent,
     button.setOutlineThickness(2);
 
     // Create the button's text label
-    
-    //font.loadFromFile("Asset/game_over.ttf");
     text.setFont(*font);
     text.setString(textContent);
     text.setCharacterSize(textSize);

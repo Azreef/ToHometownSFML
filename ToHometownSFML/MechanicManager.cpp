@@ -99,14 +99,14 @@ void MechanicManager::initVariable()
 	lives = 5;
 	isInvi = false;
 
-	destinationBar.setFillColor(sf::Color::Red);
+	destinationBar.setFillColor(sf::Color(144, 238, 144,180));
 	destinationBar.setPosition(sf::Vector2f(0, 0));
 
 	gearBar.setFillColor(sf::Color::Green);
 	gearBar.setPosition(sf::Vector2f(gearText.getPosition().x + gearText.getCharacterSize() + 30 , gearText.getPosition().y + gearText.getCharacterSize() - 35));
 	gearBar.setSize(sf::Vector2f(40, 40));
 
-	gearBorder.setFillColor(sf::Color::Black);
+	gearBorder.setFillColor(sf::Color(0, 0, 0, 30));
 	gearBorder.setPosition(sf::Vector2f(gearText.getPosition().x + gearText.getCharacterSize() - 2.5 + 30, gearText.getPosition().y + gearText.getCharacterSize() - 35 - 2.5));
 	gearBorder.setSize(sf::Vector2f(205, 45));
 
@@ -115,7 +115,7 @@ void MechanicManager::initVariable()
 	inviBar.setPosition(sf::Vector2f(inviTimerText.getPosition().x + inviTimerText.getCharacterSize() + 200, inviTimerText.getPosition().y + inviTimerText.getCharacterSize() - 35));
 	inviBar.setSize(sf::Vector2f(40, 40));
 
-	inviBorder.setFillColor(sf::Color::Black);
+	inviBorder.setFillColor(sf::Color(0,0,0,30));
 	inviBorder.setPosition(sf::Vector2f(inviTimerText.getPosition().x + inviTimerText.getCharacterSize() - 2.5 + 200, inviTimerText.getPosition().y + inviTimerText.getCharacterSize() - 35 - 2.5));
 	inviBorder.setSize(sf::Vector2f(205, 45));
 }
@@ -146,31 +146,40 @@ void MechanicManager::setFont()
 	livesText.setFillColor(sf::Color::White);
 	livesText.setString("Lives: 00");
 	livesText.setPosition(sf::Vector2f(20, -50));
-
+	livesText.setOutlineColor(sf::Color::Black);
+	livesText.setOutlineThickness(4);
 
 	scoreText.setFont(font);
 	scoreText.setCharacterSize(150);
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setString("Distance: 00");
 	scoreText.setPosition(sf::Vector2f(sf::Vector2f(1280 / 2 - scoreText.getGlobalBounds().width /2, -50)));
+	scoreText.setOutlineColor(sf::Color::Black);
+	scoreText.setOutlineThickness(4);
 
 	gearText.setFont(font);
 	gearText.setCharacterSize(150);
 	gearText.setFillColor(sf::Color::White);
 	gearText.setString("Speed: ");
 	gearText.setPosition(sf::Vector2f(20, 50));
+	gearText.setOutlineColor(sf::Color::Black);
+	gearText.setOutlineThickness(4);
 
 	inviTimerText.setFont(font);
 	inviTimerText.setCharacterSize(150);
 	inviTimerText.setFillColor(sf::Color::White);
 	inviTimerText.setString("Invincible: 00");
-	inviTimerText.setPosition(sf::Vector2f(20, 200));
+	inviTimerText.setPosition(sf::Vector2f(20, 150));
+	inviTimerText.setOutlineColor(sf::Color::Black);
+	inviTimerText.setOutlineThickness(4);
 
 	timeLimitText.setFont(font);
 	timeLimitText.setCharacterSize(150);
 	timeLimitText.setFillColor(sf::Color::White);
 	timeLimitText.setString("Time: 00");
 	timeLimitText.setPosition(sf::Vector2f(1280 - timeLimitText.getGlobalBounds().width - 30, -50));
+	timeLimitText.setOutlineColor(sf::Color::Black);
+	timeLimitText.setOutlineThickness(4);
 
 }
 

@@ -26,8 +26,8 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 
 	button[0] = Button(sf::Vector2f(800, 600), sf::Vector2f(400, 100), "Play", 100, &font);
 	button[1] = Button(sf::Vector2f(800, 750), sf::Vector2f(400, 100), "How To Play", 100, &font);
+	button[2] = Button(sf::Vector2f(800, 900), sf::Vector2f(400, 100), "High Score", 100, &font);
 
-	stopDoubleClick();
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false) 
 	{
 		sf::RenderWindow& w = *window;
@@ -39,14 +39,21 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 			*currentMenu = 1;
 			*isInMenu = true;
 		}
-		if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to select level
+		if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to how to play
 		{
 			clickSound.play();
 			*currentMenu = 5;
 			*isInMenu = true;
 		}
+		if (button[2].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to score
+		{
+			clickSound.play();
+			*currentMenu = 6;
+			*isInMenu = true;
+		}
 		hasClicked = true;
 	}
+	stopDoubleClick();
 }
 
 void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int completedLevel)
@@ -58,8 +65,6 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 	backGroundTexture = resourceManager.getTexture("Asset/UI/selectScreen.png");
 	backGroundImage.setTexture(*backGroundTexture);
 
-
-	//setText(0, sf::Vector2f(0, 0), 100, "Select Level");
 
 	button[0] = Button(sf::Vector2f(400, 250), sf::Vector2f(400, 150), "Level 1-1", 100,&font);
 
@@ -191,8 +196,9 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		backGroundImage.setTexture(*backGroundTexture);
 
 
-		setText(0, sf::Vector2f(0, 0), 100, "Stage Completed!");
-		setText(1, sf::Vector2f(0, 200), 100, "Time Left:" + std::to_string(remainingTime.asSeconds()));
+		setText(0, sf::Vector2f(400, 430), 180, "Time Taken: " + std::to_string((int)remainingTime.asSeconds()) + " sec");
+		setText(1, sf::Vector2f(400, 530), 180, "Total Score: " + std::to_string(*currentScore));
+
 
 		button[0] = Button(sf::Vector2f(150, 750), sf::Vector2f(400, 150), "Continue", 100, &font);
 		button[1] = Button(sf::Vector2f(750, 750), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
@@ -231,25 +237,20 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 	}
 	else if (gameState == 2 || gameState == 3) //Out if Lives & Time
 	{
-		setText(0, sf::Vector2f(0, 0), 100, "Stage Failed!");
 		if (gameState == 2)
 		{
 			
 			backGroundTexture = resourceManager.getTexture("Asset/UI/levelCarBroken.png");
 			backGroundImage.setTexture(*backGroundTexture);
 			
-			setText(1, sf::Vector2f(0, 200), 100, "Out of Lives");
 		}
 		else if (gameState == 3)
 		{
 			backGroundTexture = resourceManager.getTexture("Asset/UI/levelOutTime.png");
 			backGroundImage.setTexture(*backGroundTexture);
 			
-			setText(1, sf::Vector2f(0, 200), 100, "Out of Time");
 		}
 		
-		setText(2, sf::Vector2f(0, 300), 100, "Distance Left: " + std::to_string(remainingDistance));
-
 		button[0] = Button(sf::Vector2f(150, 750), sf::Vector2f(400, 150), "Retry", 100, &font);
 		button[1] = Button(sf::Vector2f(750, 750), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
 
@@ -336,6 +337,49 @@ void Menu::howToPlayMenu(sf::RenderWindow* window, int* currentMenu)
 
 }
 
+void Menu::scoreMenu(sf::RenderWindow* window, int* currentMenu, int *highScore,bool* isResetSave)
+{
+	refreshText();
+	refreshButton();
+	stopDoubleClick();
+
+	sf::RenderWindow& w = *window;
+	sf::Vector2i mousePos = sf::Mouse::getPosition(w);
+
+	backGroundTexture = resourceManager.getTexture("Asset/UI/score.png");
+	backGroundImage.setTexture(*backGroundTexture);
+
+	button[0] = Button(sf::Vector2f(450, 850), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
+	button[1] = Button(sf::Vector2f(100, 900), sf::Vector2f(250, 100), "Reset Save", 80, &font);
+
+	setText(0, sf::Vector2f(400, 200), 180, "Level 1-1 : " + std::to_string(highScore[0]));
+	setText(1, sf::Vector2f(400, 300), 180, "Level 1-2 : " + std::to_string(highScore[1]));
+	setText(2, sf::Vector2f(400, 400), 180, "Level 2-1 : " + std::to_string(highScore[2]));
+	setText(3, sf::Vector2f(400, 500), 180, "Level 2-2 : " + std::to_string(highScore[3]));
+
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
+	{
+		if (button[0].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
+		{
+			clickSound.play();
+
+			*currentMenu = 0;
+		}
+		if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Continue
+		{
+			clickSound.play();
+
+			*currentMenu = 0;
+			*isResetSave = true;
+			
+
+		}
+		hasClicked = true;
+	}
+}
+
+
 
 void Menu::render(sf::RenderTarget* target)
 {
@@ -359,7 +403,6 @@ void Menu::stopDoubleClick()
 	if (hasClicked == true)
 	{
 		clickTimer = clock.getElapsedTime();
-		//std::cout << clickTimer.asSeconds() << std::endl;
 		if (clickTimer.asSeconds() > 1)
 		{
 			hasClicked = false;
@@ -376,6 +419,7 @@ void Menu::refreshText()
 	{
 		text[i].setFont(font);
 		text[i].setCharacterSize(0);
+		text[i].setPosition(sf::Vector2f(3000, 3000));
 	}
 }
 
@@ -393,6 +437,8 @@ void Menu::setText(int id, sf::Vector2f position, int size, sf::String content)
 	text[id].setPosition(position);
 	text[id].setCharacterSize(size);
 	text[id].setString(content);
+	text[id].setOutlineColor(sf::Color::Black);
+	text[id].setOutlineThickness(8);
 }
 
 

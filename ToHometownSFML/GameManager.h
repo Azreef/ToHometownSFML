@@ -28,6 +28,7 @@ private:
 	int currentMenu;
 	bool isInmenu;
 	int currentMusic;
+	bool isResetSave;
 
 
 	//gameplay Variable

@@ -53,6 +53,11 @@ void GameManager::update()
         else if (currentMenu == 3)
         {
             //Result Screen
+            if (highScore[currentLevel] < currentScore)
+            {
+                highScore[currentLevel] = currentScore;
+            }
+            setSave();
             menu.resultMenu(window, &isInmenu, &currentLevel, &currentMenu, gameState, remainingLive, remainingTime, remainingDistance, &completedLevel,&currentScore);
         }
         else if (currentMenu == 4)
@@ -62,9 +67,21 @@ void GameManager::update()
         }
         else if (currentMenu == 5)
         {
+            //How to Play
             menu.howToPlayMenu(window, &currentMenu);
         }
-        //std::cout << currentMenu << std::endl;;
+        else if (currentMenu == 6)
+        {
+            //score
+            menu.scoreMenu(window, &currentMenu, highScore, &isResetSave);
+
+            if (isResetSave)
+            {
+                resetSave();
+                isResetSave = false;
+            }
+        }
+        
         if (musicIsPlaying == false || currentMusic != currentMenu)
         {
             loadBGM();
@@ -384,6 +401,8 @@ void GameManager::initVariable()
     musicIsPlaying = false;
     levelIsSet = false;
     isInmenu = true;
+
+    isResetSave = false;
 }
 
 
