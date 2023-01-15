@@ -11,7 +11,7 @@ GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int s
 {
 	if (levelType == 0)
 	{
-		levelMin = 650;
+		levelMin = 700;
 	}
 	else if (levelType == 1)
 	{

@@ -5,7 +5,7 @@ Menu::Menu()
 {
 	refreshText();
 	refreshButton();
-	hasClicked = true;
+	hasClicked = false;
 	timerStarted = false;
 
 	std::shared_ptr<sf::SoundBuffer> clickSo = resourceManager.getSound("Asset/sound/button.ogg");
@@ -16,17 +16,18 @@ Menu::Menu()
 
 void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, int* currentMenu)
 {
+	stopDoubleClick();
+	clickTimer = sf::seconds(0);
 	refreshText();
 	refreshButton();
-	stopDoubleClick();
-
+	
 	backGroundTexture = resourceManager.getTexture("Asset/UI/mainMenu.png");
 	backGroundImage.setTexture(*backGroundTexture);
 
 
-	button[0] = Button(sf::Vector2f(800, 600), sf::Vector2f(400, 100), "Play", 100, &font);
-	button[1] = Button(sf::Vector2f(800, 750), sf::Vector2f(400, 100), "How To Play", 100, &font);
-	button[2] = Button(sf::Vector2f(800, 900), sf::Vector2f(400, 100), "High Score", 100, &font);
+	button[0] = Button(sf::Vector2f(800, 550), sf::Vector2f(400, 100), "Play", 100, &font);
+	button[1] = Button(sf::Vector2f(800, 700), sf::Vector2f(400, 100), "How To Play", 100, &font);
+	button[2] = Button(sf::Vector2f(800, 850), sf::Vector2f(400, 100), "High Score", 100, &font);
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false) 
 	{
@@ -53,7 +54,7 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 		}
 		hasClicked = true;
 	}
-	stopDoubleClick();
+	
 }
 
 void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel, int* currentMenu, int completedLevel)
@@ -82,6 +83,7 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		button[3] = Button(sf::Vector2f(400, 850), sf::Vector2f(400, 150), "Level 2-2", 100, &font);
 	}
 
+	button[4] = Button(sf::Vector2f(100, 900), sf::Vector2f(250, 100), "Back", 80, &font);
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
 	{
@@ -117,7 +119,14 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 			*currentMenu = 2;
 			*isInMenu = true;
 		}
+		if (button[4].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to level 2
+		{
+			clickSound.play();
+			*currentMenu = 0;
+			*isInMenu = true;
+		}
 		hasClicked = true;
+		stopDoubleClick();
 		
 	}
 }
@@ -174,6 +183,7 @@ void Menu::stageMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLevel
 
 		}
 		hasClicked = true;
+		stopDoubleClick();
 	}
 	
 }
@@ -279,6 +289,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 			}
 
 			hasClicked = true;
+			stopDoubleClick();
 		}
 
 	}
@@ -288,7 +299,6 @@ void Menu::endMenu(sf::RenderWindow* window, int* currentMenu)
 {
 	refreshText();
 	refreshButton();
-	stopDoubleClick();
 
 	sf::RenderWindow& w = *window;
 	sf::Vector2i mousePos = sf::Mouse::getPosition(w);
@@ -307,6 +317,7 @@ void Menu::endMenu(sf::RenderWindow* window, int* currentMenu)
 			*currentMenu = 0;
 		}
 		hasClicked = true;
+		stopDoubleClick();
 	}
 }
 
@@ -333,6 +344,7 @@ void Menu::howToPlayMenu(sf::RenderWindow* window, int* currentMenu)
 			*currentMenu = 0;
 		}
 		hasClicked = true;
+		stopDoubleClick();
 	}
 
 }
@@ -376,6 +388,7 @@ void Menu::scoreMenu(sf::RenderWindow* window, int* currentMenu, int *highScore,
 
 		}
 		hasClicked = true;
+		stopDoubleClick();
 	}
 }
 
@@ -394,21 +407,24 @@ void Menu::render(sf::RenderTarget* target)
 
 void Menu::stopDoubleClick()
 {
+	
+	if (hasClicked)
+	{
+		clickTimer = clock.getElapsedTime();
+		std::cout << clickTimer.asSeconds() << std::endl;
+		if (clickTimer.asSeconds() > 1.2)
+		{
+			hasClicked = false;
+			timerStarted = false;
+		}
+	}
 	if (timerStarted == false)
 	{
 		clock.restart();
 		timerStarted = true;
 	}
 
-	if (hasClicked == true)
-	{
-		clickTimer = clock.getElapsedTime();
-		if (clickTimer.asSeconds() > 1)
-		{
-			hasClicked = false;
-			timerStarted = false;
-		}
-	}
+	
 }
 
 void Menu::refreshText()

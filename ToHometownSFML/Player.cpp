@@ -112,14 +112,14 @@ void Player::initVariable(int levelType)
 
     if (levelType == 0)
     {
-        maxTop = 600;
-        maxBottom = 980;
+        maxTop = 650;
+        maxBottom = 1030;
     }
 
     else if (levelType == 1)
     {
         maxTop = 400;
-        maxBottom = 980;
+        maxBottom = 1030;
     }
 }
 

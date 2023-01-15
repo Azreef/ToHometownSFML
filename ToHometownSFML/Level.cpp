@@ -253,19 +253,19 @@ void Level::initVariable(int levelType, int backGroundType)
 	//Set road variable
 	if (levelType == 0)
 	{
-		roadYPos = 350;
+		roadYPos = 400;
 
 		//Set background Variable
 		if (backGroundType == 0)
 		{
-			backgroundYPos = -300;
-			subBackgroundYPos = -20;
+			backgroundYPos = -250;
+			subBackgroundYPos = 30;
 			cloudBackgroundYPos = 0;
 		}
 		else if (backGroundType == 1)
 		{
-			backgroundYPos = -350;
-			subBackgroundYPos = 150;
+			backgroundYPos = -300;
+			subBackgroundYPos = 200;
 			cloudBackgroundYPos = 0;
 		}
 		

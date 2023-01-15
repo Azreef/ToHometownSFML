@@ -16,7 +16,7 @@ Button::Button(sf::Vector2f position, sf::Vector2f size, sf::String textContent,
     // Create the button's shape
     button.setPosition(position);
     button.setSize(size);
-    button.setFillColor(sf::Color::White);
+    button.setFillColor(sf::Color(218, 223, 225,150));
     button.setOutlineColor(sf::Color::Black);
     button.setOutlineThickness(2);
 
@@ -24,7 +24,9 @@ Button::Button(sf::Vector2f position, sf::Vector2f size, sf::String textContent,
     text.setFont(*font);
     text.setString(textContent);
     text.setCharacterSize(textSize);
-    text.setFillColor(sf::Color::Black);
+    text.setFillColor(sf::Color::White);
+    text.setOutlineColor(sf::Color::Black);
+    text.setOutlineThickness(textSize/80);
 
      //Position the text relative to the button
      sf::FloatRect textRect = text.getLocalBounds();
