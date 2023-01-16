@@ -36,6 +36,7 @@ private:
 	sf::Sound fuelSound;
 	sf::Sound fuelDoneSound;
 	sf::Sound repairSound;
+	sf::Sound trafficSound;
 
 	bool inviSoundPlayed = false;
 

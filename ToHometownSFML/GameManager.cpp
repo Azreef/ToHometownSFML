@@ -246,6 +246,7 @@ void GameManager::resetSave()
 void GameManager::loadBGM()
 {
     backgroundMusic.stop();
+    backgroundMusic.setVolume(25);
     if (currentMenu == 0) //main Theme
     {
         if (!backgroundMusic.openFromFile("Asset/sound/mainTheme.wav"))
@@ -253,7 +254,7 @@ void GameManager::loadBGM()
             std::cout << "Cant Open Music Files";
         }
 
-        backgroundMusic.setVolume(25);
+      
     }
     else if (currentMenu == 1) //select Level
     {
@@ -261,7 +262,7 @@ void GameManager::loadBGM()
         {
             std::cout << "Cant Open Music Files";
         }
-        backgroundMusic.setVolume(25);
+        //backgroundMusic.setVolume(25);
     }
     else if (currentMenu == 2) //Stage Screen
     {
@@ -269,7 +270,7 @@ void GameManager::loadBGM()
         {
             std::cout << "Cant Open Music Files";
         }
-        backgroundMusic.setVolume(25);
+       // backgroundMusic.setVolume(25);
     }
     else if (currentMenu == 3) //result
     {
@@ -287,7 +288,7 @@ void GameManager::loadBGM()
                 std::cout << "Cant Open Music Files";
             }
         }
-        backgroundMusic.setVolume(25);
+        //backgroundMusic.setVolume(25);
     }
     else if (currentMenu == 4) //end
     {
@@ -318,35 +319,39 @@ void GameManager::loadBGM()
 
 void GameManager::loadGameMusic()
 {
-    if (currentLevel == 0) //main Theme
+    if (currentLevel == 0) 
     {
+        backgroundMusic.setVolume(10);
         if (!backgroundMusic.openFromFile("Asset/sound/cityStage.wav"))
         {
             std::cout << "Cant Open Music Files";
         }
 
-        backgroundMusic.setVolume(25);
     }
-    else if (currentLevel == 1) //select Level
+    else if (currentLevel == 1) 
     {
+        backgroundMusic.setVolume(20);
         if (!backgroundMusic.openFromFile("Asset/sound/cityStage2.wav"))
         {
             std::cout << "Cant Open Music Files";
         }
+       
     }
-    else if (currentLevel == 2) //Stage Screen
+    else if (currentLevel == 2) 
     {
+        backgroundMusic.setVolume(20);
         if (!backgroundMusic.openFromFile("Asset/sound/countryStage.wav"))
         {
             std::cout << "Cant Open Music Files";
         }
     }
-    else if (currentLevel == 3) //Stage Screen
+    else if (currentLevel == 3) 
     {
+        backgroundMusic.setVolume(15);
         if (!backgroundMusic.openFromFile("Asset/sound/countryStage2.wav"))
         {
             std::cout << "Cant Open Music Files";
-        }
+        }  
     }
     backgroundMusic.play();
     musicIsPlaying = true;

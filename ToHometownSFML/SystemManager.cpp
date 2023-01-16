@@ -15,6 +15,8 @@ SystemManager::SystemManager(int currentLevel)
     int backGroundType;
     setSoundFX();
 
+    trafficSound.play();
+
     //Set Level Variable
     if (currentLevel == 0)
     {
@@ -25,7 +27,7 @@ SystemManager::SystemManager(int currentLevel)
         backGroundType = 0;
 
         //Destination Distance
-        maxDistance = 5;
+        maxDistance = 300;
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
@@ -36,10 +38,10 @@ SystemManager::SystemManager(int currentLevel)
         enemyInterval = 800;
 
         //Item Spawn frequency
-        spawnPickupRate = 1;
+        spawnPickupRate = 600;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
-        spawnEnemyType = 1;
+        spawnEnemyType = 0;
        
     }
     else if (currentLevel == 1)
@@ -51,7 +53,7 @@ SystemManager::SystemManager(int currentLevel)
         backGroundType = 0;
 
         //Destination Distance
-        maxDistance = 10;
+        maxDistance = 500;
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
@@ -59,13 +61,13 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
-        enemyInterval = 10000;
+        enemyInterval = 600;
 
         //Item Spawn frequency
-        spawnPickupRate = 1;
+        spawnPickupRate = 500;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
-        spawnEnemyType = 1;
+        spawnEnemyType = 0;
 
     }
     else if (currentLevel == 2)
@@ -77,7 +79,7 @@ SystemManager::SystemManager(int currentLevel)
         backGroundType = 1;
 
         //Destination Distance
-        maxDistance = 500;
+        maxDistance = 600;
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
@@ -85,10 +87,10 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
-        enemyInterval = 800;
+        enemyInterval = 700;
 
         //Item Spawn frequency
-        spawnPickupRate = 1;
+        spawnPickupRate = 600;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 1;
@@ -103,7 +105,7 @@ SystemManager::SystemManager(int currentLevel)
         backGroundType = 1;
 
         //Destination Distance
-        maxDistance = 500;
+        maxDistance = 700;
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
@@ -111,10 +113,10 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
-        enemyInterval = 10000;
+        enemyInterval = 500;
 
         //Item Spawn frequency
-        spawnPickupRate = 1;
+        spawnPickupRate = 500;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 1;
@@ -191,7 +193,7 @@ void SystemManager::updateLive()
         mechanicManager.setInvi();
     }
 
-    std::cout << isInvi << std::endl;
+
     if (!mechanicManager.getIsInvi() && inviSoundPlayed)
     {
         fuelDoneSound.play();
@@ -218,22 +220,30 @@ void SystemManager::setSoundFX()
     fuelDoneSound.setBuffer(*fuelDoneSo);
 
     fuelDoneSound.setVolume(25);
+
+    std::shared_ptr<sf::SoundBuffer> trafficSo = resourceManager.getSound("Asset/sound/traffic.wav");
+    trafficSound.setBuffer(*trafficSo);
+
+    trafficSound.setVolume(70);
 }
 void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int* remainingLive, int* remainingDistance,int* score)
 {
     
     if (mechanicManager.getDistance() >= maxDistance * 100)
     {
-        *gameState  = 1;     
+        *gameState  = 1;    
+        trafficSound.stop();
     }
     else if (mechanicManager.getLive() <= 0)
     {
         *gameState = 2;
+        trafficSound.stop();
         
     }
     else if (mechanicManager.getTimeLimit().asSeconds() >= timeLimit.asSeconds())
     {
         *gameState = 3;
+        trafficSound.stop();
     }
     else
     {

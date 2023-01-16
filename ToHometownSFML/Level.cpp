@@ -44,7 +44,7 @@ void Level::scrollBackground()
 	cloudBackGroundSprite[0].move(-roadSpeed * 0.02, 0);
 	cloudBackGroundSprite[1].move(-roadSpeed * 0.02, 0);
 
-	backGroundSprite.move(-roadSpeed * 0.005, 0);
+	backGroundSprite.move(-roadSpeed * 0.008, 0);
 
 	if (subBackGroundSprite[currentSub].getPosition().x <= -subBackGroundSprite[currentSub].getGlobalBounds().width)
 	{
@@ -284,7 +284,7 @@ void Level::initVariable(int levelType, int backGroundType)
 		else if (backGroundType == 1)
 		{
 			backgroundYPos = -520;
-			subBackgroundYPos = 80;
+			subBackgroundYPos = 20;
 			cloudBackgroundYPos = 0;
 		}
 		

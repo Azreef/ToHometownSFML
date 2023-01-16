@@ -140,7 +140,7 @@ void GamePlayManager::spawnPickup()
 		randomChooseType = dist1(mt);
 		randomSetPosition = dist2(mt);
 
-		//std::cout << random << std::endl;
+
 		if (randomChanceSpawn == 1)
 		{
 			if (randomChooseType == 1)//spawn repair
@@ -241,10 +241,10 @@ void GamePlayManager::spawnEnemy()
 	}
 	else if (spawnEnemyType == 1)
 	{
-		std::uniform_int_distribution<int> dist1(0, 5);
+		std::uniform_int_distribution<int> dist1(0, 3);
 		std::mt19937 rng;
 		rng.seed(std::random_device()());
-		if (dist1(rng) < 5)
+		if (dist1(rng) < 3)
 		{
 			enemyType = 0;
 		}
@@ -255,7 +255,7 @@ void GamePlayManager::spawnEnemy()
 	}
 
 	//Determine position
-	std::uniform_int_distribution<int> dist2(levelMin, 850);
+	std::uniform_int_distribution<int> dist2(levelMin, 920);
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	int pos = dist2(rng);

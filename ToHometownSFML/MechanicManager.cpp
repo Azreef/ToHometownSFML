@@ -96,7 +96,7 @@ void MechanicManager::render(sf::RenderTarget* target)
 void MechanicManager::initVariable()
 {
 	minScore = 0;
-	lives = 5;
+	lives = 3;
 	isInvi = false;
 
 	destinationBar.setFillColor(sf::Color(144, 238, 144,180));

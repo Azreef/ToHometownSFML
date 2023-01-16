@@ -89,7 +89,7 @@ void Menu::selectMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 		button[3] = Button(sf::Vector2f(400, 850), sf::Vector2f(400, 150), "Level 2-2", 100, &font);
 	}
 
-	button[4] = Button(sf::Vector2f(100, 900), sf::Vector2f(250, 100), "Back", 80, &font);
+	button[4] = Button(sf::Vector2f(900, 900), sf::Vector2f(250, 100), "Back", 80, &font);
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false)
 	{
@@ -206,7 +206,11 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 
 	if (gameState == 1) //Successfull
 	{
-		*completedLevel = *currentLevel + 1; //Set level as completed
+		if (*completedLevel < *currentLevel + 1)
+		{
+			*completedLevel = *currentLevel + 1;
+		}
+		 //Set level as completed
 
 		backGroundTexture = resourceManager.getTexture("Asset/UI/levelComplete.png");
 		backGroundImage.setTexture(*backGroundTexture);
@@ -307,6 +311,7 @@ void Menu::endMenu(sf::RenderWindow* window, int* currentMenu)
 {
 	refreshText();
 	refreshButton();
+	stopDoubleClick();
 
 	sf::RenderWindow& w = *window;
 	sf::Vector2i mousePos = sf::Mouse::getPosition(w);
@@ -370,7 +375,7 @@ void Menu::scoreMenu(sf::RenderWindow* window, int* currentMenu, int *highScore,
 	backGroundImage.setTexture(*backGroundTexture);
 
 	button[0] = Button(sf::Vector2f(450, 850), sf::Vector2f(400, 150), "Return To Menu", 100, &font);
-	button[1] = Button(sf::Vector2f(100, 900), sf::Vector2f(250, 100), "Reset Save", 80, &font);
+	button[1] = Button(sf::Vector2f(900, 900), sf::Vector2f(250, 100), "Reset Save", 80, &font);
 
 	setText(0, sf::Vector2f(400, 200), 180, "Level 1-1 : " + std::to_string(highScore[0]));
 	setText(1, sf::Vector2f(400, 300), 180, "Level 1-2 : " + std::to_string(highScore[1]));
@@ -419,7 +424,6 @@ void Menu::stopDoubleClick()
 	if (hasClicked)
 	{
 		clickTimer = clock.getElapsedTime();
-		std::cout << clickTimer.asSeconds() << std::endl;
 		if (clickTimer.asSeconds() > 1.2)
 		{
 			hasClicked = false;
