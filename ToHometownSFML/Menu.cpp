@@ -25,9 +25,10 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 	backGroundImage.setTexture(*backGroundTexture);
 
 
-	button[0] = Button(sf::Vector2f(800, 550), sf::Vector2f(400, 100), "Play", 100, &font);
-	button[1] = Button(sf::Vector2f(800, 700), sf::Vector2f(400, 100), "How To Play", 100, &font);
-	button[2] = Button(sf::Vector2f(800, 850), sf::Vector2f(400, 100), "High Score", 100, &font);
+	button[0] = Button(sf::Vector2f(400, 550), sf::Vector2f(400, 100), "Play", 100, &font);
+	button[1] = Button(sf::Vector2f(400, 700), sf::Vector2f(400, 100), "How To Play", 100, &font);
+	button[2] = Button(sf::Vector2f(400, 850), sf::Vector2f(400, 100), "High Score", 100, &font);
+	button[3] = Button(sf::Vector2f(100, 900), sf::Vector2f(250, 100), "Exit", 80, &font);
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && hasClicked == false) 
 	{
@@ -51,6 +52,11 @@ void Menu::mainMenu(sf::RenderWindow *window,bool *isInMenu, int* currentLevel, 
 			clickSound.play();
 			*currentMenu = 6;
 			*isInMenu = true;
+		}
+		if (button[3].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //go to score
+		{
+			clickSound.play();
+			window->close();
 		}
 		hasClicked = true;
 	}
@@ -237,6 +243,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{
 				clickSound.play();
+				clickTimer = sf::seconds(0);
 				*currentMenu = 0;
 				*isInMenu = true;
 			}
@@ -284,6 +291,7 @@ void Menu::resultMenu(sf::RenderWindow* window, bool* isInMenu, int* currentLeve
 			if (button[1].button.getGlobalBounds().contains(sf::Vector2f(mousePos))) //Return to Main Menu
 			{
 				clickSound.play();
+				clickTimer = sf::seconds(0);
 				*currentMenu = 0;
 				*isInMenu = true;
 			}
