@@ -40,10 +40,13 @@ private:
 	int levelType;
 	int levelMin;
 
-	std::shared_ptr<sf::Texture> carTexture = resourceManager.getTexture("Asset/car2.png");
-	std::shared_ptr<sf::Texture> busTexture = resourceManager.getTexture("Asset/bus.png");
-	std::shared_ptr<sf::Texture> repairTexture = resourceManager.getTexture("Asset/repairKit.png");
-	std::shared_ptr<sf::Texture> fuelTexture = resourceManager.getTexture("Asset/fuel.png");
+	std::shared_ptr<sf::Texture> carTexture[5];
+	std::shared_ptr<sf::Texture> busTexture[5];
+	std::shared_ptr<sf::Texture> repairTexture;
+	std::shared_ptr<sf::Texture> fuelTexture;
+	//std::shared_ptr<sf::Texture> carTexture = resourceManager.getTexture("Asset/car2.png");
+	//std::shared_ptr<sf::Texture> busTexture = resourceManager.getTexture("Asset/bus.png");
+
 
 
 
@@ -64,8 +67,8 @@ public:
 	void update();
 	void spawnPickup();
 	void setPlayerData(sf::Sprite);
-	void setCurrentDistance(int distance);
-	void setCurrentSpeed(int speed);
+	void setCurrentDistance(float distance);
+	void setCurrentSpeed(float speed);
 	int detectCollision();
 	void spawnEntity();
 	void initVariable();
@@ -73,6 +76,7 @@ public:
 	void enemyFixPos();
 	void spawnEnemy();
 	void setEnemies();
+	void setTexture();
 
 };
 

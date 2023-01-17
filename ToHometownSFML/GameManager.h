@@ -7,8 +7,7 @@
 #include <sstream>
 #include "ResourceManager.h"
 
-//include "LevelManager.h"
-#include "SystemManager.h";
+#include "SystemManager.h"
 #include "Menu.h"
 class GameManager
 {

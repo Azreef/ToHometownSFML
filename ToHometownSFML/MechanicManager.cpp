@@ -183,12 +183,12 @@ void MechanicManager::setFont()
 
 }
 
-void MechanicManager::setCurrentDistance(int distance)
+void MechanicManager::setCurrentDistance(float distance)
 {
 	currentDistance = distance;
 }
 
-void MechanicManager::setCurrentGear(int gear)
+void MechanicManager::setCurrentGear(float gear)
 {
 	currentGear = gear;
 }

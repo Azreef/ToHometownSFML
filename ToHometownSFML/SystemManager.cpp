@@ -83,7 +83,7 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
-        timeLimit = sf::seconds(60);
+        timeLimit = sf::seconds(65);
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
@@ -109,14 +109,14 @@ SystemManager::SystemManager(int currentLevel)
         mechanicManager.setMaxDistance(maxDistance);
 
         //Time Limit
-        timeLimit = sf::seconds(60);
+        timeLimit = sf::seconds(70);
         mechanicManager.setTimeLimit(timeLimit);
 
         //Enemy spawn frequency 
         enemyInterval = 500;
 
         //Item Spawn frequency
-        spawnPickupRate = 400;
+        spawnPickupRate = 300;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 1;
@@ -249,7 +249,7 @@ void SystemManager::updateGameValue(int* gameState, sf::Time* remainingTime, int
     {
         *gameState = 0;
     }
-
+     
     *remainingTime = mechanicManager.getTimeLimit();
     *remainingLive = mechanicManager.getLive();
     *remainingDistance = (maxDistance * 100) - mechanicManager.getDistance();

@@ -4,6 +4,7 @@
 //CONSTRUCTOR
 Entity::Entity(float x, float y, int entityType, int entitySubtype, std::shared_ptr<sf::Texture> texture)
 {
+	
 	if (entityType == 0)
 	{
 		//Entity Type Car
@@ -125,13 +126,13 @@ void Entity::setIsDestroyed(bool isDestoyed)
 	this->isDestroyed = isDestoyed;
 }
 
-void Entity::setEntitySpeed(int entitySpeed)
+void Entity::setEntitySpeed(float entitySpeed)
 {
 	this->entitySpeed = entitySpeed;
 
 }
 
-void Entity::setEntityPosition(int x,int y)
+void Entity::setEntityPosition(float x, float y)
 {
 	entitySprite.setPosition((sf::Vector2f(x, y)));
 }

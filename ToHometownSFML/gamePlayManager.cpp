@@ -9,6 +9,8 @@ GamePlayManager::GamePlayManager()
 
 GamePlayManager::GamePlayManager(float enemyInterval, int spawnPickupRate, int spawnEnemyType,int levelType)
 {
+	setTexture();
+
 	if (levelType == 0)
 	{
 		levelMin = 700;
@@ -222,12 +224,20 @@ void GamePlayManager::enemyFixPos()
 	if (enemy[enemy.size() - 1]->getEntity().getGlobalBounds().intersects(enemy[enemy.size() - 2]->getEntity().getGlobalBounds()))
 	{
 		enemy[enemy.size() - 1]->setEntityPosition(enemy[enemy.size() - 1]->getEntity().getPosition().x + 100, enemy[enemy.size() - 1]->getEntity().getPosition().y);
-		//enemy[enemy.size() - 1]->setIsDestroyed(true);
 	}
 }
 
 void GamePlayManager::spawnEnemy()
 {
+	//Determine Colour
+	int textureColor;
+
+	std::uniform_int_distribution<int> dist0(0, 4);
+	std::mt19937 rngColor;
+	rngColor.seed(std::random_device()());
+
+	textureColor = dist0(rngColor);
+
 	//Determine Type
 	int enemyType;
 	if (spawnEnemyType == 0)
@@ -238,9 +248,9 @@ void GamePlayManager::spawnEnemy()
 	else if (spawnEnemyType == 1)
 	{
 		std::uniform_int_distribution<int> dist1(0, 3);
-		std::mt19937 rng;
-		rng.seed(std::random_device()());
-		if (dist1(rng) < 3)
+		std::mt19937 rngType;
+		rngType.seed(std::random_device()());
+		if (dist1(rngType) < 3)
 		{
 			enemyType = 0;
 		}
@@ -252,17 +262,17 @@ void GamePlayManager::spawnEnemy()
 
 	//Determine position
 	std::uniform_int_distribution<int> dist2(levelMin, 920);
-	std::mt19937 rng;
-	rng.seed(std::random_device()());
-	int pos = dist2(rng);
+	std::mt19937 rngPos;
+	rngPos.seed(std::random_device()());
+	int pos = dist2(rngPos);
 
 	if (enemyType == 0)
 	{
-		enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType, carTexture));
+		enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType, carTexture[textureColor]));
 	}
 	else if (enemyType == 1)
 	{
-		enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType, busTexture));
+		enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType, busTexture[textureColor]));
 	}
 	
 }
@@ -274,18 +284,41 @@ void GamePlayManager::setEnemies()
 	
 }
 
+void GamePlayManager::setTexture()
+{
+	//car texture
+
+	carTexture[0] = resourceManager.getTexture("Asset/car1.png");
+	carTexture[1] = resourceManager.getTexture("Asset/car2.png");
+	carTexture[2] = resourceManager.getTexture("Asset/car3.png");
+	carTexture[3] = resourceManager.getTexture("Asset/car4.png");
+	carTexture[4] = resourceManager.getTexture("Asset/car5.png");
+
+	//set bus
+	busTexture[0] = resourceManager.getTexture("Asset/bus1.png");
+	busTexture[1] = resourceManager.getTexture("Asset/bus2.png");
+	busTexture[2] = resourceManager.getTexture("Asset/bus3.png");
+	busTexture[3] = resourceManager.getTexture("Asset/bus4.png");
+	busTexture[4] = resourceManager.getTexture("Asset/bus5.png");
+
+
+	//set pickup
+	repairTexture = resourceManager.getTexture("Asset/repairKit.png");
+	fuelTexture = resourceManager.getTexture("Asset/fuel.png");
+}
+
 void GamePlayManager::setPlayerData(sf::Sprite playerData)
 {
 	player.setPlayerSprite(playerData);
 	player.updateHitbox();
 }
 
-void GamePlayManager::setCurrentDistance(int distance)
+void GamePlayManager::setCurrentDistance(float distance)
 {
 	currentDistance = distance;
 }
 
-void GamePlayManager::setCurrentSpeed(int speed)
+void GamePlayManager::setCurrentSpeed(float speed)
 {
 	enemySpeed = speed;
 }

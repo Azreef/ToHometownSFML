@@ -46,8 +46,8 @@ public:
 	void initVariable();
 	void removeLive();
 	void addLive();
-	void setCurrentDistance(int dis);
-	void setCurrentGear(int gear);
+	void setCurrentDistance(float dis);
+	void setCurrentGear(float gear);
 	void update();
 	void updateText();
 	void render(sf::RenderTarget* target);

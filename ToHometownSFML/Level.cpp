@@ -318,7 +318,7 @@ float Level::getCurrentDistance()
 	return currentDistance;
 }
 
-int Level::getCurrentGear()
+float Level::getCurrentGear()
 {
 	return currentGear;
 }

@@ -15,7 +15,7 @@ private:
 	sf::Vector2f position;
 	sf::Sprite entitySprite;
 	bool isDestroyed;
-	int entitySpeed;
+	float entitySpeed;
 	int entityType; // 0 = enemy , 1 = power ups
 	int entitySubType; 
 	ResourceManager resourceManager;
@@ -39,8 +39,8 @@ public:
 	sf::Sprite getEntity();
 	bool getIsDestroyed();
 	void setIsDestroyed(bool isDestoyed);
-	void setEntitySpeed(int enemySpeed);
-	void setEntityPosition(int x, int y);
+	void setEntitySpeed(float enemySpeed);
+	void setEntityPosition(float x, float y);
 	
 };
 

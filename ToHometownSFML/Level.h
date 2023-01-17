@@ -55,7 +55,7 @@ public:
 	void setCurrentDistance(float distance);
 
 	float getCurrentDistance();
-	int getCurrentGear();
+	float getCurrentGear();
 
 
 };
