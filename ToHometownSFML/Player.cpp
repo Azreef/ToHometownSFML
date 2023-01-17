@@ -79,10 +79,7 @@ void Player::moveUpdate()
 
 void Player::render(sf::RenderTarget* target)
 {
-
-    target->draw(playerSprite);
-    //target->draw(playerHitbox);
-    
+    target->draw(playerSprite); 
 }
 
 

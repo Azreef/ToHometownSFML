@@ -145,13 +145,11 @@ void GamePlayManager::spawnPickup()
 		{
 			if (randomChooseType == 1)//spawn repair
 			{
-				std::cout << "Spawn Repair" << std::endl;
 				repairPickup.setIsDestroyed(false);
 				repairPickup.setEntityPosition(1300, randomSetPosition);
 			}
 			else if (randomChooseType == 2)//spawn fuel
 			{
-				std::cout << "Spawn Fuel" << std::endl;
 				fuelPickup.setIsDestroyed(false);
 				fuelPickup.setEntityPosition(1300, randomSetPosition);
 			}
@@ -207,13 +205,11 @@ void GamePlayManager::pickupFixPos()
 		if (fuelPickup.getEntity().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
 		{
 			fuelPickup.setEntityPosition(fuelPickup.getEntity().getPosition().x + 50, fuelPickup.getEntity().getPosition().y);
-			//std::cout << "Fixed" << std::endl;
 		}
 
 		if (repairPickup.getEntity().getGlobalBounds().intersects(enemy[i]->getEntity().getGlobalBounds()))
 		{
 			repairPickup.setEntityPosition(repairPickup.getEntity().getPosition().x + 50, repairPickup.getEntity().getPosition().y);
-			//std::cout << "Fixed" << std::endl;
 		}
 	}
 	
@@ -263,12 +259,10 @@ void GamePlayManager::spawnEnemy()
 	if (enemyType == 0)
 	{
 		enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType, carTexture));
-		std::cout << "spawn car"<< std::endl;
 	}
 	else if (enemyType == 1)
 	{
 		enemy.push_back(std::make_shared<Entity>(1400, pos, 0, enemyType, busTexture));
-		std::cout << "spawn bus" << std::endl;
 	}
 	
 }

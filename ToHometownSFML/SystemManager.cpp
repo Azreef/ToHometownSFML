@@ -38,7 +38,7 @@ SystemManager::SystemManager(int currentLevel)
         enemyInterval = 800;
 
         //Item Spawn frequency
-        spawnPickupRate = 600;
+        spawnPickupRate = 400;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 0;
@@ -64,7 +64,7 @@ SystemManager::SystemManager(int currentLevel)
         enemyInterval = 600;
 
         //Item Spawn frequency
-        spawnPickupRate = 500;
+        spawnPickupRate = 400;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 0;
@@ -90,7 +90,7 @@ SystemManager::SystemManager(int currentLevel)
         enemyInterval = 700;
 
         //Item Spawn frequency
-        spawnPickupRate = 600;
+        spawnPickupRate = 400;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 1;
@@ -116,7 +116,7 @@ SystemManager::SystemManager(int currentLevel)
         enemyInterval = 500;
 
         //Item Spawn frequency
-        spawnPickupRate = 500;
+        spawnPickupRate = 400;
 
         //Enemy Spawn Type (0 - Cars Only/ 1 - Cars and Bus)
         spawnEnemyType = 1;
