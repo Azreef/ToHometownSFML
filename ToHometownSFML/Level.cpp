@@ -146,20 +146,11 @@ void Level::setSprite(int levelType,int backGroundType)
 	//Set Road Sprite
 	if (levelType == 0)
 	{
-		
 		roadTexture = resourceManager.getTexture("Asset/road3.png");
-		/*if (!roadTexture.loadFromFile("Asset/road3.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}*/
 	}
 	else if (levelType == 1)
 	{
 		roadTexture = resourceManager.getTexture("Asset/road4.png");
-		/*if (!roadTexture.loadFromFile("Asset/road4.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}*/
 	}
 
 	roadSprite.setTexture(*roadTexture);
@@ -173,20 +164,6 @@ void Level::setSprite(int levelType,int backGroundType)
 		backGroundTexture = resourceManager.getTexture("Asset/cityBackground.png");
 		subBackGroundTexture = resourceManager.getTexture("Asset/building.png");
 		cloudBackGroundTexture = resourceManager.getTexture("Asset/cloud.png");
-		/*if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		if (!subBackGroundTexture.loadFromFile("Asset/building.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}*/
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -217,20 +194,6 @@ void Level::setSprite(int levelType,int backGroundType)
 		backGroundTexture = resourceManager.getTexture("Asset/countryBackground.png");
 		subBackGroundTexture = resourceManager.getTexture("Asset/tree.png");
 		cloudBackGroundTexture = resourceManager.getTexture("Asset/cloud.png");
-		/*if (!backGroundTexture.loadFromFile("Asset/countryBackground.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		if (!subBackGroundTexture.loadFromFile("Asset/tree.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}
-
-		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
-		{
-			std::cout << "ERROR TEXTURE";
-		}*/
 
 		for (int i = 0; i < 2; i++)
 		{

@@ -4,10 +4,10 @@
 #include <SFML/System.hpp>
 #include <SFML/Main.hpp>
 #include <iostream>
-#include "Button.h"
 #include <string>
-#include "ResourceManager.h"
 
+#include "ResourceManager.h"
+#include "Button.h"
 
 
 class Menu

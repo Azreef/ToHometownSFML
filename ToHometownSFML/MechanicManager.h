@@ -1,11 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 #include <cstdlib>
 #include <iostream>
-#include "Level.h"
-#include <SFML/System.hpp>
 
+
+
+#include "Level.h"
 class MechanicManager
 {
 private:

@@ -49,8 +49,6 @@ private:
 
 	sf::Music backgroundMusic;
 
-	//sf::RenderWindow* loadingWindow;
-	
 	
 public:
 	// Constructor

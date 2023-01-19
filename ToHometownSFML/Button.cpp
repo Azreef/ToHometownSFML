@@ -50,10 +50,6 @@ sf::RectangleShape Button::getButtonBox()
     return button;
 }
 
-//sf::Text Button::getButtonText()
-//{
-   // return text;
-//}
 
 
 

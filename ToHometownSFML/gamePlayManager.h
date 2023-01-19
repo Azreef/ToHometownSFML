@@ -12,14 +12,12 @@
 #include "ResourceManager.h"
 
 
-//#define TOTAL_ENEMY 50
 
 class GamePlayManager
 {
 private:
 	//Variable
-	//Entity enemy[TOTAL_ENEMY];
-
+	
 	std::vector<std::shared_ptr<Entity>> enemy;
 
 	Entity repairPickup;

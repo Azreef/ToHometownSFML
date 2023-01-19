@@ -143,9 +143,6 @@
     <ClCompile Include="ToHometownSFML.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="oldCode.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GamePlayManager.h" />

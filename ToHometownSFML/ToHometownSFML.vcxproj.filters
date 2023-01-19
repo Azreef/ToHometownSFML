@@ -50,11 +50,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="oldCode.txt">
-      <Filter>Source Files</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
