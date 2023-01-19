@@ -1,18 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <random>
-#include "Entity.h"
-
-#include "Player.h"
-
 #include <algorithm>
-#include "ResourceManager.h"
-#include <SFML/Audio.hpp>
 
-#define TOTAL_ENEMY 50
+#include "Entity.h"
+#include "Player.h"
+#include "ResourceManager.h"
+
+
+//#define TOTAL_ENEMY 50
 
 class GamePlayManager
 {
@@ -44,10 +44,6 @@ private:
 	std::shared_ptr<sf::Texture> busTexture[5];
 	std::shared_ptr<sf::Texture> repairTexture;
 	std::shared_ptr<sf::Texture> fuelTexture;
-	//std::shared_ptr<sf::Texture> carTexture = resourceManager.getTexture("Asset/car2.png");
-	//std::shared_ptr<sf::Texture> busTexture = resourceManager.getTexture("Asset/bus.png");
-
-
 
 
 	std::shared_ptr<sf::Texture> explosionTexture = resourceManager.getTexture("Asset/explosion.png");

@@ -239,7 +239,7 @@ void GamePlayManager::spawnEnemy()
 	textureColor = dist0(rngColor);
 
 	//Determine Type
-	int enemyType;
+	int enemyType = 0;
 	if (spawnEnemyType == 0)
 	{
 		enemyType = 0;

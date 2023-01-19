@@ -87,13 +87,9 @@ void Player::render(sf::RenderTarget* target)
 
 void Player::setSprite()
 {
- 
-    if (!texture.loadFromFile("Asset/car.png"))
-    {
-        std::cout << "ERROR TEXTURE";
-    }
-
-    playerSprite.setTexture(texture);
+    texture = resourceManager.getTexture("Asset/car.png");
+   
+    playerSprite.setTexture(*texture);
     playerSprite.setPosition(position);
     playerSprite.setScale(sf::Vector2f(0.05, 0.05));
 

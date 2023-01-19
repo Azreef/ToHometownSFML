@@ -2,12 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "ResourceManager.h"
 
 class Player
 {
 private:
 	//Variable
-	sf::Texture texture;
+	std::shared_ptr<sf::Texture> texture;
 	sf::Vector2f position;
 	sf::Sprite playerSprite;
 	sf::RectangleShape playerHitbox;
@@ -18,6 +19,7 @@ private:
 	float maxTop;
 	float maxBottom;
 
+	ResourceManager resourceManager;
 
 public:
 	

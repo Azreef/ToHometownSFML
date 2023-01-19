@@ -141,23 +141,28 @@ void Level::render(sf::RenderTarget* target)
 
 void Level::setSprite(int levelType,int backGroundType)
 {
+
+	
 	//Set Road Sprite
 	if (levelType == 0)
 	{
-		if (!roadTexture.loadFromFile("Asset/road3.png"))
+		
+		roadTexture = resourceManager.getTexture("Asset/road3.png");
+		/*if (!roadTexture.loadFromFile("Asset/road3.png"))
 		{
 			std::cout << "ERROR TEXTURE";
-		}
+		}*/
 	}
 	else if (levelType == 1)
 	{
-		if (!roadTexture.loadFromFile("Asset/road4.png"))
+		roadTexture = resourceManager.getTexture("Asset/road4.png");
+		/*if (!roadTexture.loadFromFile("Asset/road4.png"))
 		{
 			std::cout << "ERROR TEXTURE";
-		}
+		}*/
 	}
 
-	roadSprite.setTexture(roadTexture);
+	roadSprite.setTexture(*roadTexture);
 	roadSprite.setScale(sf::Vector2f(0.6, 0.6));
 	roadSprite.setPosition(position);
 
@@ -165,7 +170,10 @@ void Level::setSprite(int levelType,int backGroundType)
 	//Set Background
 	if (backGroundType == 0)
 	{
-		if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
+		backGroundTexture = resourceManager.getTexture("Asset/cityBackground.png");
+		subBackGroundTexture = resourceManager.getTexture("Asset/building.png");
+		cloudBackGroundTexture = resourceManager.getTexture("Asset/cloud.png");
+		/*if (!backGroundTexture.loadFromFile("Asset/cityBackground.png"))
 		{
 			std::cout << "ERROR TEXTURE";
 		}
@@ -178,18 +186,19 @@ void Level::setSprite(int levelType,int backGroundType)
 		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
 		{
 			std::cout << "ERROR TEXTURE";
-		}
+		}*/
 
 		for (int i = 0; i < 2; i++)
 		{
-			subBackGroundSprite[i].setTexture(subBackGroundTexture);
+			subBackGroundSprite[i].setTexture(*subBackGroundTexture);
+
 			subBackGroundSprite[i].setScale(sf::Vector2f(0.5, 0.5));
 
-			cloudBackGroundSprite[i].setTexture(cloudBackGroundTexture);
+			cloudBackGroundSprite[i].setTexture(*cloudBackGroundTexture);
 			cloudBackGroundSprite[i].setScale(sf::Vector2f(0.4, 0.4));
 		}
 
-		backGroundSprite.setTexture(backGroundTexture);
+		backGroundSprite.setTexture(*backGroundTexture);
 		backGroundSprite.setScale(sf::Vector2f(1.2, 1.2));
 		backGroundSprite.setPosition(backGroundPos);
 
@@ -204,7 +213,11 @@ void Level::setSprite(int levelType,int backGroundType)
 
 	else if (backGroundType == 1)
 	{
-		if (!backGroundTexture.loadFromFile("Asset/countryBackground.png"))
+
+		backGroundTexture = resourceManager.getTexture("Asset/countryBackground.png");
+		subBackGroundTexture = resourceManager.getTexture("Asset/tree.png");
+		cloudBackGroundTexture = resourceManager.getTexture("Asset/cloud.png");
+		/*if (!backGroundTexture.loadFromFile("Asset/countryBackground.png"))
 		{
 			std::cout << "ERROR TEXTURE";
 		}
@@ -217,18 +230,18 @@ void Level::setSprite(int levelType,int backGroundType)
 		if (!cloudBackGroundTexture.loadFromFile("Asset/cloud.png"))
 		{
 			std::cout << "ERROR TEXTURE";
-		}
+		}*/
 
 		for (int i = 0; i < 2; i++)
 		{
-			subBackGroundSprite[i].setTexture(subBackGroundTexture);
+			subBackGroundSprite[i].setTexture(*subBackGroundTexture);
 			subBackGroundSprite[i].setScale(sf::Vector2f(0.8, 0.8));
 
-			cloudBackGroundSprite[i].setTexture(cloudBackGroundTexture);
+			cloudBackGroundSprite[i].setTexture(*cloudBackGroundTexture);
 			cloudBackGroundSprite[i].setScale(sf::Vector2f(0.4, 0.4));
 		}
 
-		backGroundSprite.setTexture(backGroundTexture);
+		backGroundSprite.setTexture(*backGroundTexture);
 		backGroundSprite.setScale(sf::Vector2f(0.5, 0.5));
 		backGroundSprite.setPosition(backGroundPos);
 

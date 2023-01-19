@@ -2,24 +2,30 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "ResourceManager.h"
 class Level
 {
 private:
-	sf::Texture roadTexture;
+
+	std::shared_ptr<sf::Texture> roadTexture;
+	//sf::Texture roadTexture;
 	sf::Sprite roadSprite;
 	sf::Vector2f position;
 
 	sf::Vector2f backGroundPos;
-	sf::Texture backGroundTexture;
+	std::shared_ptr<sf::Texture> backGroundTexture;
+	//sf::Texture backGroundTexture;
 	sf::Sprite backGroundSprite;
 
 	sf::Vector2f subBackGroundPos[2];
-	sf::Texture subBackGroundTexture;
+	//sf::Texture subBackGroundTexture;
+	std::shared_ptr<sf::Texture> subBackGroundTexture;
 	sf::Sprite subBackGroundSprite[2];
 	int currentSub = 0;
 
 	sf::Vector2f cloudBackGroundPos[2];
-	sf::Texture cloudBackGroundTexture;
+	std::shared_ptr<sf::Texture> cloudBackGroundTexture;
+	//sf::Texture cloudBackGroundTexture;
 	sf::Sprite cloudBackGroundSprite[2];
 	int currentCloud = 0;
 
@@ -35,6 +41,8 @@ private:
 	float roadYPos;
 	int currentGear;
 	bool keyIsPressed;
+
+	ResourceManager resourceManager;
 
 	
 	
